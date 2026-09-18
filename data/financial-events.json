@@ -1,0 +1,118 @@
+{
+  "definitions": {
+    "scope": "Major asset bubbles, banking crises, credit events, sovereign debt crises, and systemic real-estate shocks with broad market impact.",
+    "exclusion": "Normal business cycles and isolated company failures without meaningful contagion risk.",
+    "confidence": "Milestones use widely documented market or policy inflection dates."
+  },
+  "events": [
+    {
+      "id": "japan-asset-bubble-1990",
+      "date": "1990-01-04",
+      "titleZh": "日本资产泡沫破裂",
+      "titleEn": "Japan Asset Bubble Burst",
+      "detail": "Japanese equity and real-estate valuations begin a prolonged collapse.",
+      "region": "Asia",
+      "scope": "Asset bubble",
+      "confidence": "high",
+      "sourceLabel": "Bank of Japan",
+      "sourceUrl": "https://www.boj.or.jp/en/about/history/"
+    },
+    {
+      "id": "asian-financial-crisis-1997",
+      "date": "1997-07-02",
+      "titleZh": "亚洲金融危机",
+      "titleEn": "Asian Financial Crisis",
+      "detail": "Currency devaluation in Thailand triggers contagion across Asian financial markets.",
+      "region": "Asia",
+      "scope": "Currency and banking crisis",
+      "confidence": "high",
+      "sourceLabel": "IMF",
+      "sourceUrl": "https://www.imf.org/external/np/exr/ib/1998/021198.htm"
+    },
+    {
+      "id": "dotcom-burst-2000",
+      "date": "2000-03-10",
+      "titleZh": "互联网泡沫破裂",
+      "titleEn": "Dot-com Bubble Burst",
+      "detail": "The Nasdaq peak marks the start of the technology-sector bear market.",
+      "region": "United States",
+      "scope": "Asset bubble",
+      "confidence": "high",
+      "sourceLabel": "Federal Reserve History",
+      "sourceUrl": "https://www.federalreservehistory.org/"
+    },
+    {
+      "id": "subprime-credit-crisis-2007",
+      "date": "2007-08-09",
+      "titleZh": "美国次贷危机爆发",
+      "titleEn": "US Subprime Credit Crisis",
+      "detail": "Losses on US mortgage securities freeze global short-term credit markets.",
+      "region": "Global",
+      "scope": "Real-estate and credit crisis",
+      "confidence": "high",
+      "sourceLabel": "Federal Reserve History",
+      "sourceUrl": "https://www.federalreservehistory.org/essays/subprime-mortgage-crisis"
+    },
+    {
+      "id": "lehman-2008",
+      "date": "2008-09-15",
+      "titleZh": "雷曼兄弟破产",
+      "titleEn": "Lehman Brothers Bankruptcy",
+      "detail": "Lehman Brothers files for bankruptcy, triggering the most severe phase of the global financial crisis.",
+      "region": "Global",
+      "scope": "Systemic financial crisis",
+      "confidence": "high",
+      "sourceLabel": "Federal Reserve History",
+      "sourceUrl": "https://www.federalreservehistory.org/essays/lehman-brothers-collapse"
+    },
+    {
+      "id": "euro-debt-crisis-2010",
+      "date": "2010-05-02",
+      "titleZh": "欧洲主权债务危机升级",
+      "titleEn": "European Sovereign Debt Crisis",
+      "detail": "A financial support package for Greece raises systemic concerns across the euro area.",
+      "region": "Europe",
+      "scope": "Sovereign debt crisis",
+      "confidence": "high",
+      "sourceLabel": "IMF",
+      "sourceUrl": "https://www.imf.org/en/Publications/SPROLLs/Greece-Country-Documents"
+    },
+    {
+      "id": "us-downgrade-2011",
+      "date": "2011-08-05",
+      "titleZh": "美国主权信用评级下调",
+      "titleEn": "US Sovereign Rating Downgrade",
+      "detail": "The United States loses its top credit rating, intensifying global risk aversion.",
+      "region": "United States",
+      "scope": "Sovereign debt crisis",
+      "confidence": "high",
+      "sourceLabel": "US Treasury",
+      "sourceUrl": "https://home.treasury.gov/news/press-releases/tg1257"
+    },
+    {
+      "id": "evergrande-2021",
+      "date": "2021-09-20",
+      "titleZh": "恒大房地产债务危机",
+      "titleEn": "Evergrande Real-Estate Crisis",
+      "detail": "Contagion concerns spread across China's property sector and global credit markets.",
+      "region": "Asia",
+      "scope": "Real-estate and credit crisis",
+      "confidence": "high",
+      "sourceLabel": "IMF GFSR",
+      "sourceUrl": "https://www.imf.org/en/Publications/GFSR"
+    },
+    {
+      "id": "svb-2023",
+      "date": "2023-03-10",
+      "titleZh": "硅谷银行倒闭",
+      "titleEn": "Silicon Valley Bank Failure",
+      "detail": "Silicon Valley Bank is closed, triggering a regional-banking crisis.",
+      "region": "United States",
+      "scope": "Banking crisis",
+      "confidence": "high",
+      "sourceLabel": "FDIC",
+      "sourceUrl": "https://www.fdic.gov/news/press-releases/2023/pr23016.html"
+    }
+  ]
+}
+

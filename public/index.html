@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="环球风险图谱：全球市场、利率、冲突、资源、公共卫生与系统性风险全景。"
+    >
+    <title>环球风险图谱 | Global Risk Atlas</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#overview" aria-label="返回总览">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span>
+            <strong>环球风险图谱</strong>
+            <small>GLOBAL RISK ATLAS</small>
+          </span>
+        </a>
+
+        <nav class="side-nav" aria-label="页面导航">
+          <a class="active" href="#overview">今日总览</a>
+          <a href="#charts">指数走势</a>
+          <a href="#events">事件窗口</a>
+          <a href="#notes">数据口径</a>
+        </nav>
+
+        <section class="sidebar-news" aria-label="影响全球市场的重要新闻">
+          <div class="sidebar-news-heading">
+            <strong>全球市场要闻</strong>
+            <span><i aria-hidden="true"></i>更新</span>
+          </div>
+          <div class="sidebar-news-window">
+            <div class="sidebar-news-track" id="sidebar-news-track"></div>
+          </div>
+          <small id="sidebar-news-time">等待数据更新</small>
+        </section>
+
+        <div class="sidebar-status">
+          <span class="status-label">每日更新</span>
+          <strong>07:00</strong>
+          <small>行情与利率自动刷新</small>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <div class="header-copy">
+            <p class="eyebrow">美联储政策 × 重大军事冲突 × 美国主要指数</p>
+            <h1>环球风险图谱</h1>
+            <p class="header-summary">
+              全球市场、政策、冲突、资源、公共卫生与系统性风险全景。
+            </p>
+          </div>
+          <div class="freshness" aria-live="polite">
+            <span class="freshness-dot" aria-hidden="true"></span>
+            <div>
+              <strong id="freshness-label">数据加载中</strong>
+              <span id="freshness-time">正在读取本地快照</span>
+            </div>
+          </div>
+        </header>
+
+        <main id="overview">
+      <section class="control-bar" aria-label="图表筛选">
+        <div class="control-group range-control">
+          <span class="control-label">观察区间</span>
+          <div class="segmented" id="range-control">
+            <button type="button" data-range="all" aria-pressed="false">全部</button>
+            <button type="button" data-range="1990" aria-pressed="true">1990</button>
+            <button type="button" data-range="2000" aria-pressed="false">2000</button>
+            <button type="button" data-range="2008" aria-pressed="false">2008</button>
+            <button type="button" data-range="2020" aria-pressed="false">2020</button>
+            <button type="button" data-range="2022" aria-pressed="false">2022</button>
+            <button type="button" data-range="2025" aria-pressed="false">2025</button>
+          </div>
+        </div>
+
+        <div class="control-group filter-control">
+          <span class="control-label">事件图层</span>
+          <div class="filters">
+            <label class="filter-option hike">
+              <input type="checkbox" data-event-filter="hike" checked>
+              <span class="filter-symbol up" aria-hidden="true"></span>
+              <span>加息</span>
+            </label>
+            <label class="filter-option cut">
+              <input type="checkbox" data-event-filter="cut" checked>
+              <span class="filter-symbol down" aria-hidden="true"></span>
+              <span>降息</span>
+            </label>
+            <label class="filter-option conflict">
+              <input type="checkbox" data-event-filter="conflict" checked>
+              <span class="filter-symbol diamond" aria-hidden="true"></span>
+              <span>重大冲突</span>
+            </label>
+            <label class="filter-option health">
+              <input type="checkbox" data-event-filter="health" checked>
+              <span class="filter-symbol health" aria-hidden="true"></span>
+              <span>公共卫生</span>
+            </label>
+            <label class="filter-option financial">
+              <input type="checkbox" data-event-filter="financial" checked>
+              <span class="filter-symbol financial" aria-hidden="true"></span>
+              <span>金融风险</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-label="市场摘要">
+        <article class="summary-card">
+          <div class="summary-heading">
+            <span>标普500</span>
+            <span class="series-key sp500-key" aria-hidden="true"></span>
+          </div>
+          <strong id="sp500-latest" class="summary-value">--</strong>
+          <span id="sp500-change" class="summary-change">--</span>
+        </article>
+        <article class="summary-card">
+          <div class="summary-heading">
+            <span>纳斯达克100</span>
+            <span class="series-key nasdaq-key" aria-hidden="true"></span>
+          </div>
+          <strong id="nasdaq-latest" class="summary-value">--</strong>
+          <span id="nasdaq-change" class="summary-change">--</span>
+        </article>
+        <article class="summary-card">
+          <div class="summary-heading">
+            <span>布伦特原油</span>
+            <span class="series-key brent-key" aria-hidden="true"></span>
+          </div>
+          <strong id="brent-latest" class="summary-value">--</strong>
+          <span id="brent-change" class="summary-change">--</span>
+        </article>
+        <article class="summary-card">
+          <div class="summary-heading">
+            <span>黄金现货</span>
+            <span class="series-key gold-key" aria-hidden="true"></span>
+          </div>
+          <strong id="gold-latest" class="summary-value">--</strong>
+          <span id="gold-change" class="summary-change">--</span>
+        </article>
+        <article class="summary-card">
+          <div class="summary-heading">
+            <span>当前区间事件</span>
+          </div>
+          <strong id="event-count" class="summary-value">--</strong>
+          <span id="event-breakdown" class="summary-change">--</span>
+        </article>
+      </section>
+
+      <section class="chart-stack" id="charts" aria-label="指数走势图">
+        <article class="chart-panel" data-market="sp500">
+          <div class="chart-heading">
+            <div>
+              <div class="chart-range-picker" data-chart-range="sp500"></div>
+              <h2>标普500</h2>
+              <p id="sp500-range-label">--</p>
+            </div>
+            <div class="range-change">
+              <span>区间涨幅</span>
+              <strong id="sp500-change-large">--</strong>
+            </div>
+            <button class="chart-reset" type="button" data-reset-chart="sp500">复位</button>
+          </div>
+          <div class="canvas-wrap">
+            <canvas
+              id="sp500-chart"
+              role="img"
+              aria-label="标普500指数日线走势及美联储与冲突事件标记。"
+            ></canvas>
+            <div class="chart-tooltip" hidden></div>
+          </div>
+        </article>
+
+        <article class="chart-panel" data-market="nasdaq100">
+          <div class="chart-heading">
+            <div>
+              <div class="chart-range-picker" data-chart-range="nasdaq100"></div>
+              <h2>纳斯达克100</h2>
+              <p id="nasdaq-range-label">--</p>
+            </div>
+            <div class="range-change">
+              <span>区间涨幅</span>
+              <strong id="nasdaq-change-large">--</strong>
+            </div>
+            <button class="chart-reset" type="button" data-reset-chart="nasdaq100">复位</button>
+          </div>
+          <div class="canvas-wrap">
+            <canvas
+              id="nasdaq-chart"
+              role="img"
+              aria-label="纳斯达克100指数日线走势及美联储与冲突事件标记。"
+            ></canvas>
+            <div class="chart-tooltip" hidden></div>
+          </div>
+        </article>
+
+        <article class="chart-panel" data-market="brent">
+          <div class="chart-heading">
+            <div>
+              <div class="chart-range-picker" data-chart-range="brent"></div>
+              <h2>布伦特原油</h2>
+              <p id="brent-range-label">--</p>
+            </div>
+            <div class="range-change">
+              <span>区间涨幅</span>
+              <strong id="brent-change-large">--</strong>
+            </div>
+            <button class="chart-reset" type="button" data-reset-chart="brent">复位</button>
+          </div>
+          <div class="canvas-wrap">
+            <canvas
+              id="brent-chart"
+              role="img"
+              aria-label="布伦特原油日线走势及美联储与冲突事件标记。"
+            ></canvas>
+            <div class="chart-tooltip" hidden></div>
+          </div>
+        </article>
+
+        <article class="chart-panel" data-market="gold">
+          <div class="chart-heading">
+            <div>
+              <div class="chart-range-picker" data-chart-range="gold"></div>
+              <h2>黄金现货</h2>
+              <p id="gold-range-label">--</p>
+            </div>
+            <div class="range-change">
+              <span>区间涨幅</span>
+              <strong id="gold-change-large">--</strong>
+            </div>
+            <button class="chart-reset" type="button" data-reset-chart="gold">复位</button>
+          </div>
+          <div class="canvas-wrap">
+            <canvas
+              id="gold-chart"
+              role="img"
+              aria-label="伦敦金现货日线走势及美联储与冲突事件标记。"
+            ></canvas>
+            <div class="chart-tooltip" hidden></div>
+          </div>
+        </article>
+
+        <article class="chart-panel" data-market="china">
+          <div class="chart-heading">
+            <div>
+              <div class="chart-range-picker" data-chart-range="china"></div>
+              <h2>中国主要股指</h2>
+              <p id="china-range-label">--</p>
+            </div>
+            <div class="china-heading-metrics">
+              <span>
+                <b>上证指数</b>
+                <em>区间涨幅</em>
+                <strong id="shanghai-period">--</strong>
+              </span>
+              <span>
+                <b>创业板指</b>
+                <em>区间涨幅</em>
+                <strong id="chinext-period">--</strong>
+              </span>
+              <span>
+                <b>沪深300</b>
+                <em>区间涨幅</em>
+                <strong id="csi300-period">--</strong>
+              </span>
+            </div>
+            <button class="chart-reset" type="button" data-reset-chart="china">复位</button>
+          </div>
+          <div class="canvas-wrap chart-canvas-tall">
+            <canvas
+              id="china-chart"
+              role="img"
+              aria-label="上证指数、创业板指和沪深300指数蜡烛图，每个指数使用独立纵轴。"
+            ></canvas>
+            <div class="chart-tooltip" hidden></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="events-section" id="events">
+        <div class="section-heading">
+          <div>
+            <h2>事件窗口</h2>
+            <p id="table-summary">--</p>
+          </div>
+          <label class="search-field">
+            <span class="sr-only">搜索事件</span>
+            <input id="event-search" type="search" placeholder="搜索冲突、地区或日期">
+          </label>
+        </div>
+
+        <div class="table-responsive">
+          <table class="event-table">
+            <thead>
+              <tr>
+                <th scope="col">日期</th>
+                <th scope="col">类型</th>
+                <th scope="col">事件</th>
+                <th scope="col" class="numeric"><span class="sr-only">标普500</span></th>
+                <th scope="col" class="numeric"><span class="sr-only">纳斯达克100</span></th>
+                <th scope="col" class="numeric"><span class="sr-only">布伦特原油</span></th>
+                <th scope="col" class="numeric"><span class="sr-only">黄金现货</span></th>
+                <th scope="col">来源</th>
+              </tr>
+            </thead>
+            <tbody id="event-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="notes-section" id="notes">
+        <details>
+          <summary>数据口径与筛选标准</summary>
+          <div class="notes-grid">
+            <div>
+              <h3>利率事件</h3>
+              <p>
+                使用美联储联邦基金目标利率或目标区间的生效日期。标记的是目标利率发生变化，不是每次 FOMC 会议。
+              </p>
+            </div>
+            <div>
+              <h3>冲突事件</h3>
+              <p>
+                只保留州际战争、内战、入侵以及持续地区冲突的爆发或重大升级节点，不收录零散袭击和普通抗议。
+              </p>
+            </div>
+            <div>
+              <h3>行情更新</h3>
+              <p>
+                免费延时日线。标普500、纳指和布伦特按公开数据源更新；黄金使用伦敦金现货，历史起点为
+                2006 年。
+              </p>
+            </div>
+            <div>
+              <h3>公共卫生事件</h3>
+              <p>
+                记录 WHO 全球警报、国际公共卫生紧急事件和全球大流行节点，重点观察供应链与政策冲击。
+              </p>
+            </div>
+            <div>
+              <h3>金融风险事件</h3>
+              <p>
+                记录资产泡沫、房地产与信用危机、银行业危机及主权债务危机等系统性风险节点。
+              </p>
+            </div>
+          </div>
+          <p class="source-line" id="source-line">--</p>
+        </details>
+      </section>
+        </main>
+      </div>
+    </div>
+
+    <noscript>该页面需要启用 JavaScript 才能绘制本地时间轴。</noscript>
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

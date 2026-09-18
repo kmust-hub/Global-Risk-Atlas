@@ -1,0 +1,106 @@
+{
+  "definitions": {
+    "scope": "Major global epidemic and pandemic milestones that triggered international public-health emergencies or materially changed economic activity.",
+    "exclusion": "Routine seasonal outbreaks and localized public-health alerts without substantial cross-border market impact.",
+    "confidence": "Dates use WHO global alerts, Public Health Emergency of International Concern declarations, or pandemic declarations."
+  },
+  "events": [
+    {
+      "id": "sars-2003",
+      "date": "2003-03-12",
+      "titleZh": "非典全球警报",
+      "titleEn": "SARS Global Alert",
+      "detail": "WHO issues a global alert for severe acute respiratory syndrome.",
+      "region": "Global",
+      "scope": "Epidemic",
+      "confidence": "high",
+      "sourceLabel": "WHO",
+      "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2003_03_12-en"
+    },
+    {
+      "id": "h1n1-2009",
+      "date": "2009-04-25",
+      "titleZh": "甲型H1N1流感全球紧急事件",
+      "titleEn": "H1N1 Public Health Emergency",
+      "detail": "WHO declares the H1N1 outbreak a public health emergency of international concern.",
+      "region": "Global",
+      "scope": "Global health emergency",
+      "confidence": "high",
+      "sourceLabel": "WHO",
+      "sourceUrl": "https://www.who.int/emergencies/disease-outbreak-news/item/2009_04_25-en"
+    },
+    {
+      "id": "ebola-2014",
+      "date": "2014-08-08",
+      "titleZh": "西非埃博拉全球紧急事件",
+      "titleEn": "West Africa Ebola Emergency",
+      "detail": "WHO declares the West Africa Ebola outbreak a public health emergency of international concern.",
+      "region": "Africa",
+      "scope": "Global health emergency",
+      "confidence": "high",
+      "sourceLabel": "WHO",
+      "sourceUrl": "https://www.who.int/news/item/08-08-2014-who-declares-the-ebola-outbreak-in-west-africa-a-public-health-emergency-of-international-concern"
+    },
+    {
+      "id": "zika-2016",
+      "date": "2016-02-01",
+      "titleZh": "寨卡病毒全球紧急事件",
+      "titleEn": "Zika Public Health Emergency",
+      "detail": "WHO declares the Zika virus cluster a public health emergency of international concern.",
+      "region": "Global",
+      "scope": "Global health emergency",
+      "confidence": "high",
+      "sourceLabel": "WHO",
+      "sourceUrl": "https://www.who.int/news/item/01-02-2016-who-statement-on-the-first-meeting-of-the-international-health-regulations-(2005)-emergency-committee-on-zika-virus-and-observed-increase-in-neurological-disorders-and-neonatal-malformations"
+    },
+    {
+      "id": "covid-pheic-2020",
+      "date": "2020-01-30",
+      "titleZh": "新冠疫情全球紧急事件",
+      "titleEn": "COVID-19 Public Health Emergency",
+      "detail": "WHO declares the novel coronavirus outbreak a public health emergency of international concern.",
+      "region": "Global",
+      "scope": "Global health emergency",
+      "confidence": "high",
+      "sourceLabel": "WHO",
+      "sourceUrl": "https://www.who.int/news/item/30-01-2020-statement-on-the-second-meeting-of-the-international-health-regulations-(2005)-emergency-committee-regarding-the-outbreak-of-novel-coronavirus-(2019-ncov)"
+    },
+    {
+      "id": "covid-pandemic-2020",
+      "date": "2020-03-11",
+      "titleZh": "新冠全球大流行",
+      "titleEn": "COVID-19 Pandemic Declaration",
+      "detail": "WHO characterizes COVID-19 as a pandemic as global markets enter a severe selloff.",
+      "region": "Global",
+      "scope": "Pandemic",
+      "confidence": "high",
+      "sourceLabel": "WHO",
+      "sourceUrl": "https://www.who.int/director-general/speeches/detail/who-director-general-s-opening-remarks-at-the-media-briefing-on-covid-19---11-march-2020"
+    },
+    {
+      "id": "mpox-2022",
+      "date": "2022-07-23",
+      "titleZh": "猴痘全球紧急事件",
+      "titleEn": "Mpox Public Health Emergency",
+      "detail": "WHO declares the multi-country mpox outbreak a public health emergency of international concern.",
+      "region": "Global",
+      "scope": "Global health emergency",
+      "confidence": "high",
+      "sourceLabel": "WHO",
+      "sourceUrl": "https://www.who.int/news/item/23-07-2022-second-meeting-of-the-international-health-regulations-(2005)-(ihr)-emergency-committee-regarding-the-multi-country-outbreak-of-monkeypox"
+    },
+    {
+      "id": "mpox-2024",
+      "date": "2024-08-14",
+      "titleZh": "猴痘疫情再次构成全球紧急事件",
+      "titleEn": "Mpox Emergency Declared Again",
+      "detail": "WHO again declares the mpox outbreak a public health emergency of international concern.",
+      "region": "Global",
+      "scope": "Global health emergency",
+      "confidence": "high",
+      "sourceLabel": "WHO",
+      "sourceUrl": "https://www.who.int/news/item/14-08-2024-who-director-general-declares-mpox-outbreak-a-public-health-emergency-of-international-concern"
+    }
+  ]
+}
+
