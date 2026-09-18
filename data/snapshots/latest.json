@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generatedAt": "2026-09-18T14:45:45.497Z",
-    "newsUpdatedAt": "2026-09-18T15:02:07.853Z",
+    "generatedAt": "2026-09-18T15:22:25.271Z",
+    "newsUpdatedAt": "2026-09-18T15:22:25.271Z",
     "newsRefreshMinutes": 15,
     "through": "2026-09-18",
     "requestedThrough": "2026-09-18",
@@ -204955,7 +204955,7 @@
       ],
       [
         "2026-09-18",
-        100.05,
+        99.83,
         99.4,
         100.15,
         97.8,
@@ -246445,7 +246445,7 @@
       ],
       [
         "2026-09-18",
-        4352.79,
+        4355.24,
         4343.47,
         4399.49,
         4334.23,
@@ -394227,16 +394227,16 @@
           "pre10": 3.76,
           "pre20": 6.72,
           "d1": -5.65,
-          "d5": 0.59,
-          "d20": 0.59
+          "d5": 0.37,
+          "d20": 0.37
         },
         "gold": {
           "pre5": 0.58,
           "pre10": -2.94,
           "pre20": -3.93,
           "d1": 1.82,
-          "d5": 0.26,
-          "d20": 0.26
+          "d5": 0.31,
+          "d20": 0.31
         }
       }
     }
@@ -396571,12 +396571,11 @@
     {
       "id": "mining-1214671",
       "category": "矿产资源",
-      "title": "China Rare Earths eyes indirect stake in MP Materials",
+      "title": "China Rare Earth eyes indirect stake in MP Materials",
       "summary": "Beijing’s consolidation drive could put a Chinese state company alongside the Pentagon on MP’s shareholder register.",
       "source": "MINING.COM",
-      "url": "https://www.mining.com/china-rare-earths-eyes-indirect-stake-in-mp-materials/",
-      "publishedAt": "2026-09-17T21:23:00.000Z",
-      "score": 44
+      "url": "https://www.mining.com/china-rare-earth-eyes-indirect-stake-in-mp-materials/",
+      "publishedAt": "2026-09-17T21:23:00.000Z"
     },
     {
       "id": "mining-1214226",
@@ -396585,8 +396584,7 @@
       "summary": "Mesa operation provides US companies with a domestic destination for magnet-bearing products that would otherwise be exported as waste.",
       "source": "MINING.COM",
       "url": "https://www.mining.com/site-visit-cyclic-materials-opens-commercial-scale-rare-earth-recycling-plant-in-arizona/",
-      "publishedAt": "2026-09-11T07:04:40.000Z",
-      "score": 44
+      "publishedAt": "2026-09-11T07:04:40.000Z"
     },
     {
       "id": "mining-1214222",
@@ -396595,8 +396593,7 @@
       "summary": "Event marks a milestone in its plan to build an integrated US rare earth supply chain.",
       "source": "MINING.COM",
       "url": "https://www.mining.com/usa-rare-earth-breaks-ground-at-1-2b-rare-earth-magnet-manufacturing-facility-in-south-carolina/",
-      "publishedAt": "2026-09-11T03:07:15.000Z",
-      "score": 44
+      "publishedAt": "2026-09-11T03:07:15.000Z"
     },
     {
       "id": "mining-1213869",
@@ -396605,8 +396602,7 @@
       "summary": "By 2030, DOD needs may triple to 10,000 tonnes annually, while current rare earth magnet production is 20,000-25,000 tonnes.",
       "source": "MINING.COM",
       "url": "https://www.mining.com/pentagon-rare-earth-push-collides-with-chinas-grip/",
-      "publishedAt": "2026-09-04T00:19:57.000Z",
-      "score": 44
+      "publishedAt": "2026-09-04T00:19:57.000Z"
     },
     {
       "id": "resource-PCOPPUSDM-2026-07-01",
@@ -396615,9 +396611,8 @@
       "summary": "全球铜价月度国际价格，经 FRED 更新。",
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PCOPPUSDM",
-      "publishedAt": "2026-09-18T14:45:38.012Z",
-      "dataDate": "2026-07-01",
-      "score": 22
+      "publishedAt": "2026-09-18T15:22:25.195Z",
+      "dataDate": "2026-07-01"
     },
     {
       "id": "macro-cpi-2026-08-01",
@@ -396626,31 +396621,8 @@
       "summary": "美国劳工统计局消费者价格指数，经 FRED 更新。",
       "source": "FRED",
       "url": "https://fred.stlouisfed.org/series/CPIAUCSL",
-      "publishedAt": "2026-09-18T14:45:33.805Z",
-      "dataDate": "2026-08-01",
-      "score": 16
-    },
-    {
-      "id": "food-PFOODINDEXM-2026-07-01",
-      "category": "粮食农业",
-      "title": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%",
-      "summary": "全球食品价格指数月度数据，经 FRED 更新。",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PFOODINDEXM",
-      "publishedAt": "2026-09-18T14:45:35.771Z",
-      "dataDate": "2026-07-01",
-      "score": 14
-    },
-    {
-      "id": "food-PWHEAMTUSDM-2026-07-01",
-      "category": "粮食农业",
-      "title": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%",
-      "summary": "全球小麦价格月度数据，经 FRED 更新。",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
-      "publishedAt": "2026-09-18T14:45:33.188Z",
-      "dataDate": "2026-07-01",
-      "score": 14
+      "publishedAt": "2026-09-18T15:22:15.383Z",
+      "dataDate": "2026-08-01"
     },
     {
       "id": "food-PMAIZMTUSDM-2026-07-01",
@@ -396659,31 +396631,8 @@
       "summary": "全球玉米价格月度数据，经 FRED 更新。",
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PMAIZMTUSDM",
-      "publishedAt": "2026-09-18T14:45:32.679Z",
-      "dataDate": "2026-07-01",
-      "score": 14
-    },
-    {
-      "id": "resource-PZINCUSDM-2026-07-01",
-      "category": "矿产资源",
-      "title": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%",
-      "summary": "全球锌价月度国际价格，经 FRED 更新。",
-      "source": "FRED Commodities",
-      "url": "https://fred.stlouisfed.org/series/PZINCUSDM",
-      "publishedAt": "2026-09-18T14:45:32.425Z",
-      "dataDate": "2026-07-01",
-      "score": 14
-    },
-    {
-      "id": "resource-PIORECRUSDM-2026-07-01",
-      "category": "矿产资源",
-      "title": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%",
-      "summary": "全球铁矿石价格月度国际价格，经 FRED 更新。",
-      "source": "FRED Commodities",
-      "url": "https://fred.stlouisfed.org/series/PIORECRUSDM",
-      "publishedAt": "2026-09-18T14:45:31.904Z",
-      "dataDate": "2026-07-01",
-      "score": 14
+      "publishedAt": "2026-09-18T15:22:21.015Z",
+      "dataDate": "2026-07-01"
     },
     {
       "id": "resource-PNICKUSDM-2026-07-01",
@@ -396692,9 +396641,8 @@
       "summary": "全球镍价月度国际价格，经 FRED 更新。",
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PNICKUSDM",
-      "publishedAt": "2026-09-18T14:45:31.882Z",
-      "dataDate": "2026-07-01",
-      "score": 14
+      "publishedAt": "2026-09-18T15:22:16.981Z",
+      "dataDate": "2026-07-01"
     },
     {
       "id": "food-PSOYBUSDQ-2026-04-01",
@@ -396703,9 +396651,57 @@
       "summary": "全球大豆价格月度数据，经 FRED 更新。",
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PSOYBUSDQ",
-      "publishedAt": "2026-09-18T14:45:31.797Z",
-      "dataDate": "2026-04-01",
-      "score": 14
+      "publishedAt": "2026-09-18T15:22:16.633Z",
+      "dataDate": "2026-04-01"
+    },
+    {
+      "id": "resource-PIORECRUSDM-2026-07-01",
+      "category": "矿产资源",
+      "title": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%",
+      "summary": "全球铁矿石价格月度国际价格，经 FRED 更新。",
+      "source": "FRED Commodities",
+      "url": "https://fred.stlouisfed.org/series/PIORECRUSDM",
+      "publishedAt": "2026-09-18T15:22:14.655Z",
+      "dataDate": "2026-07-01"
+    },
+    {
+      "id": "food-PWHEAMTUSDM-2026-07-01",
+      "category": "粮食农业",
+      "title": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%",
+      "summary": "全球小麦价格月度数据，经 FRED 更新。",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
+      "publishedAt": "2026-09-18T15:22:14.239Z",
+      "dataDate": "2026-07-01"
+    },
+    {
+      "id": "food-PFOODINDEXM-2026-07-01",
+      "category": "粮食农业",
+      "title": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%",
+      "summary": "全球食品价格指数月度数据，经 FRED 更新。",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PFOODINDEXM",
+      "publishedAt": "2026-09-18T15:22:13.621Z",
+      "dataDate": "2026-07-01"
+    },
+    {
+      "id": "resource-PZINCUSDM-2026-07-01",
+      "category": "矿产资源",
+      "title": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%",
+      "summary": "全球锌价月度国际价格，经 FRED 更新。",
+      "source": "FRED Commodities",
+      "url": "https://fred.stlouisfed.org/series/PZINCUSDM",
+      "publishedAt": "2026-09-18T15:22:13.304Z",
+      "dataDate": "2026-07-01"
+    },
+    {
+      "id": "chinanews-218dd3ba39f7",
+      "category": "粮食农业",
+      "title": "河南商丘逾695万亩玉米陆续进入收获期",
+      "summary": "",
+      "source": "中国新闻网",
+      "url": "https://www.chinanews.com.cn/tp/2026/09-18/10699184.shtml",
+      "publishedAt": "2026-09-18T12:25:00.000Z"
     },
     {
       "id": "UN News-c6f9a4ff0e54",
@@ -396714,8 +396710,7 @@
       "summary": "Amid a rising number of attacks on shipping in key waterways in the Middle East linked to the US-Iran war, the head of UN maritime agency, Mr. Arsenio Dominguez, has insisted that the conflict is not a “pretext” to target “innocent seafarer",
       "source": "UN News",
       "url": "https://news.un.org/feed/view/en/story/2026/09/1168352",
-      "publishedAt": "2026-09-16T12:00:00.000Z",
-      "score": 14
+      "publishedAt": "2026-09-16T12:00:00.000Z"
     },
     {
       "id": "FAO-31ab5567fdf7",
@@ -396724,18 +396719,7 @@
       "summary": "",
       "source": "FAO",
       "url": "https://www.fao.org/newsroom/detail/supply-concerns-drive-fao-food-price-index-higher/en",
-      "publishedAt": "2026-09-04T12:00:00.000Z",
-      "score": 14
-    },
-    {
-      "id": "FAO-3d877646f3ce",
-      "category": "粮食农业",
-      "title": "FAO at UNCCD COP17: Advancing solutions for land degradation, drought and food security",
-      "summary": "",
-      "source": "FAO",
-      "url": "https://www.fao.org/newsroom/detail/fao-at-unccd-cop17--advancing-solutions-for-land-degradation--drought-and-food-security/en",
-      "publishedAt": "2026-08-28T12:00:00.000Z",
-      "score": 14
+      "publishedAt": "2026-09-04T12:00:00.000Z"
     }
   ]
 }

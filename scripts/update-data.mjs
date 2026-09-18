@@ -815,6 +815,137 @@ async function fetchFaoNews() {
   );
 }
 
+function classifyDomesticNews(title, summary = "") {
+  const text = `${title} ${summary}`;
+  if (/美联储|联邦基金|加息|降息|FOMC/i.test(text)) {
+    return "美联储";
+  }
+  if (/CPI|非农|失业率|通胀|PMI|GDP|经济数据/i.test(text)) {
+    return "经济数据";
+  }
+  if (/稀土|铜|锂|镍|锌|铝|铁矿石|有色|矿产|矿业/i.test(text)) {
+    return "矿产资源";
+  }
+  if (/粮食|小麦|玉米|大豆|食品|农业|丰收/i.test(text)) {
+    return "粮食农业";
+  }
+  if (/房地产|楼市|恒大|房贷|银行|债务|金融风险|违约/i.test(text)) {
+    return "金融风险";
+  }
+  if (/疫情|病毒|公共卫生|流感/i.test(text)) {
+    return "公共卫生";
+  }
+  if (/战争|冲突|袭击|空袭|导弹|制裁|停火|军事/i.test(text)) {
+    return "地缘政治";
+  }
+  if (/原油|黄金|股市|指数|市场|汇率/i.test(text)) {
+    return "全球市场";
+  }
+  return null;
+}
+
+async function fetchSinaRollNews() {
+  const url = new URL("https://feed.mix.sina.com.cn/api/roll/get");
+  url.searchParams.set("pageid", "153");
+  url.searchParams.set("lid", "2516");
+  url.searchParams.set("num", "50");
+  url.searchParams.set("page", "1");
+  const response = await fetch(url, {
+    headers: {
+      "user-agent": userAgent,
+      accept: "application/json,text/plain,*/*",
+      referer: "https://finance.sina.com.cn/",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`Sina roll news request failed ${response.status}`);
+  }
+  const payload = await response.json();
+  return (payload?.result?.data ?? [])
+    .map((item) => {
+      const title = stripHtml(item.title ?? "");
+      const summary = stripHtml(item.intro ?? "");
+      const category = classifyDomesticNews(title, summary);
+      if (!category) {
+        return null;
+      }
+      return {
+        id: `sina-${item.docid ?? hashText(title).slice(0, 12)}`,
+        category,
+        title,
+        summary: summary.slice(0, 240),
+        source: "新浪财经",
+        url: item.url,
+        publishedAt: new Date(Number(item.ctime) * 1000).toISOString(),
+      };
+    })
+    .filter(Boolean)
+    .slice(0, 12);
+}
+
+async function fetchChinanewsRollNews() {
+  const dates = [today, new Date(today.getTime() - 86_400_000)];
+  const pages = await Promise.all(
+    dates.map(async (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const url = `https://www.chinanews.com.cn/scroll-news/${year}/${month}${day}/news.shtml`;
+      const html = await fetchText(url, {
+        headers: {
+          accept: "text/html,*/*",
+        },
+      });
+      return [...html.matchAll(
+        /<div class="dd_bt"><a href="([^"]+)"[^>]*>([\s\S]*?)<\/a><\/div><div class="dd_time">([^<]+)<\/div>/gi,
+      )].map((match) => {
+        const title = stripHtml(match[2]);
+        const category = classifyDomesticNews(title);
+        if (!category) {
+          return null;
+        }
+        const time = match[3].trim();
+        const [timeMonth, timeDay, clock] = time.match(/(\d+)-(\d+)\s+(\d+:\d+)/)?.slice(1) ?? [];
+        const publishedAt =
+          timeMonth && timeDay && clock
+            ? new Date(
+                `${year}-${String(timeMonth).padStart(2, "0")}-${String(timeDay).padStart(2, "0")}T${clock}:00+08:00`,
+              )
+            : date;
+        return {
+          id: `chinanews-${hashText(`${title}${match[1]}`).slice(0, 12)}`,
+          category,
+          title,
+          summary: "",
+          source: "中国新闻网",
+          url: new URL(match[1], "https://www.chinanews.com.cn").toString(),
+          publishedAt: publishedAt.toISOString(),
+        };
+      });
+    }),
+  );
+  return pages.flat().filter(Boolean).slice(0, 12);
+}
+
+async function fetchEastmoneyNews() {
+  const xml = await fetchText("https://rss.eastmoney.com/rss_partener.xml");
+  return parseRssItems(xml, "东方财富", "全球市场", 30)
+    .map((item) => ({
+      ...item,
+      category: classifyDomesticNews(item.title, item.summary) ?? item.category,
+    }))
+    .slice(0, 12);
+}
+
+async function fetchDomesticNews() {
+  const results = await Promise.all([
+    safeFetch("Sina Finance", fetchSinaRollNews),
+    safeFetch("China News Service", fetchChinanewsRollNews),
+    safeFetch("Eastmoney", fetchEastmoneyNews),
+  ]);
+  return results.flat();
+}
+
 async function fetchNoaaEnsoNews() {
   const html = await fetchText(
     "https://www.climate.gov/news-features/blogs/enso",
@@ -900,6 +1031,8 @@ function newsScore(item) {
     气候风险: 7,
     矿产资源: 10,
     粮食农业: 10,
+    金融风险: 10,
+    公共卫生: 8,
     美联储: 4,
   };
   let score = keywords.reduce(
@@ -943,6 +1076,9 @@ function rankNewsItems(results) {
     "FAO / FRED": 4,
     "MINING.COM": 4,
     FAO: 4,
+    新浪财经: 4,
+    中国新闻网: 4,
+    东方财富: 3,
   };
   const sourceCounts = new Map();
   const selected = [];
@@ -1037,6 +1173,7 @@ async function fetchNewsItems({ includeData = true } = {}) {
     safeFetch("NOAA", fetchNoaaEnsoNews),
     safeFetch("MINING.COM", fetchMiningNews),
     safeFetch("FAO", fetchFaoNews),
+    safeFetch("Domestic news", fetchDomesticNews),
     ...(includeData
       ? [
           safeFetch("Macro data", fetchMacroNews),
@@ -1303,6 +1440,12 @@ async function optionalStooq(symbol, label) {
 
 async function main() {
   console.log(`Refreshing market data through ${endDate}`);
+  let previousSnapshot = {};
+  try {
+    previousSnapshot = JSON.parse(await readFile(snapshotPath, "utf8"));
+  } catch {
+    previousSnapshot = {};
+  }
   const [
     fredSp500,
     fredNasdaq100,
@@ -1322,11 +1465,11 @@ async function main() {
     csi300,
     newsItems,
   ] = await Promise.all([
-      fetchFredWithRetry("SP500"),
-      fetchFredWithRetry("NASDAQ100"),
-      fetchFredWithRetry("DFEDTAR"),
-      fetchFredWithRetry("DFEDTARU"),
-      fetchFredWithRetry("DFEDTARL"),
+      safeFetch("FRED SP500", () => fetchFredWithRetry("SP500")),
+      safeFetch("FRED NASDAQ100", () => fetchFredWithRetry("NASDAQ100")),
+      safeFetch("FRED DFEDTAR", () => fetchFredWithRetry("DFEDTAR")),
+      safeFetch("FRED DFEDTARU", () => fetchFredWithRetry("DFEDTARU")),
+      safeFetch("FRED DFEDTARL", () => fetchFredWithRetry("DFEDTARL")),
       optionalStooq("^spx", "S&P 500"),
       optionalEastmoney("100.SPX", "S&P 500"),
       optionalEastmoney("100.NDX", "Nasdaq-100"),
@@ -1385,6 +1528,11 @@ async function main() {
   );
   const gold = sinaGold.filter((row) => row.date >= "2006-01-01");
   const rateRows = combineTargetRate(fredTarget, fredUpper, fredLower);
+  const freshRateEvents = buildRateEvents(rateRows);
+  const baseRateEvents =
+    freshRateEvents.length > 0
+      ? freshRateEvents
+      : previousSnapshot.rateEvents ?? [];
   const sp500Points = compactMarketPoints(sp500);
   const nasdaq100Points = compactMarketPoints(nasdaq100);
   const brentPoints = compactMarketPoints(brent);
@@ -1394,19 +1542,19 @@ async function main() {
   const csi300Points = compactMarketPoints(csi300);
   const rateEventsSp500 = addTradingWindows(
     sp500Points,
-    buildRateEvents(rateRows),
+    baseRateEvents,
   );
   const rateEventsNasdaq100 = addTradingWindows(
     nasdaq100Points,
-    buildRateEvents(rateRows),
+    baseRateEvents,
   );
   const rateEventsBrent = addTradingWindows(
     brentPoints,
-    buildRateEvents(rateRows),
+    baseRateEvents,
   );
   const rateEventsGold = addTradingWindows(
     goldPoints,
-    buildRateEvents(rateRows),
+    baseRateEvents,
   );
   const rateEvents = rateEventsSp500.map((event, index) => ({
     ...event,

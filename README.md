@@ -49,6 +49,10 @@ The server listens on port `4173` and prints the local and network URLs.
   News, NOAA ENSO updates, Mining.com resource headlines, FAO agriculture
   news, and FRED-generated summaries for CPI, nonfarm payroll, unemployment,
   copper, iron ore, zinc, nickel, food prices, wheat, maize, and soybeans.
+- China-network fallback: Sina Finance rolling news, China News Service, and
+  Eastmoney can populate the news feed when foreign sources are unavailable.
+  Failed market sources retain the last successful snapshot instead of
+  aborting the refresh.
 
 Only the most recent 10 years of S&P 500 data are available from FRED because
 of index licensing. Tencent Finance is used to fill the longer history, and
