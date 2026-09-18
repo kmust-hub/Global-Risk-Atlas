@@ -1,8 +1,8 @@
 SIB/
+.deploy/
 preview/
 data/server.log
 data/server.err.log
 *.tmp
 .DS_Store
 Thumbs.db
-
