@@ -18,6 +18,7 @@ const chrome = spawn(
   [
     "--headless=new",
     "--disable-gpu",
+    "--window-size=390,844",
     "--allow-file-access-from-files",
     `--remote-debugging-port=${port}`,
     `--user-data-dir=${profileDir}`,
@@ -111,6 +112,8 @@ try {
       count: track.querySelectorAll(".news-item").length,
       animationName: style.animationName,
       duration: style.animationDuration,
+      panelDisplay: getComputedStyle(document.querySelector(".sidebar-news")).display,
+      panelHeight: document.querySelector(".sidebar-news").getBoundingClientRect().height,
       categories: [...track.querySelectorAll(".news-category")]
         .map((element) => element.textContent)
     };
@@ -118,6 +121,8 @@ try {
   if (
     newsState.count < 4 ||
     newsState.animationName !== "news-scroll" ||
+    newsState.panelDisplay === "none" ||
+    newsState.panelHeight < 100 ||
     !newsState.categories.includes("矿产资源") ||
     !newsState.categories.includes("粮食农业")
   ) {
@@ -137,6 +142,34 @@ try {
     !eventTypeCoverage.financialFilter
   ) {
     throw new Error("Public-health or financial-risk events are missing");
+  }
+
+  const zoomControlLayout = await evaluate(`(() => ({
+    viewportWidth: document.documentElement.clientWidth,
+    groups: [...document.querySelectorAll(".chart-controls")].slice(0, 5).map((group) => {
+      const rect = group.getBoundingClientRect();
+      return {
+        left: rect.left,
+        right: rect.right,
+        width: rect.width,
+        buttons: [...group.querySelectorAll("button")].map((button) => ({
+          text: button.textContent,
+          width: button.getBoundingClientRect().width,
+          visible: button.getBoundingClientRect().width > 0
+        }))
+      };
+    })
+  }))()`);
+  if (
+    zoomControlLayout.groups.some(
+      (group) =>
+        group.right > zoomControlLayout.viewportWidth ||
+        group.buttons.length !== 3 ||
+        group.buttons.some((button) => !button.visible),
+    )
+  ) {
+    console.error(JSON.stringify(zoomControlLayout));
+    throw new Error("Mobile chart zoom controls are clipped");
   }
 
   const before = hash(
@@ -199,6 +232,26 @@ try {
   if (before !== resetHash) {
     throw new Error("Chart reset did not restore the original viewport");
   }
+  const buttonBefore = hash(
+    await evaluate("document.querySelector('#sp500-chart').toDataURL()"),
+  );
+  await evaluate(
+    "document.querySelector('[data-zoom-chart=\"sp500\"][data-zoom-direction=\"in\"]').click(); true",
+  );
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  const buttonZoomed = hash(
+    await evaluate("document.querySelector('#sp500-chart').toDataURL()"),
+  );
+  await evaluate(
+    "document.querySelector('[data-reset-chart=\"sp500\"]').click(); true",
+  );
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  const buttonResetHash = hash(
+    await evaluate("document.querySelector('#sp500-chart').toDataURL()"),
+  );
+  if (buttonBefore === buttonZoomed || buttonBefore !== buttonResetHash) {
+    throw new Error("Mobile zoom button did not update and reset the chart");
+  }
   if (chinaBefore === chinaZoomed) {
     throw new Error("China chart wheel zoom did not change the rendered chart");
   }
@@ -257,6 +310,9 @@ try {
       beforeHash: before,
       zoomedHash: zoomed,
       resetHash,
+      buttonBefore,
+      buttonZoomed,
+      buttonResetHash,
       chinaBeforeHash: chinaBefore,
       chinaZoomedHash: chinaZoomed,
       chinaResetHash,
@@ -264,6 +320,7 @@ try {
       sidebarNavigation: activeNavigation,
       newsState,
       eventTypeCoverage,
+      zoomControlLayout,
     }),
   );
 } finally {

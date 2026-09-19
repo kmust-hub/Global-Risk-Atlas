@@ -2,7 +2,10 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"
+    >
     <meta
       name="description"
       content="环球风险图谱：全球市场、利率、冲突、资源、公共卫生与系统性风险全景。"
@@ -65,7 +68,9 @@
         </header>
 
         <main id="overview">
-      <section class="control-bar" aria-label="图表筛选">
+          <div id="mobile-news-slot" class="mobile-news-slot"></div>
+
+          <section class="control-bar" aria-label="图表筛选">
         <div class="control-group range-control">
           <span class="control-label">观察区间</span>
           <div class="segmented" id="range-control">
@@ -165,7 +170,11 @@
               <span>区间涨幅</span>
               <strong id="sp500-change-large">--</strong>
             </div>
-            <button class="chart-reset" type="button" data-reset-chart="sp500">复位</button>
+            <div class="chart-controls" aria-label="图表缩放">
+              <button class="chart-tool" type="button" data-zoom-chart="sp500" data-zoom-direction="out" aria-label="缩小标普500图表">−</button>
+              <button class="chart-tool" type="button" data-zoom-chart="sp500" data-zoom-direction="in" aria-label="放大标普500图表">＋</button>
+              <button class="chart-reset" type="button" data-reset-chart="sp500">复位</button>
+            </div>
           </div>
           <div class="canvas-wrap">
             <canvas
@@ -188,7 +197,11 @@
               <span>区间涨幅</span>
               <strong id="nasdaq-change-large">--</strong>
             </div>
-            <button class="chart-reset" type="button" data-reset-chart="nasdaq100">复位</button>
+            <div class="chart-controls" aria-label="图表缩放">
+              <button class="chart-tool" type="button" data-zoom-chart="nasdaq100" data-zoom-direction="out" aria-label="缩小纳斯达克100图表">−</button>
+              <button class="chart-tool" type="button" data-zoom-chart="nasdaq100" data-zoom-direction="in" aria-label="放大纳斯达克100图表">＋</button>
+              <button class="chart-reset" type="button" data-reset-chart="nasdaq100">复位</button>
+            </div>
           </div>
           <div class="canvas-wrap">
             <canvas
@@ -211,7 +224,11 @@
               <span>区间涨幅</span>
               <strong id="brent-change-large">--</strong>
             </div>
-            <button class="chart-reset" type="button" data-reset-chart="brent">复位</button>
+            <div class="chart-controls" aria-label="图表缩放">
+              <button class="chart-tool" type="button" data-zoom-chart="brent" data-zoom-direction="out" aria-label="缩小布伦特原油图表">−</button>
+              <button class="chart-tool" type="button" data-zoom-chart="brent" data-zoom-direction="in" aria-label="放大布伦特原油图表">＋</button>
+              <button class="chart-reset" type="button" data-reset-chart="brent">复位</button>
+            </div>
           </div>
           <div class="canvas-wrap">
             <canvas
@@ -234,7 +251,11 @@
               <span>区间涨幅</span>
               <strong id="gold-change-large">--</strong>
             </div>
-            <button class="chart-reset" type="button" data-reset-chart="gold">复位</button>
+            <div class="chart-controls" aria-label="图表缩放">
+              <button class="chart-tool" type="button" data-zoom-chart="gold" data-zoom-direction="out" aria-label="缩小黄金现货图表">−</button>
+              <button class="chart-tool" type="button" data-zoom-chart="gold" data-zoom-direction="in" aria-label="放大黄金现货图表">＋</button>
+              <button class="chart-reset" type="button" data-reset-chart="gold">复位</button>
+            </div>
           </div>
           <div class="canvas-wrap">
             <canvas
@@ -270,7 +291,11 @@
                 <strong id="csi300-period">--</strong>
               </span>
             </div>
-            <button class="chart-reset" type="button" data-reset-chart="china">复位</button>
+            <div class="chart-controls" aria-label="图表缩放">
+              <button class="chart-tool" type="button" data-zoom-chart="china" data-zoom-direction="out" aria-label="缩小中国主要股指图表">−</button>
+              <button class="chart-tool" type="button" data-zoom-chart="china" data-zoom-direction="in" aria-label="放大中国主要股指图表">＋</button>
+              <button class="chart-reset" type="button" data-reset-chart="china">复位</button>
+            </div>
           </div>
           <div class="canvas-wrap chart-canvas-tall">
             <canvas

@@ -590,12 +590,23 @@
     const context = canvas.getContext("2d");
     const wrapper = canvas.parentElement;
     const chartTooltip = wrapper.querySelector(".chart-tooltip");
+    const chartState = {
+      context,
+      wrapper,
+      chartTooltip,
+      layout: null,
+      pinch: null,
+    };
+    canvasState.set(canvas, chartState);
     const observer = new ResizeObserver(() => {
       requestAnimationFrame(() => drawChart(marketKey));
     });
     observer.observe(wrapper);
 
     canvas.addEventListener("pointermove", (event) => {
+      if (chartState.pinch) {
+        return;
+      }
       if (state.drag.has(marketKey)) {
         panChart(marketKey, event);
         return;
@@ -606,6 +617,9 @@
       drawChart(marketKey);
     });
     canvas.addEventListener("pointerdown", (event) => {
+      if (chartState.pinch) {
+        return;
+      }
       if (event.button !== 0) {
         return;
       }
@@ -640,6 +654,75 @@
     canvas.addEventListener("dblclick", () => {
       resetChartViewport(marketKey);
     });
+    canvas.addEventListener("touchstart", (event) => {
+      if (event.touches.length !== 2 || !chartState.layout) {
+        return;
+      }
+      const first = event.touches[0];
+      const second = event.touches[1];
+      const distance = Math.hypot(
+        first.clientX - second.clientX,
+        first.clientY - second.clientY,
+      );
+      chartState.pinch = {
+        distance,
+        startIndex: chartState.layout.startIndex,
+        endIndex: chartState.layout.endIndex,
+      };
+      state.drag.delete(marketKey);
+      event.preventDefault();
+    }, { passive: false });
+    canvas.addEventListener("touchmove", (event) => {
+      if (event.touches.length !== 2 || !chartState.pinch) {
+        return;
+      }
+      const layout = chartState.layout;
+      const first = event.touches[0];
+      const second = event.touches[1];
+      const distance = Math.hypot(
+        first.clientX - second.clientX,
+        first.clientY - second.clientY,
+      );
+      const startSpan =
+        chartState.pinch.endIndex - chartState.pinch.startIndex;
+      const nextSpan = Math.max(
+        Math.min(20, layout.baseRows.length - 1),
+        Math.min(
+          layout.baseRows.length - 1,
+          Math.round(
+            startSpan * (chartState.pinch.distance / Math.max(1, distance)),
+          ),
+        ),
+      );
+      const midpoint = (first.clientX + second.clientX) / 2;
+      const rect = canvas.getBoundingClientRect();
+      const ratio = Math.max(
+        0,
+        Math.min(
+          1,
+          (midpoint - rect.left - layout.margin.left) / layout.plotWidth,
+        ),
+      );
+      const anchorIndex =
+        chartState.pinch.startIndex +
+        ratio * (chartState.pinch.endIndex - chartState.pinch.startIndex);
+      let nextStart = Math.round(anchorIndex - ratio * nextSpan);
+      nextStart = Math.max(
+        0,
+        Math.min(layout.baseRows.length - 1 - nextSpan, nextStart),
+      );
+      state.viewport.set(marketKey, {
+        start: nextStart,
+        end: nextStart + nextSpan,
+      });
+      drawChart(marketKey);
+      event.preventDefault();
+    }, { passive: false });
+    canvas.addEventListener("touchend", (event) => {
+      if (event.touches.length < 2) {
+        chartState.pinch = null;
+      }
+    });
     canvas.addEventListener("pointerleave", () => {
       if (state.drag.has(marketKey)) {
         return;
@@ -649,7 +732,6 @@
       drawChart(marketKey);
     });
 
-    canvasState.set(canvas, { context, wrapper, chartTooltip, layout: null });
   }
 
   function drawChart(marketKey) {
@@ -871,6 +953,35 @@
     );
     const anchorIndex = layout.startIndex + ratio * span;
     let nextStart = Math.round(anchorIndex - ratio * nextSpan);
+    nextStart = Math.max(
+      0,
+      Math.min(layout.baseRows.length - 1 - nextSpan, nextStart),
+    );
+    state.viewport.set(marketKey, {
+      start: nextStart,
+      end: nextStart + nextSpan,
+    });
+    drawChart(marketKey);
+  }
+
+  function zoomChartBy(marketKey, direction) {
+    const canvas = allChartConfigs[marketKey].canvas;
+    const chart = canvasState.get(canvas);
+    const layout = chart?.layout;
+    if (!layout || layout.baseRows.length < 20) {
+      return;
+    }
+    const currentSpan = layout.endIndex - layout.startIndex;
+    const factor = direction === "in" ? 0.72 : 1 / 0.72;
+    const nextSpan = Math.max(
+      Math.min(20, layout.baseRows.length - 1),
+      Math.min(
+        layout.baseRows.length - 1,
+        Math.round(currentSpan * factor),
+      ),
+    );
+    const centerIndex = (layout.startIndex + layout.endIndex) / 2;
+    let nextStart = Math.round(centerIndex - nextSpan / 2);
     nextStart = Math.max(
       0,
       Math.min(layout.baseRows.length - 1 - nextSpan, nextStart),
@@ -1999,6 +2110,25 @@
     }
   }
 
+  function setupResponsiveNewsPlacement() {
+    const news = document.querySelector(".sidebar-news");
+    const slot = document.querySelector("#mobile-news-slot");
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarStatus = document.querySelector(".sidebar-status");
+    const media = window.matchMedia("(max-width: 960px)");
+
+    const placeNews = () => {
+      if (media.matches) {
+        slot.append(news);
+      } else {
+        sidebar.insertBefore(news, sidebarStatus);
+      }
+    };
+
+    placeNews();
+    media.addEventListener("change", placeNews);
+  }
+
   function refresh() {
     updateRangeButtons();
     updateSummary();
@@ -2072,6 +2202,11 @@
         resetChartViewport(button.dataset.resetChart);
       });
     });
+    document.querySelectorAll("[data-zoom-chart]").forEach((button) => {
+      button.addEventListener("click", () => {
+        zoomChartBy(button.dataset.zoomChart, button.dataset.zoomDirection);
+      });
+    });
 
     document.querySelectorAll("[data-event-filter]").forEach((input) => {
       input.addEventListener("change", () => {
@@ -2102,6 +2237,7 @@
 
     initializeChartRangePickers();
     setupSidebarNavigation();
+    setupResponsiveNewsPlacement();
     refresh();
     setupDataAutoRefresh();
   }

@@ -366,6 +366,10 @@ a {
   min-width: 0;
 }
 
+.mobile-news-slot:empty {
+  display: none;
+}
+
 .topbar {
   position: sticky;
   z-index: 5;
@@ -926,6 +930,33 @@ main {
   color: #fff;
 }
 
+.chart-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.chart-tool {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.chart-tool:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+}
+
 .canvas-wrap {
   position: relative;
   width: 100%;
@@ -1408,7 +1439,20 @@ canvas.is-panning {
   }
 
   .sidebar-news {
-    display: none;
+    display: flex;
+    min-height: 150px;
+    max-height: 230px;
+    flex: none;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .sidebar-news-window {
+    max-height: 150px;
+  }
+
+  .mobile-news-slot {
+    margin-bottom: 10px;
   }
 
   .topbar {
@@ -1533,12 +1577,10 @@ canvas.is-panning {
     justify-items: start;
   }
 
-  .chart-heading .chart-reset {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: center;
-    font-size: 12px;
-    font-weight: 600;
+  .chart-heading .chart-controls {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-content: flex-start;
   }
 
   .chart-panel[data-market="china"] .china-heading-metrics {
@@ -1546,9 +1588,15 @@ canvas.is-panning {
     grid-row: 2;
   }
 
-  .chart-panel[data-market="china"] .chart-reset {
-    grid-column: 2;
-    grid-row: 1;
+  .chart-panel[data-market="china"] .chart-controls {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .chart-tool {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
   }
 
   .canvas-wrap,

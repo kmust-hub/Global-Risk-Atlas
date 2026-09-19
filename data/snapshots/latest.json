@@ -1,10 +1,10 @@
 {
   "meta": {
-    "generatedAt": "2026-09-18T15:22:25.271Z",
-    "newsUpdatedAt": "2026-09-18T15:22:25.271Z",
+    "generatedAt": "2026-09-19T12:36:14.952Z",
+    "newsUpdatedAt": "2026-09-19T12:36:14.952Z",
     "newsRefreshMinutes": 15,
     "through": "2026-09-18",
-    "requestedThrough": "2026-09-18",
+    "requestedThrough": "2026-09-19",
     "start": "1982-01-04",
     "sources": {
       "sp500": "Tencent Finance primary, FRED fallback",
@@ -22,7 +22,7 @@
         "maxAbsPercent": 0.0229
       },
       "nasdaq100VsFred": {
-        "points": 6706,
+        "points": 6707,
         "meanAbsPercent": 0.0329,
         "maxAbsPercent": 2.4426
       }
@@ -90180,6 +90180,14 @@
         7646.86,
         7611.81,
         1
+      ],
+      [
+        "2026-09-18",
+        7650.5,
+        7657.17,
+        7657.17,
+        7610.52,
+        1
       ]
     ],
     "nasdaq100": [
@@ -158046,6 +158054,14 @@
         29494.95,
         29305.9,
         1
+      ],
+      [
+        "2026-09-18",
+        29644.17,
+        29529.64,
+        29647.8,
+        29371.89,
+        1
       ]
     ],
     "brent": [
@@ -204955,7 +204971,7 @@
       ],
       [
         "2026-09-18",
-        99.83,
+        99.03,
         99.4,
         100.15,
         97.8,
@@ -204963,14 +204979,6 @@
       ]
     ],
     "gold": [
-      [
-        "2006-09-18",
-        587.2,
-        579.55,
-        588.36,
-        578.42,
-        1
-      ],
       [
         "2006-09-19",
         573.65,
@@ -246445,7 +246453,7 @@
       ],
       [
         "2026-09-18",
-        4355.24,
+        4378.29,
         4343.47,
         4399.49,
         4334.23,
@@ -394202,8 +394210,8 @@
         "pre10": -0.38,
         "pre20": -0.91,
         "d1": 1.14,
-        "d5": null,
-        "d20": null
+        "d5": 0.17,
+        "d20": 0.17
       },
       "windows": {
         "sp500": {
@@ -394211,32 +394219,32 @@
           "pre10": -0.38,
           "pre20": -0.91,
           "d1": 1.14,
-          "d5": null,
-          "d20": null
+          "d5": 0.17,
+          "d20": 0.17
         },
         "nasdaq100": {
           "pre5": 1.18,
           "pre10": 1.04,
           "pre20": 0.07,
           "d1": 1.73,
-          "d5": null,
-          "d20": null
+          "d5": 0.67,
+          "d20": 0.67
         },
         "brent": {
           "pre5": -8.98,
           "pre10": 3.76,
           "pre20": 6.72,
           "d1": -5.65,
-          "d5": 0.37,
-          "d20": 0.37
+          "d5": -0.43,
+          "d20": -0.43
         },
         "gold": {
           "pre5": 0.58,
           "pre10": -2.94,
           "pre20": -3.93,
           "d1": 1.82,
-          "d5": 0.31,
-          "d20": 0.31
+          "d5": 0.84,
+          "d20": 0.84
         }
       }
     }
@@ -394294,8 +394302,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394351,8 +394359,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394408,8 +394416,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394465,8 +394473,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394522,8 +394530,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394579,8 +394587,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394636,8 +394644,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394693,8 +394701,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394750,8 +394758,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -394807,8 +394815,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -395663,8 +395671,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -396113,8 +396121,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -396169,8 +396177,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -396225,8 +396233,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 0.61,
-          "d20": 1.5
+          "d5": 3.2,
+          "d20": 2.87
         }
       }
     },
@@ -396611,7 +396619,7 @@
       "summary": "全球铜价月度国际价格，经 FRED 更新。",
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PCOPPUSDM",
-      "publishedAt": "2026-09-18T15:22:25.195Z",
+      "publishedAt": "2026-09-19T12:36:14.149Z",
       "dataDate": "2026-07-01"
     },
     {
@@ -396621,48 +396629,17 @@
       "summary": "美国劳工统计局消费者价格指数，经 FRED 更新。",
       "source": "FRED",
       "url": "https://fred.stlouisfed.org/series/CPIAUCSL",
-      "publishedAt": "2026-09-18T15:22:15.383Z",
+      "publishedAt": "2026-09-19T12:36:12.560Z",
       "dataDate": "2026-08-01"
     },
     {
-      "id": "food-PMAIZMTUSDM-2026-07-01",
-      "category": "粮食农业",
-      "title": "全球玉米价格最新值 213.2 美元/吨（2026-07），环比 +8.9%",
-      "summary": "全球玉米价格月度数据，经 FRED 更新。",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PMAIZMTUSDM",
-      "publishedAt": "2026-09-18T15:22:21.015Z",
-      "dataDate": "2026-07-01"
-    },
-    {
-      "id": "resource-PNICKUSDM-2026-07-01",
-      "category": "矿产资源",
-      "title": "全球镍价最新值 16632.4 美元/吨（2026-07），环比 -5.4%",
-      "summary": "全球镍价月度国际价格，经 FRED 更新。",
-      "source": "FRED Commodities",
-      "url": "https://fred.stlouisfed.org/series/PNICKUSDM",
-      "publishedAt": "2026-09-18T15:22:16.981Z",
-      "dataDate": "2026-07-01"
-    },
-    {
-      "id": "food-PSOYBUSDQ-2026-04-01",
-      "category": "粮食农业",
-      "title": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%",
-      "summary": "全球大豆价格月度数据，经 FRED 更新。",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PSOYBUSDQ",
-      "publishedAt": "2026-09-18T15:22:16.633Z",
-      "dataDate": "2026-04-01"
-    },
-    {
-      "id": "resource-PIORECRUSDM-2026-07-01",
-      "category": "矿产资源",
-      "title": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%",
-      "summary": "全球铁矿石价格月度国际价格，经 FRED 更新。",
-      "source": "FRED Commodities",
-      "url": "https://fred.stlouisfed.org/series/PIORECRUSDM",
-      "publishedAt": "2026-09-18T15:22:14.655Z",
-      "dataDate": "2026-07-01"
+      "id": "MarketWatch-31d2ca30b548",
+      "category": "全球市场",
+      "title": "Stocks face a growing list of threats — so why are investors staying so calm?",
+      "summary": "Investors are well aware of the risks, but they have simply decided none are significant enough to force them out of the market.",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com/story/stocks-face-a-growing-list-of-threats-so-why-are-investors-staying-so-calm-a6acd7e5?mod=mw_rss_topstories",
+      "publishedAt": "2026-09-19T11:30:00.000Z"
     },
     {
       "id": "food-PWHEAMTUSDM-2026-07-01",
@@ -396671,7 +396648,7 @@
       "summary": "全球小麦价格月度数据，经 FRED 更新。",
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
-      "publishedAt": "2026-09-18T15:22:14.239Z",
+      "publishedAt": "2026-09-19T12:36:13.824Z",
       "dataDate": "2026-07-01"
     },
     {
@@ -396681,7 +396658,7 @@
       "summary": "全球食品价格指数月度数据，经 FRED 更新。",
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PFOODINDEXM",
-      "publishedAt": "2026-09-18T15:22:13.621Z",
+      "publishedAt": "2026-09-19T12:36:12.725Z",
       "dataDate": "2026-07-01"
     },
     {
@@ -396691,17 +396668,48 @@
       "summary": "全球锌价月度国际价格，经 FRED 更新。",
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PZINCUSDM",
-      "publishedAt": "2026-09-18T15:22:13.304Z",
+      "publishedAt": "2026-09-19T12:36:12.278Z",
       "dataDate": "2026-07-01"
     },
     {
-      "id": "chinanews-218dd3ba39f7",
+      "id": "food-PSOYBUSDQ-2026-04-01",
       "category": "粮食农业",
-      "title": "河南商丘逾695万亩玉米陆续进入收获期",
-      "summary": "",
-      "source": "中国新闻网",
-      "url": "https://www.chinanews.com.cn/tp/2026/09-18/10699184.shtml",
-      "publishedAt": "2026-09-18T12:25:00.000Z"
+      "title": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%",
+      "summary": "全球大豆价格月度数据，经 FRED 更新。",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PSOYBUSDQ",
+      "publishedAt": "2026-09-19T12:36:12.158Z",
+      "dataDate": "2026-04-01"
+    },
+    {
+      "id": "resource-PNICKUSDM-2026-07-01",
+      "category": "矿产资源",
+      "title": "全球镍价最新值 16632.4 美元/吨（2026-07），环比 -5.4%",
+      "summary": "全球镍价月度国际价格，经 FRED 更新。",
+      "source": "FRED Commodities",
+      "url": "https://fred.stlouisfed.org/series/PNICKUSDM",
+      "publishedAt": "2026-09-19T12:36:11.700Z",
+      "dataDate": "2026-07-01"
+    },
+    {
+      "id": "resource-PIORECRUSDM-2026-07-01",
+      "category": "矿产资源",
+      "title": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%",
+      "summary": "全球铁矿石价格月度国际价格，经 FRED 更新。",
+      "source": "FRED Commodities",
+      "url": "https://fred.stlouisfed.org/series/PIORECRUSDM",
+      "publishedAt": "2026-09-19T12:36:11.113Z",
+      "dataDate": "2026-07-01"
+    },
+    {
+      "id": "food-PMAIZMTUSDM-2026-07-01",
+      "category": "粮食农业",
+      "title": "全球玉米价格最新值 213.2 美元/吨（2026-07），环比 +8.9%",
+      "summary": "全球玉米价格月度数据，经 FRED 更新。",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PMAIZMTUSDM",
+      "publishedAt": "2026-09-19T12:36:10.885Z",
+      "dataDate": "2026-07-01"
     },
     {
       "id": "UN News-c6f9a4ff0e54",
