@@ -1668,7 +1668,7 @@
     if (hasConflict) {
       drawDiamond(context, x, y, size - 0.4, colors.conflict, colors.surface);
     } else if (hasFinancial) {
-      drawDiamond(context, x, y, size - 0.7, colors.financial, colors.surface);
+      drawSquareMarker(context, x, y, size - 0.5, colors.financial);
     } else if (hasHealth) {
       drawHealthMarker(context, x, y, size);
     } else if (hasHike && hasCut) {
@@ -1697,6 +1697,16 @@
     context.moveTo(x, y - size * 0.48);
     context.lineTo(x, y + size * 0.48);
     context.stroke();
+    context.restore();
+  }
+
+  function drawSquareMarker(context, x, y, size, fill) {
+    context.save();
+    context.fillStyle = fill;
+    context.strokeStyle = colors.surface;
+    context.lineWidth = 1.4;
+    context.fillRect(x - size, y - size, size * 2, size * 2);
+    context.strokeRect(x - size, y - size, size * 2, size * 2);
     context.restore();
   }
 
@@ -1734,13 +1744,42 @@
     ];
 
     context.save();
-    context.font = "11px Segoe UI, Microsoft YaHei UI, sans-serif";
-    context.textAlign = "right";
+    context.font = "600 11px Segoe UI, Microsoft YaHei UI, sans-serif";
+    context.textAlign = "left";
     context.textBaseline = "middle";
+    let legendX = margin.left;
+    const legendY = plotBottom + 13;
     for (const row of rows) {
+      const textWidth = context.measureText(row.label).width;
+      const chipWidth = textWidth + 28;
+      const chipTop = legendY - 9;
+      context.globalAlpha = 0.08;
       context.fillStyle = row.color;
-      context.globalAlpha = 0.8;
-      context.fillText(row.label, margin.left - 7, row.y);
+      context.beginPath();
+      if (typeof context.roundRect === "function") {
+        context.roundRect(legendX, chipTop, chipWidth, 18, 6);
+      } else {
+        context.rect(legendX, chipTop, chipWidth, 18);
+      }
+      context.fill();
+      context.globalAlpha = 0.28;
+      context.strokeStyle = row.color;
+      context.lineWidth = 1;
+      context.stroke();
+      context.globalAlpha = 1;
+      drawClusterMarker(
+        context,
+        { events: [{ type: row.type }] },
+        legendX + 10,
+        legendY,
+        3.7,
+      );
+      context.fillStyle = row.color;
+      context.fillText(row.label, legendX + 18, legendY + 0.5);
+      legendX += chipWidth + 6;
+    }
+
+    for (const row of rows) {
       context.globalAlpha = 0.14;
       context.strokeStyle = row.color;
       context.beginPath();
