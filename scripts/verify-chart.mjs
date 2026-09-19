@@ -172,6 +172,54 @@ try {
     throw new Error("Mobile chart zoom controls are clipped");
   }
 
+  await evaluate(`(() => {
+    const canvas = document.querySelector("#sp500-chart");
+    const rect = canvas.getBoundingClientRect();
+    const startX = rect.left + rect.width * 0.68;
+    const startY = rect.top + rect.height * 0.5;
+    canvas.dispatchEvent(new PointerEvent("pointerdown", {
+      pointerId: 7,
+      pointerType: "touch",
+      clientX: startX,
+      clientY: startY,
+      bubbles: true,
+      cancelable: true,
+      buttons: 1
+    }));
+    canvas.dispatchEvent(new PointerEvent("pointermove", {
+      pointerId: 7,
+      pointerType: "touch",
+      clientX: startX + 24,
+      clientY: startY,
+      bubbles: true,
+      cancelable: true,
+      buttons: 1
+    }));
+    canvas.dispatchEvent(new PointerEvent("pointerup", {
+      pointerId: 7,
+      pointerType: "touch",
+      clientX: startX + 24,
+      clientY: startY,
+      bubbles: true,
+      cancelable: true,
+      buttons: 0
+    }));
+    return true;
+  })()`);
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  const touchTooltip = await evaluate(`(() => {
+    const tooltip = document.querySelector(
+      '.chart-panel[data-market="sp500"] .chart-tooltip'
+    );
+    return {
+      hidden: tooltip.hidden,
+      text: tooltip.textContent
+    };
+  })()`);
+  if (touchTooltip.hidden || !touchTooltip.text.includes("标普500")) {
+    throw new Error("Touch movement did not display chart event information");
+  }
+
   const before = hash(
     await evaluate("document.querySelector('#sp500-chart').toDataURL()"),
   );
@@ -321,6 +369,7 @@ try {
       newsState,
       eventTypeCoverage,
       zoomControlLayout,
+      touchTooltip,
     }),
   );
 } finally {

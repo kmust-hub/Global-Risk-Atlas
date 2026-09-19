@@ -1,7 +1,7 @@
 {
   "meta": {
     "generatedAt": "2026-09-19T12:36:14.952Z",
-    "newsUpdatedAt": "2026-09-19T12:36:14.952Z",
+    "newsUpdatedAt": "2026-09-19T13:17:20.082Z",
     "newsRefreshMinutes": 15,
     "through": "2026-09-18",
     "requestedThrough": "2026-09-19",
@@ -396583,7 +396583,8 @@
       "summary": "Beijing’s consolidation drive could put a Chinese state company alongside the Pentagon on MP’s shareholder register.",
       "source": "MINING.COM",
       "url": "https://www.mining.com/china-rare-earth-eyes-indirect-stake-in-mp-materials/",
-      "publishedAt": "2026-09-17T21:23:00.000Z"
+      "publishedAt": "2026-09-17T21:23:00.000Z",
+      "score": 44
     },
     {
       "id": "mining-1214226",
@@ -396592,7 +396593,8 @@
       "summary": "Mesa operation provides US companies with a domestic destination for magnet-bearing products that would otherwise be exported as waste.",
       "source": "MINING.COM",
       "url": "https://www.mining.com/site-visit-cyclic-materials-opens-commercial-scale-rare-earth-recycling-plant-in-arizona/",
-      "publishedAt": "2026-09-11T07:04:40.000Z"
+      "publishedAt": "2026-09-11T07:04:40.000Z",
+      "score": 44
     },
     {
       "id": "mining-1214222",
@@ -396601,7 +396603,8 @@
       "summary": "Event marks a milestone in its plan to build an integrated US rare earth supply chain.",
       "source": "MINING.COM",
       "url": "https://www.mining.com/usa-rare-earth-breaks-ground-at-1-2b-rare-earth-magnet-manufacturing-facility-in-south-carolina/",
-      "publishedAt": "2026-09-11T03:07:15.000Z"
+      "publishedAt": "2026-09-11T03:07:15.000Z",
+      "score": 44
     },
     {
       "id": "mining-1213869",
@@ -396610,7 +396613,18 @@
       "summary": "By 2030, DOD needs may triple to 10,000 tonnes annually, while current rare earth magnet production is 20,000-25,000 tonnes.",
       "source": "MINING.COM",
       "url": "https://www.mining.com/pentagon-rare-earth-push-collides-with-chinas-grip/",
-      "publishedAt": "2026-09-04T00:19:57.000Z"
+      "publishedAt": "2026-09-04T00:19:57.000Z",
+      "score": 44
+    },
+    {
+      "id": "MarketWatch-1baea46f9e9b",
+      "category": "全球市场",
+      "title": "Warsh’s Fed shows it’s serious about taming inflation. Why Wall Street now believes it.",
+      "summary": "After more than five years of failing to do so, Federal Reserve leaders think they can shrink the rate of inflation to 2% by 2029 with just slightly higher U.S. interest rates. Are they serious?",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com/story/warshs-fed-shows-its-serious-about-taming-inflation-why-wall-street-now-believes-it-55dc5af5?mod=mw_rss_topstories",
+      "publishedAt": "2026-09-19T13:00:00.000Z",
+      "score": 24
     },
     {
       "id": "resource-PCOPPUSDM-2026-07-01",
@@ -396620,7 +396634,8 @@
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PCOPPUSDM",
       "publishedAt": "2026-09-19T12:36:14.149Z",
-      "dataDate": "2026-07-01"
+      "dataDate": "2026-07-01",
+      "score": 22
     },
     {
       "id": "macro-cpi-2026-08-01",
@@ -396630,7 +396645,8 @@
       "source": "FRED",
       "url": "https://fred.stlouisfed.org/series/CPIAUCSL",
       "publishedAt": "2026-09-19T12:36:12.560Z",
-      "dataDate": "2026-08-01"
+      "dataDate": "2026-08-01",
+      "score": 16
     },
     {
       "id": "MarketWatch-31d2ca30b548",
@@ -396639,7 +396655,8 @@
       "summary": "Investors are well aware of the risks, but they have simply decided none are significant enough to force them out of the market.",
       "source": "MarketWatch",
       "url": "https://www.marketwatch.com/story/stocks-face-a-growing-list-of-threats-so-why-are-investors-staying-so-calm-a6acd7e5?mod=mw_rss_topstories",
-      "publishedAt": "2026-09-19T11:30:00.000Z"
+      "publishedAt": "2026-09-19T11:30:00.000Z",
+      "score": 16
     },
     {
       "id": "food-PWHEAMTUSDM-2026-07-01",
@@ -396649,7 +396666,8 @@
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
       "publishedAt": "2026-09-19T12:36:13.824Z",
-      "dataDate": "2026-07-01"
+      "dataDate": "2026-07-01",
+      "score": 14
     },
     {
       "id": "food-PFOODINDEXM-2026-07-01",
@@ -396659,7 +396677,8 @@
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PFOODINDEXM",
       "publishedAt": "2026-09-19T12:36:12.725Z",
-      "dataDate": "2026-07-01"
+      "dataDate": "2026-07-01",
+      "score": 14
     },
     {
       "id": "resource-PZINCUSDM-2026-07-01",
@@ -396669,7 +396688,8 @@
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PZINCUSDM",
       "publishedAt": "2026-09-19T12:36:12.278Z",
-      "dataDate": "2026-07-01"
+      "dataDate": "2026-07-01",
+      "score": 14
     },
     {
       "id": "food-PSOYBUSDQ-2026-04-01",
@@ -396679,7 +396699,8 @@
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PSOYBUSDQ",
       "publishedAt": "2026-09-19T12:36:12.158Z",
-      "dataDate": "2026-04-01"
+      "dataDate": "2026-04-01",
+      "score": 14
     },
     {
       "id": "resource-PNICKUSDM-2026-07-01",
@@ -396689,7 +396710,8 @@
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PNICKUSDM",
       "publishedAt": "2026-09-19T12:36:11.700Z",
-      "dataDate": "2026-07-01"
+      "dataDate": "2026-07-01",
+      "score": 14
     },
     {
       "id": "resource-PIORECRUSDM-2026-07-01",
@@ -396699,7 +396721,8 @@
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PIORECRUSDM",
       "publishedAt": "2026-09-19T12:36:11.113Z",
-      "dataDate": "2026-07-01"
+      "dataDate": "2026-07-01",
+      "score": 14
     },
     {
       "id": "food-PMAIZMTUSDM-2026-07-01",
@@ -396709,7 +396732,8 @@
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PMAIZMTUSDM",
       "publishedAt": "2026-09-19T12:36:10.885Z",
-      "dataDate": "2026-07-01"
+      "dataDate": "2026-07-01",
+      "score": 14
     },
     {
       "id": "UN News-c6f9a4ff0e54",
@@ -396718,16 +396742,8 @@
       "summary": "Amid a rising number of attacks on shipping in key waterways in the Middle East linked to the US-Iran war, the head of UN maritime agency, Mr. Arsenio Dominguez, has insisted that the conflict is not a “pretext” to target “innocent seafarer",
       "source": "UN News",
       "url": "https://news.un.org/feed/view/en/story/2026/09/1168352",
-      "publishedAt": "2026-09-16T12:00:00.000Z"
-    },
-    {
-      "id": "FAO-31ab5567fdf7",
-      "category": "粮食农业",
-      "title": "Supply concerns drive FAO Food Price Index higher in August",
-      "summary": "",
-      "source": "FAO",
-      "url": "https://www.fao.org/newsroom/detail/supply-concerns-drive-fao-food-price-index-higher/en",
-      "publishedAt": "2026-09-04T12:00:00.000Z"
+      "publishedAt": "2026-09-16T12:00:00.000Z",
+      "score": 14
     }
   ]
 }

@@ -630,17 +630,43 @@
       }
       state.drag.set(marketKey, {
         pointerId: event.pointerId,
+        pointerType: event.pointerType,
         startX: event.clientX,
         startIndex: layout.startIndex,
         endIndex: layout.endIndex,
         plotWidth: layout.plotWidth,
+        moved: false,
       });
-      canvas.setPointerCapture?.(event.pointerId);
+      try {
+        canvas.setPointerCapture?.(event.pointerId);
+      } catch {
+        // Synthetic pointer events do not own a browser pointer capture.
+      }
       canvas.classList.add("is-panning");
     });
     canvas.addEventListener("pointerup", (event) => {
+      const drag = state.drag.get(marketKey);
+      if (drag && !drag.moved && drag.pointerType !== "mouse") {
+        const layout = canvasState.get(canvas)?.layout;
+        if (layout) {
+          const rect = canvas.getBoundingClientRect();
+          const x = Math.max(
+            layout.margin.left,
+            Math.min(
+              layout.margin.left + layout.plotWidth,
+              event.clientX - rect.left,
+            ),
+          );
+          state.hover.set(marketKey, x);
+          drawChart(marketKey);
+        }
+      }
       state.drag.delete(marketKey);
-      canvas.releasePointerCapture?.(event.pointerId);
+      try {
+        canvas.releasePointerCapture?.(event.pointerId);
+      } catch {
+        // Ignore pointers that were not captured.
+      }
       canvas.classList.remove("is-panning");
     });
     canvas.addEventListener("pointercancel", () => {
@@ -723,8 +749,11 @@
         chartState.pinch = null;
       }
     });
-    canvas.addEventListener("pointerleave", () => {
+    canvas.addEventListener("pointerleave", (event) => {
       if (state.drag.has(marketKey)) {
+        return;
+      }
+      if (event.pointerType === "touch") {
         return;
       }
       state.hover.delete(marketKey);
@@ -1004,6 +1033,7 @@
     if (Math.abs(deltaX) < 2) {
       return;
     }
+    drag.moved = true;
     const span = drag.endIndex - drag.startIndex;
     const indexDelta = Math.round((-deltaX / drag.plotWidth) * span);
     const maxStart = chart.layout.baseRows.length - 1 - span;
@@ -1012,8 +1042,15 @@
       start: nextStart,
       end: nextStart + span,
     });
-    state.hover.delete(marketKey);
-    chart.chartTooltip.hidden = true;
+    const rect = canvas.getBoundingClientRect();
+    const x = Math.max(
+      chart.layout.margin.left,
+      Math.min(
+        chart.layout.margin.left + chart.layout.plotWidth,
+        event.clientX - rect.left,
+      ),
+    );
+    state.hover.set(marketKey, x);
     drawChart(marketKey);
   }
 
