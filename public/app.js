@@ -798,7 +798,7 @@
     const margin = {
       top: 18,
       right: width < 560 ? 28 : 36,
-      bottom: 94,
+      bottom: 120,
       left: width < 560 ? 58 : 72,
     };
     const plotWidth = width - margin.left - margin.right;
@@ -1292,7 +1292,7 @@
     const margin = {
       top: 18,
       right: width < 560 ? 28 : 36,
-      bottom: 94,
+      bottom: 120,
       left: width < 560 ? 58 : 72,
     };
     const plotWidth = width - margin.left - margin.right;
@@ -1721,24 +1721,24 @@
   ) {
     const plotBottom = margin.top + plotHeight;
     const rows = [
-      { type: "hike", label: "加息", y: plotBottom + 36, color: colors.hike },
-      { type: "cut", label: "降息", y: plotBottom + 48, color: colors.cut },
+      { type: "hike", label: "加息", y: plotBottom + 58, color: colors.hike },
+      { type: "cut", label: "降息", y: plotBottom + 70, color: colors.cut },
       {
         type: "conflict",
         label: "冲突",
-        y: plotBottom + 60,
+        y: plotBottom + 82,
         color: colors.conflict,
       },
       {
         type: "health",
         label: "卫生",
-        y: plotBottom + 72,
+        y: plotBottom + 94,
         color: colors.health,
       },
       {
         type: "financial",
         label: "金融",
-        y: plotBottom + 84,
+        y: plotBottom + 106,
         color: colors.financial,
       },
     ];
@@ -1748,7 +1748,7 @@
     context.textAlign = "left";
     context.textBaseline = "middle";
     let legendX = margin.left;
-    const legendY = plotBottom + 13;
+    const legendY = plotBottom + 34;
     for (const row of rows) {
       const textWidth = context.measureText(row.label).width;
       const chipWidth = textWidth + 28;

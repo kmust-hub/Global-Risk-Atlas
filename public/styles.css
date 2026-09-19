@@ -960,12 +960,12 @@ main {
 .canvas-wrap {
   position: relative;
   width: 100%;
-  height: 330px;
+  height: 360px;
   margin-top: 2px;
 }
 
 .chart-panel[data-market="nasdaq100"] .canvas-wrap {
-  height: 330px;
+  height: 360px;
 }
 
 .chart-panel[data-market="china"] {
@@ -973,7 +973,7 @@ main {
 }
 
 .chart-panel[data-market="china"] .canvas-wrap {
-  height: 760px;
+  height: 800px;
 }
 
 .chart-note {
@@ -1601,11 +1601,11 @@ canvas.is-panning {
 
   .canvas-wrap,
   .chart-panel[data-market="nasdaq100"] .canvas-wrap {
-    height: 300px;
+    height: 340px;
   }
 
   .chart-panel[data-market="china"] .canvas-wrap {
-    height: 720px;
+    height: 780px;
   }
 
   .china-heading-metrics {
