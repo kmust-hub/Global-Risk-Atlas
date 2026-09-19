@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" width="760" height="220">
+  <g transform="translate(92 110)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle r="70" fill="#f8fafc" stroke="#1e293b" stroke-width="7"/>
+    <ellipse rx="28" ry="70" stroke="#2563eb" stroke-width="4"/>
+    <path d="M-70 0h140" stroke="#2563eb" stroke-width="4"/>
+    <path d="M-28-21v19M0-34v32M28-46v44" stroke="#e0241b" stroke-width="8"/>
+    <path d="M-28 8v31M0-2v51M28-2v37" stroke="#2563eb" stroke-width="8"/>
+    <circle cx="-47" cy="-34" r="8" fill="#d63f8c" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="49" cy="30" r="8" fill="#d46b08" stroke="#ffffff" stroke-width="3"/>
+  </g>
+  <text x="190" y="103" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="42" font-weight="700" fill="#152033">环球风险图谱</text>
+  <text x="192" y="141" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="600" fill="#64748b">GLOBAL RISK ATLAS</text>
+</svg>
