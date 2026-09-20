@@ -51,6 +51,7 @@
     hover: new Map(),
     viewport: new Map(),
     drag: new Map(),
+    activeTouchTooltip: null,
   };
 
   const marketConfig = {
@@ -586,6 +587,19 @@
     return escapeHtml(value);
   }
 
+  function clearChartTooltip(marketKey) {
+    state.hover.delete(marketKey);
+    if (state.activeTouchTooltip === marketKey) {
+      state.activeTouchTooltip = null;
+    }
+    const canvas = allChartConfigs[marketKey]?.canvas;
+    const chart = canvasState.get(canvas);
+    if (chart?.chartTooltip) {
+      chart.chartTooltip.hidden = true;
+    }
+    drawChart(marketKey);
+  }
+
   function setupCanvas(canvas, marketKey) {
     const context = canvas.getContext("2d");
     const wrapper = canvas.parentElement;
@@ -623,6 +637,13 @@
       if (event.button !== 0) {
         return;
       }
+      if (
+        event.pointerType !== "mouse" &&
+        state.activeTouchTooltip &&
+        state.activeTouchTooltip !== marketKey
+      ) {
+        clearChartTooltip(state.activeTouchTooltip);
+      }
       const chart = canvasState.get(canvas);
       const layout = chart?.layout;
       if (!layout) {
@@ -646,19 +667,34 @@
     });
     canvas.addEventListener("pointerup", (event) => {
       const drag = state.drag.get(marketKey);
-      if (drag && !drag.moved && drag.pointerType !== "mouse") {
-        const layout = canvasState.get(canvas)?.layout;
-        if (layout) {
-          const rect = canvas.getBoundingClientRect();
-          const x = Math.max(
-            layout.margin.left,
-            Math.min(
-              layout.margin.left + layout.plotWidth,
-              event.clientX - rect.left,
-            ),
-          );
-          state.hover.set(marketKey, x);
-          drawChart(marketKey);
+      if (drag && drag.pointerType !== "mouse") {
+        if (!drag.moved) {
+          if (
+            state.activeTouchTooltip === marketKey &&
+            !chartTooltip.hidden
+          ) {
+            clearChartTooltip(marketKey);
+          } else {
+            const layout = canvasState.get(canvas)?.layout;
+            if (layout) {
+              const rect = canvas.getBoundingClientRect();
+              const x = Math.max(
+                layout.margin.left,
+                Math.min(
+                  layout.margin.left + layout.plotWidth,
+                  event.clientX - rect.left,
+                ),
+              );
+              state.hover.set(marketKey, x);
+              state.activeTouchTooltip = marketKey;
+              drawChart(marketKey);
+            }
+          }
+        } else if (
+          state.activeTouchTooltip === marketKey ||
+          state.hover.has(marketKey)
+        ) {
+          clearChartTooltip(marketKey);
         }
       }
       state.drag.delete(marketKey);
@@ -670,8 +706,15 @@
       canvas.classList.remove("is-panning");
     });
     canvas.addEventListener("pointercancel", () => {
+      const drag = state.drag.get(marketKey);
       state.drag.delete(marketKey);
       canvas.classList.remove("is-panning");
+      if (
+        drag?.pointerType !== "mouse" &&
+        (state.activeTouchTooltip === marketKey || state.hover.has(marketKey))
+      ) {
+        clearChartTooltip(marketKey);
+      }
     });
     canvas.addEventListener("wheel", (event) => {
       event.preventDefault();
@@ -696,6 +739,9 @@
         endIndex: chartState.layout.endIndex,
       };
       state.drag.delete(marketKey);
+      if (state.activeTouchTooltip === marketKey || state.hover.has(marketKey)) {
+        clearChartTooltip(marketKey);
+      }
       event.preventDefault();
     }, { passive: false });
     canvas.addEventListener("touchmove", (event) => {
@@ -2252,6 +2298,17 @@
     for (const [key, config] of Object.entries(allChartConfigs)) {
       setupCanvas(config.canvas, key);
     }
+    document.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" || !state.activeTouchTooltip) {
+        return;
+      }
+      const activeChart =
+        allChartConfigs[state.activeTouchTooltip]?.canvas;
+      if (event.target === activeChart) {
+        return;
+      }
+      clearChartTooltip(state.activeTouchTooltip);
+    });
 
     document.querySelector("#freshness-label").textContent = `数据截至 ${formatDate(DATA.meta.through)}`;
     const generatedAt = new Date(DATA.meta.generatedAt);
