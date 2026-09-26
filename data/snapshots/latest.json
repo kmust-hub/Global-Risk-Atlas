@@ -1,10 +1,10 @@
 {
   "meta": {
-    "generatedAt": "2026-09-19T12:36:14.952Z",
-    "newsUpdatedAt": "2026-09-19T13:32:08.543Z",
+    "generatedAt": "2026-09-26T13:36:22.305Z",
+    "newsUpdatedAt": "2026-09-26T13:47:04.817Z",
     "newsRefreshMinutes": 15,
-    "through": "2026-09-18",
-    "requestedThrough": "2026-09-19",
+    "through": "2026-09-25",
+    "requestedThrough": "2026-09-26",
     "start": "1982-01-04",
     "sources": {
       "sp500": "Tencent Finance primary, FRED fallback",
@@ -17,12 +17,12 @@
     },
     "validation": {
       "sp500VsFred": {
-        "points": 2513,
+        "points": 2514,
         "meanAbsPercent": 0,
         "maxAbsPercent": 0.0229
       },
       "nasdaq100VsFred": {
-        "points": 6707,
+        "points": 6712,
         "meanAbsPercent": 0.0329,
         "maxAbsPercent": 2.4426
       }
@@ -90188,6 +90188,46 @@
         7657.17,
         7610.52,
         1
+      ],
+      [
+        "2026-09-21",
+        7764.7,
+        7692.83,
+        7779.22,
+        7691.19,
+        1
+      ],
+      [
+        "2026-09-22",
+        7764.64,
+        7770.81,
+        7782.19,
+        7756.26,
+        1
+      ],
+      [
+        "2026-09-23",
+        7706.03,
+        7761.94,
+        7761.94,
+        7694.89,
+        1
+      ],
+      [
+        "2026-09-24",
+        7704.13,
+        7666.99,
+        7719.01,
+        7662.57,
+        1
+      ],
+      [
+        "2026-09-25",
+        7743.41,
+        7709.86,
+        7752.07,
+        7693.08,
+        1
       ]
     ],
     "nasdaq100": [
@@ -158062,6 +158102,46 @@
         29647.8,
         29371.89,
         1
+      ],
+      [
+        "2026-09-21",
+        30482.35,
+        29947.16,
+        30557.33,
+        29933.22,
+        1
+      ],
+      [
+        "2026-09-22",
+        30732.4,
+        30496.43,
+        30770.63,
+        30496.43,
+        1
+      ],
+      [
+        "2026-09-23",
+        30470.29,
+        30706.23,
+        30706.23,
+        30353.88,
+        1
+      ],
+      [
+        "2026-09-24",
+        30478.86,
+        30225.19,
+        30529.35,
+        30204.16,
+        1
+      ],
+      [
+        "2026-09-25",
+        30608.13,
+        30517.46,
+        30667.56,
+        30413.59,
+        1
       ]
     ],
     "brent": [
@@ -184279,43 +184359,23 @@
       ],
       [
         "2016-09-19",
-        45.92,
-        46.01,
-        46.93,
-        45.85,
-        1
+        46.04
       ],
       [
         "2016-09-20",
-        46.2,
-        45.91,
-        46.93,
-        45.09,
-        1
+        45.24
       ],
       [
         "2016-09-21",
-        47.05,
-        46.45,
-        47.14,
-        45.09,
-        1
+        45.99
       ],
       [
         "2016-09-22",
-        47.5,
-        46.99,
-        47.83,
-        46.38,
-        1
+        47.21
       ],
       [
         "2016-09-23",
-        46.6,
-        47.85,
-        48.78,
-        46.24,
-        1
+        46.71
       ],
       [
         "2016-09-26",
@@ -204976,49 +205036,49 @@
         100.15,
         97.8,
         1
+      ],
+      [
+        "2026-09-21",
+        95.99,
+        99.99,
+        100.22,
+        95.08,
+        1
+      ],
+      [
+        "2026-09-22",
+        94.72,
+        96.26,
+        97.91,
+        93.68,
+        1
+      ],
+      [
+        "2026-09-23",
+        98.36,
+        94.72,
+        98.8,
+        94.08,
+        1
+      ],
+      [
+        "2026-09-24",
+        100.21,
+        98.36,
+        102.39,
+        97.09,
+        1
+      ],
+      [
+        "2026-09-25",
+        97.43,
+        99.7,
+        99.76,
+        96.38,
+        1
       ]
     ],
     "gold": [
-      [
-        "2006-09-19",
-        573.65,
-        587.25,
-        589.25,
-        572.75,
-        1
-      ],
-      [
-        "2006-09-20",
-        576.8,
-        572.85,
-        586.49,
-        572.35,
-        1
-      ],
-      [
-        "2006-09-21",
-        584.2,
-        576.9,
-        585.4,
-        574.84,
-        1
-      ],
-      [
-        "2006-09-22",
-        589.6,
-        584,
-        592.7,
-        582.99,
-        1
-      ],
-      [
-        "2006-09-25",
-        590.8,
-        590,
-        592.11,
-        582.26,
-        1
-      ],
       [
         "2006-09-26",
         592,
@@ -246457,6 +246517,46 @@
         4343.47,
         4399.49,
         4334.23,
+        1
+      ],
+      [
+        "2026-09-21",
+        4343.52,
+        4376.51,
+        4383.28,
+        4322.67,
+        1
+      ],
+      [
+        "2026-09-22",
+        4358.3,
+        4347.4,
+        4375.93,
+        4291.46,
+        1
+      ],
+      [
+        "2026-09-23",
+        4287.28,
+        4359.53,
+        4369.13,
+        4274.8,
+        1
+      ],
+      [
+        "2026-09-24",
+        4273.76,
+        4290.9,
+        4303.09,
+        4244.26,
+        1
+      ],
+      [
+        "2026-09-25",
+        4285.12,
+        4273.12,
+        4315.6,
+        4254.41,
         1
       ]
     ],
@@ -314908,6 +315008,38 @@
         3919.67,
         3888.5,
         1
+      ],
+      [
+        "2026-09-21",
+        3949.91,
+        3920.27,
+        3950.94,
+        3918.13,
+        1
+      ],
+      [
+        "2026-09-22",
+        3952.13,
+        3963.81,
+        3967.68,
+        3945.42,
+        1
+      ],
+      [
+        "2026-09-23",
+        3936.52,
+        3951.37,
+        3951.52,
+        3934.46,
+        1
+      ],
+      [
+        "2026-09-24",
+        3888.37,
+        3925.32,
+        3930.5,
+        3888.37,
+        1
       ]
     ],
     "chinext": [
@@ -346589,6 +346721,38 @@
         3351.56,
         3398.16,
         3313.21,
+        1
+      ],
+      [
+        "2026-09-21",
+        3399.59,
+        3403.9,
+        3429.27,
+        3373.93,
+        1
+      ],
+      [
+        "2026-09-22",
+        3399.93,
+        3446.33,
+        3472.47,
+        3387.88,
+        1
+      ],
+      [
+        "2026-09-23",
+        3379.61,
+        3412.53,
+        3412.53,
+        3372.95,
+        1
+      ],
+      [
+        "2026-09-24",
+        3288.95,
+        3366.89,
+        3371.61,
+        3288.95,
         1
       ]
     ],
@@ -388304,6 +388468,38 @@
         4523.09,
         4480.59,
         1
+      ],
+      [
+        "2026-09-21",
+        4539.57,
+        4524.34,
+        4540.55,
+        4512.15,
+        1
+      ],
+      [
+        "2026-09-22",
+        4544.59,
+        4569.87,
+        4583.38,
+        4537.04,
+        1
+      ],
+      [
+        "2026-09-23",
+        4517.28,
+        4547.61,
+        4547.69,
+        4513.45,
+        1
+      ],
+      [
+        "2026-09-24",
+        4439.14,
+        4499.86,
+        4500.2,
+        4439.14,
+        1
       ]
     ]
   },
@@ -394210,8 +394406,8 @@
         "pre10": -0.38,
         "pre20": -0.91,
         "d1": 1.14,
-        "d5": 0.17,
-        "d20": 0.17
+        "d5": 0.87,
+        "d20": 1.38
       },
       "windows": {
         "sp500": {
@@ -394219,32 +394415,32 @@
           "pre10": -0.38,
           "pre20": -0.91,
           "d1": 1.14,
-          "d5": 0.17,
-          "d20": 0.17
+          "d5": 0.87,
+          "d20": 1.38
         },
         "nasdaq100": {
           "pre5": 1.18,
           "pre10": 1.04,
           "pre20": 0.07,
           "d1": 1.73,
-          "d5": 0.67,
-          "d20": 0.67
+          "d5": 3.5,
+          "d20": 3.94
         },
         "brent": {
           "pre5": -8.98,
           "pre10": 3.76,
           "pre20": 6.72,
           "d1": -5.65,
-          "d5": -0.43,
-          "d20": -0.43
+          "d5": 0.75,
+          "d20": -2.04
         },
         "gold": {
           "pre5": 0.58,
           "pre10": -2.94,
           "pre20": -3.93,
           "d1": 1.82,
-          "d5": 0.84,
-          "d20": 0.84
+          "d5": -1.56,
+          "d20": -1.3
         }
       }
     }
@@ -394302,8 +394498,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394359,8 +394555,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394416,8 +394612,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394473,8 +394669,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394530,8 +394726,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394587,8 +394783,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394644,8 +394840,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394701,8 +394897,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394758,8 +394954,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -394815,8 +395011,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -395671,8 +395867,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -396121,8 +396317,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -396177,8 +396373,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -396233,8 +396429,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": 3.2,
-          "d20": 2.87
+          "d5": -2.96,
+          "d20": -0.94
         }
       }
     },
@@ -396577,6 +396773,45 @@
   ],
   "news": [
     {
+      "id": "mining-1215067",
+      "category": "矿产资源",
+      "title": "Rainbow Rare Earths deal with Neo clears path for Phalaborwa study",
+      "summary": "The partnership advances processing plans as Rainbow moves the South African rare earths project towards financing.",
+      "source": "MINING.COM",
+      "url": "https://www.mining.com/rainbow-rare-earths-deal-with-neo-clears-path-for-phalaborwa-study/",
+      "publishedAt": "2026-09-23T22:05:00.000Z",
+      "score": 48,
+      "titleZh": "Rainbow稀土与Neo达成协议，为Phalaborwa研究扫清道路",
+      "titleEn": "Rainbow Rare Earths deal with Neo clears path for Phalaborwa study",
+      "categoryEn": "Mining & Metals"
+    },
+    {
+      "id": "mining-1215144",
+      "category": "矿产资源",
+      "title": "North America is building rare earth plants faster than it is building rare earth engineers",
+      "summary": "Engineering degrees output is less than half the roughly 600 a year implied by DOE’s estimate of need, and about a 15th of China’s.",
+      "source": "MINING.COM",
+      "url": "https://www.mining.com/north-america-is-building-rare-earth-plants-faster-than-it-is-building-rare-earth-engineers/",
+      "publishedAt": "2026-09-25T06:40:59.000Z",
+      "score": 44,
+      "titleZh": "北美建造稀土工厂的速度快于培养稀土工程师的速度",
+      "titleEn": "North America is building rare earth plants faster than it is building rare earth engineers",
+      "categoryEn": "Mining & Metals"
+    },
+    {
+      "id": "mining-1215030",
+      "category": "矿产资源",
+      "title": "High TREO concentrations boost Rare Earths Americas’ Homer project",
+      "summary": "More than 6,500 meters of drilling have been completed at the Homer project, with multiple drill intercepts grading more than 2,000 ppm total rare earth oxides.",
+      "source": "MINING.COM",
+      "url": "https://www.mining.com/high-treo-concentrations-boost-rare-earths-americas-homer-project/",
+      "publishedAt": "2026-09-23T06:10:04.000Z",
+      "score": 44,
+      "titleZh": "高TREO浓度提振了Rare Earths Americas的Homer项目",
+      "titleEn": "High TREO concentrations boost Rare Earths Americas’ Homer project",
+      "categoryEn": "Mining & Metals"
+    },
+    {
       "id": "mining-1214671",
       "category": "矿产资源",
       "title": "China Rare Earth eyes indirect stake in MP Materials",
@@ -396584,166 +396819,184 @@
       "source": "MINING.COM",
       "url": "https://www.mining.com/china-rare-earth-eyes-indirect-stake-in-mp-materials/",
       "publishedAt": "2026-09-17T21:23:00.000Z",
-      "score": 44
-    },
-    {
-      "id": "mining-1214226",
-      "category": "矿产资源",
-      "title": "Site visit: Cyclic Materials opens commercial-scale rare earth recycling plant in Arizona",
-      "summary": "Mesa operation provides US companies with a domestic destination for magnet-bearing products that would otherwise be exported as waste.",
-      "source": "MINING.COM",
-      "url": "https://www.mining.com/site-visit-cyclic-materials-opens-commercial-scale-rare-earth-recycling-plant-in-arizona/",
-      "publishedAt": "2026-09-11T07:04:40.000Z",
-      "score": 44
-    },
-    {
-      "id": "mining-1214222",
-      "category": "矿产资源",
-      "title": "USA Rare Earth breaks ground at $1.2B magnet manufacturing facility in South Carolina",
-      "summary": "Event marks a milestone in its plan to build an integrated US rare earth supply chain.",
-      "source": "MINING.COM",
-      "url": "https://www.mining.com/usa-rare-earth-breaks-ground-at-1-2b-rare-earth-magnet-manufacturing-facility-in-south-carolina/",
-      "publishedAt": "2026-09-11T03:07:15.000Z",
-      "score": 44
-    },
-    {
-      "id": "mining-1213869",
-      "category": "矿产资源",
-      "title": "Pentagon rare earth push collides with China’s grip",
-      "summary": "By 2030, DOD needs may triple to 10,000 tonnes annually, while current rare earth magnet production is 20,000-25,000 tonnes.",
-      "source": "MINING.COM",
-      "url": "https://www.mining.com/pentagon-rare-earth-push-collides-with-chinas-grip/",
-      "publishedAt": "2026-09-04T00:19:57.000Z",
-      "score": 44
-    },
-    {
-      "id": "MarketWatch-1baea46f9e9b",
-      "category": "全球市场",
-      "title": "Warsh’s Fed shows it’s serious about taming inflation. Why Wall Street now believes it.",
-      "summary": "After more than five years of failing to do so, Federal Reserve leaders think they can shrink the rate of inflation to 2% by 2029 with just slightly higher U.S. interest rates. Are they serious?",
-      "source": "MarketWatch",
-      "url": "https://www.marketwatch.com/story/warshs-fed-shows-its-serious-about-taming-inflation-why-wall-street-now-believes-it-55dc5af5?mod=mw_rss_topstories",
-      "publishedAt": "2026-09-19T13:00:00.000Z",
-      "score": 24
+      "score": 44,
+      "titleZh": "中国稀土公司计划间接入股MP Materials",
+      "titleEn": "China Rare Earth eyes indirect stake in MP Materials",
+      "categoryEn": "Mining & Metals"
     },
     {
       "id": "resource-PCOPPUSDM-2026-07-01",
       "category": "矿产资源",
       "title": "全球铜价最新值 13542.8 美元/吨（2026-07），环比 -0.1%",
+      "titleEn": "Global copper price: 13542.8 USD/t (2026-07), MoM -0.1%",
       "summary": "全球铜价月度国际价格，经 FRED 更新。",
+      "summaryEn": "Monthly global copper price data, updated via FRED.",
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PCOPPUSDM",
-      "publishedAt": "2026-09-19T12:36:14.149Z",
+      "publishedAt": "2026-09-26T13:36:18.085Z",
       "dataDate": "2026-07-01",
-      "score": 22
+      "categoryEn": "Mining & Metals",
+      "score": 22,
+      "titleZh": "全球铜价最新值 13542.8 美元/吨（2026-07），环比 -0.1%"
+    },
+    {
+      "id": "sina-comos:nitaxpm4068313",
+      "category": "矿产资源",
+      "title": "大宗商品综述：原油下跌 伦铜基本持平 金价微升",
+      "summary": "原油下跌，因有初步迹象显示，美伊围绕重开全球最重要能源运输通道的谈判正在取得进展。铜价连续第二周上涨，交易员关注需求前景。",
+      "source": "新浪财经",
+      "url": "https://finance.sina.com.cn/world/2026-09-26/doc-initaxpm4068313.shtml",
+      "publishedAt": "2026-09-25T22:36:33.000Z",
+      "score": 22,
+      "titleZh": "大宗商品综述：原油下跌 伦铜基本持平 金价微升",
+      "titleEn": "Commodity roundup: crude oil declined, copper basically flat, gold prices rose slightly",
+      "categoryEn": "Mining & Metals"
+    },
+    {
+      "id": "sina-comos:nitaxpm4073998",
+      "category": "矿产资源",
+      "title": "9月26日隔夜要闻：美股三大指数收涨 原油下跌 金价微升 美官员称美伊正就重新开放霍尔木兹海峡进行讨论",
+      "summary": "市场 9月26日收盘：美股三大指数收涨且周线齐涨 市场无视债券抛售 苹果再创新高 9月26日热门中概股多数下跌，阿里巴巴跌0.8% 大宗商品综述：原油下跌 伦铜基本持平...",
+      "source": "新浪财经",
+      "url": "https://finance.sina.com.cn/world/2026-09-26/doc-initaxpm4073998.shtml",
+      "publishedAt": "2026-09-25T22:52:54.000Z",
+      "score": 18,
+      "titleZh": "9月26日隔夜要闻：美股三大指数收涨 原油下跌 金价微升 美官员称美伊正就重新开放霍尔木兹海峡进行讨论",
+      "titleEn": "Overnight news on September 26th: The three major indexes of US stocks closed higher, crude oil fell slightly, and gold prices rose slightly. US officials said that the US and Iran were discussing the reopening of the Strait of Hormuz.",
+      "categoryEn": "Mining & Metals"
     },
     {
       "id": "macro-cpi-2026-08-01",
       "category": "经济数据",
       "title": "美国CPI最新数据：同比 +3.7%（2026-08）",
+      "titleEn": "US CPI (YoY): +3.7% (2026-08)",
       "summary": "美国劳工统计局消费者价格指数，经 FRED 更新。",
+      "summaryEn": "US consumer price index from the Bureau of Labor Statistics, updated via FRED.",
       "source": "FRED",
       "url": "https://fred.stlouisfed.org/series/CPIAUCSL",
-      "publishedAt": "2026-09-19T12:36:12.560Z",
+      "publishedAt": "2026-09-26T13:36:17.494Z",
       "dataDate": "2026-08-01",
-      "score": 16
-    },
-    {
-      "id": "MarketWatch-31d2ca30b548",
-      "category": "全球市场",
-      "title": "Stocks face a growing list of threats — so why are investors staying so calm?",
-      "summary": "Investors are well aware of the risks, but they have simply decided none are significant enough to force them out of the market.",
-      "source": "MarketWatch",
-      "url": "https://www.marketwatch.com/story/stocks-face-a-growing-list-of-threats-so-why-are-investors-staying-so-calm-a6acd7e5?mod=mw_rss_topstories",
-      "publishedAt": "2026-09-19T11:30:00.000Z",
-      "score": 16
-    },
-    {
-      "id": "food-PWHEAMTUSDM-2026-07-01",
-      "category": "粮食农业",
-      "title": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%",
-      "summary": "全球小麦价格月度数据，经 FRED 更新。",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
-      "publishedAt": "2026-09-19T12:36:13.824Z",
-      "dataDate": "2026-07-01",
-      "score": 14
-    },
-    {
-      "id": "food-PFOODINDEXM-2026-07-01",
-      "category": "粮食农业",
-      "title": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%",
-      "summary": "全球食品价格指数月度数据，经 FRED 更新。",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PFOODINDEXM",
-      "publishedAt": "2026-09-19T12:36:12.725Z",
-      "dataDate": "2026-07-01",
-      "score": 14
-    },
-    {
-      "id": "resource-PZINCUSDM-2026-07-01",
-      "category": "矿产资源",
-      "title": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%",
-      "summary": "全球锌价月度国际价格，经 FRED 更新。",
-      "source": "FRED Commodities",
-      "url": "https://fred.stlouisfed.org/series/PZINCUSDM",
-      "publishedAt": "2026-09-19T12:36:12.278Z",
-      "dataDate": "2026-07-01",
-      "score": 14
-    },
-    {
-      "id": "food-PSOYBUSDQ-2026-04-01",
-      "category": "粮食农业",
-      "title": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%",
-      "summary": "全球大豆价格月度数据，经 FRED 更新。",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PSOYBUSDQ",
-      "publishedAt": "2026-09-19T12:36:12.158Z",
-      "dataDate": "2026-04-01",
-      "score": 14
-    },
-    {
-      "id": "resource-PNICKUSDM-2026-07-01",
-      "category": "矿产资源",
-      "title": "全球镍价最新值 16632.4 美元/吨（2026-07），环比 -5.4%",
-      "summary": "全球镍价月度国际价格，经 FRED 更新。",
-      "source": "FRED Commodities",
-      "url": "https://fred.stlouisfed.org/series/PNICKUSDM",
-      "publishedAt": "2026-09-19T12:36:11.700Z",
-      "dataDate": "2026-07-01",
-      "score": 14
+      "categoryEn": "Economic Data",
+      "score": 16,
+      "titleZh": "美国CPI最新数据：同比 +3.7%（2026-08）"
     },
     {
       "id": "resource-PIORECRUSDM-2026-07-01",
       "category": "矿产资源",
       "title": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%",
+      "titleEn": "Global iron ore price: 101.6 USD/t (2026-07), MoM -2.1%",
       "summary": "全球铁矿石价格月度国际价格，经 FRED 更新。",
+      "summaryEn": "Monthly global iron ore price data, updated via FRED.",
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PIORECRUSDM",
-      "publishedAt": "2026-09-19T12:36:11.113Z",
+      "publishedAt": "2026-09-26T13:36:21.170Z",
       "dataDate": "2026-07-01",
-      "score": 14
+      "categoryEn": "Mining & Metals",
+      "score": 14,
+      "titleZh": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%"
+    },
+    {
+      "id": "food-PFOODINDEXM-2026-07-01",
+      "category": "粮食农业",
+      "title": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%",
+      "titleEn": "Global food price index: 131.8 index (2026-07), MoM +1.1%",
+      "summary": "全球食品价格指数月度数据，经 FRED 更新。",
+      "summaryEn": "Monthly global food price index data, updated via FRED.",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PFOODINDEXM",
+      "publishedAt": "2026-09-26T13:36:20.488Z",
+      "dataDate": "2026-07-01",
+      "categoryEn": "Food & Agriculture",
+      "score": 14,
+      "titleZh": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%"
+    },
+    {
+      "id": "resource-PZINCUSDM-2026-07-01",
+      "category": "矿产资源",
+      "title": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%",
+      "titleEn": "Global zinc price: 3593.8 USD/t (2026-07), MoM +1.6%",
+      "summary": "全球锌价月度国际价格，经 FRED 更新。",
+      "summaryEn": "Monthly global zinc price data, updated via FRED.",
+      "source": "FRED Commodities",
+      "url": "https://fred.stlouisfed.org/series/PZINCUSDM",
+      "publishedAt": "2026-09-26T13:36:17.613Z",
+      "dataDate": "2026-07-01",
+      "categoryEn": "Mining & Metals",
+      "score": 14,
+      "titleZh": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%"
+    },
+    {
+      "id": "food-PWHEAMTUSDM-2026-07-01",
+      "category": "粮食农业",
+      "title": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%",
+      "titleEn": "Global wheat price: 228.7 USD/t (2026-07), MoM +14.6%",
+      "summary": "全球小麦价格月度数据，经 FRED 更新。",
+      "summaryEn": "Monthly global wheat price data, updated via FRED.",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
+      "publishedAt": "2026-09-26T13:36:17.303Z",
+      "dataDate": "2026-07-01",
+      "categoryEn": "Food & Agriculture",
+      "score": 14,
+      "titleZh": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%"
+    },
+    {
+      "id": "food-PSOYBUSDQ-2026-04-01",
+      "category": "粮食农业",
+      "title": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%",
+      "titleEn": "Global soybean price: 426.3 USD/t (2026-04), MoM +4.9%",
+      "summary": "全球大豆价格月度数据，经 FRED 更新。",
+      "summaryEn": "Monthly global soybean price data, updated via FRED.",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PSOYBUSDQ",
+      "publishedAt": "2026-09-26T13:36:17.261Z",
+      "dataDate": "2026-04-01",
+      "categoryEn": "Food & Agriculture",
+      "score": 14,
+      "titleZh": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%"
     },
     {
       "id": "food-PMAIZMTUSDM-2026-07-01",
       "category": "粮食农业",
       "title": "全球玉米价格最新值 213.2 美元/吨（2026-07），环比 +8.9%",
+      "titleEn": "Global maize price: 213.2 USD/t (2026-07), MoM +8.9%",
       "summary": "全球玉米价格月度数据，经 FRED 更新。",
+      "summaryEn": "Monthly global maize price data, updated via FRED.",
       "source": "FAO / FRED",
       "url": "https://fred.stlouisfed.org/series/PMAIZMTUSDM",
-      "publishedAt": "2026-09-19T12:36:10.885Z",
+      "publishedAt": "2026-09-26T13:36:16.862Z",
       "dataDate": "2026-07-01",
-      "score": 14
+      "categoryEn": "Food & Agriculture",
+      "score": 14,
+      "titleZh": "全球玉米价格最新值 213.2 美元/吨（2026-07），环比 +8.9%"
     },
     {
-      "id": "UN News-c6f9a4ff0e54",
-      "category": "地缘政治",
-      "title": "World News in Brief: Shipping alert from IMO, democracy vanishing in Nicaragua, alert over political ‘denialism’",
-      "summary": "Amid a rising number of attacks on shipping in key waterways in the Middle East linked to the US-Iran war, the head of UN maritime agency, Mr. Arsenio Dominguez, has insisted that the conflict is not a “pretext” to target “innocent seafarer",
-      "source": "UN News",
-      "url": "https://news.un.org/feed/view/en/story/2026/09/1168352",
-      "publishedAt": "2026-09-16T12:00:00.000Z",
-      "score": 14
+      "id": "resource-PNICKUSDM-2026-07-01",
+      "category": "矿产资源",
+      "title": "全球镍价最新值 16632.4 美元/吨（2026-07），环比 -5.4%",
+      "titleEn": "Global nickel price: 16632.4 USD/t (2026-07), MoM -5.4%",
+      "summary": "全球镍价月度国际价格，经 FRED 更新。",
+      "summaryEn": "Monthly global nickel price data, updated via FRED.",
+      "source": "FRED Commodities",
+      "url": "https://fred.stlouisfed.org/series/PNICKUSDM",
+      "publishedAt": "2026-09-26T13:36:16.068Z",
+      "dataDate": "2026-07-01",
+      "categoryEn": "Mining & Metals",
+      "score": 14,
+      "titleZh": "全球镍价最新值 16632.4 美元/吨（2026-07），环比 -5.4%"
+    },
+    {
+      "id": "FAO-54bfdf5b391b",
+      "category": "粮食农业",
+      "title": "Sudan: FAO launches nationwide livestock vaccination campaign to protect food security and livelihoods amid conflict",
+      "summary": "",
+      "source": "FAO",
+      "url": "https://www.fao.org/newsroom/detail/sudan--fao-launches-nationwide-livestock-vaccination-campaign-to-protect-food-security-and-livelihoods-amid-conflict/en",
+      "publishedAt": "2026-09-25T12:00:00.000Z",
+      "score": 14,
+      "titleZh": "苏丹：粮农组织在全国范围内开展牲畜疫苗接种运动，以保护冲突中的粮食安全和生计",
+      "titleEn": "Sudan: FAO launches nationwide livestock vaccination campaign to protect food security and livelihoods amid conflict",
+      "categoryEn": "Food & Agriculture"
     }
   ]
 }

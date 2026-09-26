@@ -17,9 +17,15 @@ const chrome = spawn(
   chromePath,
   [
     "--headless=new",
+    "--no-sandbox",
     "--disable-gpu",
+    "--disable-software-rasterizer",
+    "--disable-features=Vulkan",
+    "--use-angle=swiftshader",
+    "--hide-scrollbars",
     "--window-size=390,844",
     "--allow-file-access-from-files",
+    "--remote-allow-origins=*",
     `--remote-debugging-port=${port}`,
     `--user-data-dir=${profileDir}`,
     pageUrl,
@@ -114,6 +120,18 @@ try {
       duration: style.animationDuration,
       panelDisplay: getComputedStyle(document.querySelector(".sidebar-news")).display,
       panelHeight: document.querySelector(".sidebar-news").getBoundingClientRect().height,
+      bilingualComplete: [...track.querySelectorAll(".news-item")].every((item) => {
+        const chinese = item.querySelector(".news-title")?.textContent.trim();
+        const english = item.querySelector(".news-title-en")?.textContent.trim();
+        return Boolean(chinese && english && chinese !== english);
+      }),
+      containsNonMarketNews: [
+        ...track.querySelectorAll(".news-title, .news-title-en")
+      ].some((element) =>
+        /体育|足球|篮球|网球|马拉松|奥运|亚运|奖牌|金牌|银牌|铜牌|摘铜|非遗|中秋|旅游|景区/.test(
+          element.textContent
+        )
+      ),
       categories: [...track.querySelectorAll(".news-category")]
         .map((element) => element.textContent)
     };
@@ -123,6 +141,8 @@ try {
     newsState.animationName !== "news-scroll" ||
     newsState.panelDisplay === "none" ||
     newsState.panelHeight < 100 ||
+    !newsState.bilingualComplete ||
+    newsState.containsNonMarketNews ||
     !newsState.categories.includes("矿产资源") ||
     !newsState.categories.includes("粮食农业")
   ) {
@@ -195,6 +215,29 @@ try {
       cancelable: true,
       buttons: 1
     }));
+    return true;
+  })()`);
+  const touchTooltipDuringMove = await evaluate(`(() => {
+    const tooltip = document.querySelector(
+      '.chart-panel[data-market="sp500"] .chart-tooltip'
+    );
+    return {
+      hidden: tooltip.hidden,
+      text: tooltip.textContent
+    };
+  })()`);
+  if (
+    touchTooltipDuringMove.hidden ||
+    !touchTooltipDuringMove.text.includes("标普500")
+  ) {
+    throw new Error("Touch movement did not display chart event information");
+  }
+
+  await evaluate(`(() => {
+    const canvas = document.querySelector("#sp500-chart");
+    const rect = canvas.getBoundingClientRect();
+    const startX = rect.left + rect.width * 0.68;
+    const startY = rect.top + rect.height * 0.5;
     canvas.dispatchEvent(new PointerEvent("pointerup", {
       pointerId: 7,
       pointerType: "touch",
@@ -207,7 +250,7 @@ try {
     return true;
   })()`);
   await new Promise((resolve) => setTimeout(resolve, 150));
-  const touchTooltip = await evaluate(`(() => {
+  const touchTooltipAfterRelease = await evaluate(`(() => {
     const tooltip = document.querySelector(
       '.chart-panel[data-market="sp500"] .chart-tooltip'
     );
@@ -216,8 +259,8 @@ try {
       text: tooltip.textContent
     };
   })()`);
-  if (touchTooltip.hidden || !touchTooltip.text.includes("标普500")) {
-    throw new Error("Touch movement did not display chart event information");
+  if (!touchTooltipAfterRelease.hidden) {
+    throw new Error("Touch tooltip did not close after pointer release");
   }
 
   const before = hash(
@@ -369,7 +412,8 @@ try {
       newsState,
       eventTypeCoverage,
       zoomControlLayout,
-      touchTooltip,
+      touchTooltipDuringMove,
+      touchTooltipAfterRelease,
     }),
   );
 } finally {

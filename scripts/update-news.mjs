@@ -3,7 +3,11 @@
 import { readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { fetchNewsItems, rankNewsItems } from "./update-data.mjs";
+import {
+  addBilingualNewsFields,
+  fetchNewsItems,
+  rankNewsItems,
+} from "./update-data.mjs";
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -24,7 +28,9 @@ async function main() {
   const generatedNews = (snapshot.news ?? []).filter((item) =>
     ["FRED", "FRED Commodities", "FAO / FRED"].includes(item.source),
   );
-  const news = rankNewsItems([realtimeNews, generatedNews]);
+  const news = await addBilingualNewsFields(
+    rankNewsItems([realtimeNews, generatedNews]),
+  );
   const updatedAt = new Date().toISOString();
 
   snapshot.news = news;

@@ -550,13 +550,25 @@
             published.getDate(),
           ).padStart(2, "0")}`
         : item.dataDate?.slice(0, 7) ?? "";
+      const originalTitle = item.title?.trim() ?? "";
+      const containsCjk = /[\u3400-\u9fff]/u.test(originalTitle);
+      const titleZh =
+        item.titleZh?.trim() || (containsCjk ? originalTitle : "");
+      const titleEn = item.titleEn?.trim();
+      const primaryTitle = titleZh || titleEn || originalTitle;
+      const showEnglishTitle = titleEn && titleEn !== primaryTitle;
       return `
         <a class="news-item" href="${escapeAttribute(item.url)}" target="_blank" rel="noreferrer">
           <span class="news-meta">
             <span class="news-category">${escapeHtml(item.category)}</span>
             <span class="news-date">${escapeHtml(item.source)} · ${escapeHtml(date)}</span>
           </span>
-          <span class="news-title">${escapeHtml(item.title)}</span>
+          <span class="news-title">${escapeHtml(primaryTitle)}</span>
+          ${
+            showEnglishTitle
+              ? `<span class="news-title-en" lang="en">${escapeHtml(titleEn)}</span>`
+              : ""
+          }
         </a>
       `;
     };
@@ -564,7 +576,7 @@
     track.innerHTML = [...news, ...news].map(itemMarkup).join("");
     track.style.setProperty(
       "--news-duration",
-      `${Math.max(42, news.length * 5.5)}s`,
+      `${Math.max(56, news.length * 8)}s`,
     );
     document.querySelector("#sidebar-news-time").textContent =
       `新闻更新于 ${new Date(

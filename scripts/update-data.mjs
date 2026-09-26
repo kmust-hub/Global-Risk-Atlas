@@ -13,11 +13,32 @@ const healthEventsPath = path.join(root, "data", "health-events.json");
 const financialEventsPath = path.join(root, "data", "financial-events.json");
 const outputPath = path.join(root, "public", "data.js");
 const snapshotPath = path.join(snapshotDir, "latest.json");
+const newsTranslationPath = path.join(root, "data", "news-translations.json");
 const today = new Date();
 const endDate = formatDate(today);
 const startDate = "1982-09-27";
 const userAgent =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36";
+const newsCategoryLabelsEn = {
+  美联储: "Federal Reserve",
+  经济数据: "Economic Data",
+  矿产资源: "Mining & Metals",
+  粮食农业: "Food & Agriculture",
+  金融风险: "Financial Risk",
+  公共卫生: "Public Health",
+  地缘政治: "Geopolitics",
+  全球市场: "Global Markets",
+  气候风险: "Climate Risk",
+};
+const nonMarketNewsPatterns = [
+  /体育|足球|篮球|排球|网球|乒乓|羽毛球|田径|马拉松|奥运|亚运|世界杯|联赛|锦标赛|夺冠|冠军|奖牌|金牌|银牌|铜牌|摘金|摘银|摘铜|球员|球队|赛事|赛季|比赛/,
+  /娱乐|明星|影视|电影|电视剧|综艺|音乐|演唱会|演员|歌手/,
+  /非遗|文物|博物馆|展览|民俗|中秋|春节|元宵|端午|旅游|景区|文化/,
+  /\b(?:olympic|asian games|world cup|football|soccer|basketball|baseball|tennis|golf|marathon|championship|tournament|medal|bronze medal|silver medal|gold medal|entertainment|movie|film|music|festival|heritage|museum|culture)\b/i,
+];
+let newsTranslationCachePromise;
+let newsTranslationCacheChanged = false;
+let lastTranslationRequestAt = 0;
 
 async function fetchText(url, options = {}) {
   const response = await fetch(url, {
@@ -130,6 +151,201 @@ function parseRssItems(xml, source, category, limit = 12) {
 
 function hashText(value) {
   return createHash("sha256").update(value).digest("hex");
+}
+
+function containsCjk(value) {
+  return /[\u3400-\u9fff]/u.test(value);
+}
+
+function polishTranslatedTitle(value, sourceText, targetLanguage) {
+  let translated = value
+    .replace(/\s+/g, " ")
+    .replace(/\bnon farm\b/gi, "nonfarm")
+    .replace(/\blondon copper\b/gi, "LME copper")
+    .replace(/\bcopper price\b/gi, "copper prices")
+    .replace(/\bgold price\b/gi, "gold prices")
+    .replace(/\bcpi\b/gi, "CPI")
+    .replace(/\bfomc\b/gi, "FOMC")
+    .replace(/\bfed\b/gi, "Federal Reserve")
+    .replace(/\bunited states\b/gi, "US")
+    .replace(/\s+([,.;:%])/g, "$1")
+    .trim();
+  if (targetLanguage === "en") {
+    translated = translated.replace(
+      /^([a-z])/u,
+      (_, letter) => letter.toUpperCase(),
+    );
+  } else {
+    translated = translated
+      .replace(/\bFederal Reserve\b/gi, "美联储")
+      .replace(/\bfed\b/gi, "美联储")
+      .replace(/\bnonfarm payrolls?\b/gi, "非农就业")
+      .replace(/\bBrent crude\b/gi, "布伦特原油")
+      .replace(/\bLME copper\b/gi, "伦铜")
+      .replace(/\brare earths?\b/gi, "稀土")
+      .replace(/\bgold prices?\b/gi, "金价")
+      .replace(/\bcopper prices?\b/gi, "铜价")
+      .replace(/\bUS stocks\b/gi, "美股")
+      .replace(/\bStrait of Hormuz\b/gi, "霍尔木兹海峡")
+      .replace(/\bECB\b/g, "欧洲央行")
+      .replace(/\bNEO\b/g, "Neo")
+      .replace(/稀土美洲/g, "Rare Earths Americas")
+      .replace(/稀土 Americas/g, "Rare Earths Americas")
+      .replace(/中国稀土眼/g, "中国稀土公司计划")
+      .replace(/间接持股/g, "间接入股")
+      .replace(/建造稀土工程师/g, "培养稀土工程师")
+      .replace(/Rainbow 稀土/g, "Rainbow稀土")
+      .replace(/促进了/g, "提振了");
+  }
+  if (targetLanguage === "en" && /美伊/.test(sourceText)) {
+    translated = translated.replace(
+      /\b(?:US|United States) and Iraq\b/gi,
+      "US and Iran",
+    );
+  }
+  if (targetLanguage === "en" && /环比/.test(sourceText)) {
+    translated = translated
+      .replace(/\bqoq\b/gi, "MoM")
+      .replace(/\bsequentially\b/gi, "MoM");
+  }
+  return translated;
+}
+
+async function loadNewsTranslationCache() {
+  if (!newsTranslationCachePromise) {
+    newsTranslationCachePromise = readFile(newsTranslationPath, "utf8")
+      .then((content) => {
+        const cache = JSON.parse(content);
+        for (const [key, entry] of Object.entries(cache)) {
+          const sourceText = entry?.text ?? entry?.zh ?? "";
+          if (sourceText && isNonMarketNewsText(sourceText)) {
+            delete cache[key];
+            newsTranslationCacheChanged = true;
+          }
+        }
+        return cache;
+      })
+      .catch(() => ({}));
+  }
+  return newsTranslationCachePromise;
+}
+
+async function saveNewsTranslationCache(cache) {
+  await mkdir(path.dirname(newsTranslationPath), { recursive: true });
+  await writeAtomic(
+    newsTranslationPath,
+    `${JSON.stringify(cache, null, 2)}\n`,
+  );
+}
+
+async function translateTitle(text, targetLanguage) {
+  const cache = await loadNewsTranslationCache();
+  const key = hashText(`${targetLanguage}:${text}`);
+  const legacyKey = targetLanguage === "en" ? hashText(text) : null;
+  const cachedEntry = cache[key] ?? (legacyKey ? cache[legacyKey] : null);
+  const cached =
+    cachedEntry?.translated?.trim() ??
+    (targetLanguage === "en" ? cachedEntry?.en?.trim() : "");
+  if (cached) {
+    const polished = polishTranslatedTitle(cached, text, targetLanguage);
+    if (polished !== cached) {
+      if (cache[key]) {
+        cache[key].translated = polished;
+      } else {
+        cache[legacyKey].en = polished;
+      }
+      newsTranslationCacheChanged = true;
+    }
+    return polished;
+  }
+
+  const delay = Math.max(0, 120 - (Date.now() - lastTranslationRequestAt));
+  if (delay) {
+    await new Promise((resolve) => setTimeout(resolve, delay));
+  }
+  lastTranslationRequestAt = Date.now();
+
+  const url = new URL("https://api.mymemory.translated.net/get");
+  url.searchParams.set("q", text);
+  const sourceLanguage = targetLanguage === "en" ? "zh-CN" : "en";
+  url.searchParams.set("langpair", `${sourceLanguage}|${targetLanguage}`);
+  const response = await fetch(url, {
+    headers: {
+      "user-agent": userAgent,
+      accept: "application/json",
+    },
+    signal: AbortSignal.timeout(20_000),
+  });
+  if (!response.ok) {
+    throw new Error(`Translation request failed ${response.status}`);
+  }
+  const payload = await response.json();
+  const translated = polishTranslatedTitle(
+    decodeXml(payload?.responseData?.translatedText ?? ""),
+    text,
+    targetLanguage,
+  );
+  const invalidTranslation =
+    !translated ||
+    (targetLanguage === "en"
+      ? containsCjk(translated)
+      : !containsCjk(translated));
+  if (invalidTranslation) {
+    throw new Error(`Translation service returned an invalid ${targetLanguage} title`);
+  }
+
+  cache[key] = {
+    text,
+    translated,
+    sourceLanguage,
+    targetLanguage,
+    translatedAt: new Date().toISOString(),
+  };
+  newsTranslationCacheChanged = true;
+  return translated;
+}
+
+async function addBilingualNewsFields(items) {
+  const translatedItems = [];
+  try {
+    for (const item of items) {
+      const title = item.title?.trim() ?? "";
+      let titleZh = item.titleZh?.trim() ?? "";
+      let titleEn = item.titleEn?.trim() ?? "";
+      if (containsCjk(title)) {
+        titleZh ||= title;
+        if (!titleEn) {
+          try {
+            titleEn = await translateTitle(title, "en");
+          } catch (error) {
+            console.warn(`English translation unavailable for "${title}": ${error.message}`);
+          }
+        }
+      } else {
+        titleEn ||= title;
+        if (!titleZh) {
+          try {
+            titleZh = await translateTitle(title, "zh-CN");
+          } catch (error) {
+            console.warn(`Chinese translation unavailable for "${title}": ${error.message}`);
+          }
+        }
+      }
+      translatedItems.push({
+        ...item,
+        titleZh: titleZh || undefined,
+        titleEn: titleEn || undefined,
+        categoryEn:
+          item.categoryEn ?? newsCategoryLabelsEn[item.category] ?? item.category,
+      });
+    }
+  } finally {
+    if (newsTranslationCacheChanged) {
+      await saveNewsTranslationCache(await loadNewsTranslationCache());
+      newsTranslationCacheChanged = false;
+    }
+  }
+  return translatedItems;
 }
 
 function parseFredSeries(text, column) {
@@ -547,7 +763,9 @@ async function safeFetch(label, operation, fallback = []) {
 function macroNewsItem({
   id,
   title,
+  titleEn = title,
   summary,
+  summaryEn = summary,
   url,
   dataDate,
   category = "经济数据",
@@ -557,7 +775,9 @@ function macroNewsItem({
     id,
     category,
     title,
+    titleEn,
     summary,
+    summaryEn,
     source,
     url,
     publishedAt: new Date().toISOString(),
@@ -584,7 +804,10 @@ async function fetchMacroNews() {
       macroNewsItem({
         id: `macro-cpi-${cpiLatest.date}`,
         title: `美国CPI最新数据：同比 ${yoy >= 0 ? "+" : ""}${yoy.toFixed(1)}%（${cpiLatest.date.slice(0, 7)}）`,
+        titleEn: `US CPI (YoY): ${yoy >= 0 ? "+" : ""}${yoy.toFixed(1)}% (${cpiLatest.date.slice(0, 7)})`,
         summary: "美国劳工统计局消费者价格指数，经 FRED 更新。",
+        summaryEn:
+          "US consumer price index from the Bureau of Labor Statistics, updated via FRED.",
         url: "https://fred.stlouisfed.org/series/CPIAUCSL",
         dataDate: cpiLatest.date,
       }),
@@ -596,7 +819,10 @@ async function fetchMacroNews() {
       macroNewsItem({
         id: `macro-payrolls-${payrollLatest.date}`,
         title: `美国非农新增就业 ${change >= 0 ? "+" : ""}${(change / 10).toFixed(1)} 万人（${payrollLatest.date.slice(0, 7)}）`,
+        titleEn: `US nonfarm payrolls: ${change >= 0 ? "+" : ""}${change.toFixed(1)}k (${payrollLatest.date.slice(0, 7)})`,
         summary: "美国非农就业总人数月度变化，经 FRED 更新。",
+        summaryEn:
+          "Monthly change in US nonfarm payroll employment, updated via FRED.",
         url: "https://fred.stlouisfed.org/series/PAYEMS",
         dataDate: payrollLatest.date,
       }),
@@ -607,7 +833,9 @@ async function fetchMacroNews() {
       macroNewsItem({
         id: `macro-unemployment-${unemploymentLatest.date}`,
         title: `美国失业率最新值 ${unemploymentLatest.value.toFixed(1)}%（${unemploymentLatest.date.slice(0, 7)}）`,
+        titleEn: `US unemployment rate: ${unemploymentLatest.value.toFixed(1)}% (${unemploymentLatest.date.slice(0, 7)})`,
         summary: "美国月度失业率，经 FRED 更新。",
+        summaryEn: "US monthly unemployment rate, updated via FRED.",
         url: "https://fred.stlouisfed.org/series/UNRATE",
         dataDate: unemploymentLatest.date,
       }),
@@ -622,31 +850,41 @@ async function fetchResourceNews() {
     {
       id: "PCOPPUSDM",
       label: "全球铜价",
+      labelEn: "Global copper price",
       unit: "美元/吨",
+      unitEn: "USD/t",
       url: "https://fred.stlouisfed.org/series/PCOPPUSDM",
     },
     {
       id: "PIORECRUSDM",
       label: "全球铁矿石价格",
+      labelEn: "Global iron ore price",
       unit: "美元/吨",
+      unitEn: "USD/t",
       url: "https://fred.stlouisfed.org/series/PIORECRUSDM",
     },
     {
       id: "PZINCUSDM",
       label: "全球锌价",
+      labelEn: "Global zinc price",
       unit: "美元/吨",
+      unitEn: "USD/t",
       url: "https://fred.stlouisfed.org/series/PZINCUSDM",
     },
     {
       id: "PNICKUSDM",
       label: "全球镍价",
+      labelEn: "Global nickel price",
       unit: "美元/吨",
+      unitEn: "USD/t",
       url: "https://fred.stlouisfed.org/series/PNICKUSDM",
     },
     {
       id: "PALUMUSDM",
       label: "全球铝价",
+      labelEn: "Global aluminium price",
       unit: "美元/吨",
+      unitEn: "USD/t",
       url: "https://fred.stlouisfed.org/series/PALUMUSDM",
     },
   ];
@@ -674,7 +912,13 @@ async function fetchResourceNews() {
                 ? ""
                 : `，环比 ${change >= 0 ? "+" : ""}${change.toFixed(1)}%`
             }`,
+            titleEn: `${item.labelEn}: ${latest.value.toFixed(1)} ${item.unitEn} (${latest.date.slice(0, 7)})${
+              change === null
+                ? ""
+                : `, MoM ${change >= 0 ? "+" : ""}${change.toFixed(1)}%`
+            }`,
             summary: `${item.label}月度国际价格，经 FRED 更新。`,
+            summaryEn: `Monthly ${item.labelEn.toLowerCase()} data, updated via FRED.`,
             url: item.url,
             dataDate: latest.date,
           });
@@ -691,25 +935,33 @@ async function fetchFoodNews() {
     {
       id: "PFOODINDEXM",
       label: "全球食品价格指数",
+      labelEn: "Global food price index",
       unit: "指数",
+      unitEn: "index",
       url: "https://fred.stlouisfed.org/series/PFOODINDEXM",
     },
     {
       id: "PWHEAMTUSDM",
       label: "全球小麦价格",
+      labelEn: "Global wheat price",
       unit: "美元/吨",
+      unitEn: "USD/t",
       url: "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
     },
     {
       id: "PMAIZMTUSDM",
       label: "全球玉米价格",
+      labelEn: "Global maize price",
       unit: "美元/吨",
+      unitEn: "USD/t",
       url: "https://fred.stlouisfed.org/series/PMAIZMTUSDM",
     },
     {
       id: "PSOYBUSDQ",
       label: "全球大豆价格",
+      labelEn: "Global soybean price",
       unit: "美元/吨",
+      unitEn: "USD/t",
       url: "https://fred.stlouisfed.org/series/PSOYBUSDQ",
     },
   ];
@@ -737,7 +989,13 @@ async function fetchFoodNews() {
                 ? ""
                 : `，环比 ${change >= 0 ? "+" : ""}${change.toFixed(1)}%`
             }`,
+            titleEn: `${item.labelEn}: ${latest.value.toFixed(1)} ${item.unitEn} (${latest.date.slice(0, 7)})${
+              change === null
+                ? ""
+                : `, MoM ${change >= 0 ? "+" : ""}${change.toFixed(1)}%`
+            }`,
             summary: `${item.label}月度数据，经 FRED 更新。`,
+            summaryEn: `Monthly ${item.labelEn.toLowerCase()} data, updated via FRED.`,
             url: item.url,
             dataDate: latest.date,
           });
@@ -817,13 +1075,16 @@ async function fetchFaoNews() {
 
 function classifyDomesticNews(title, summary = "") {
   const text = `${title} ${summary}`;
+  if (isNonMarketNewsText(text)) {
+    return null;
+  }
   if (/美联储|联邦基金|加息|降息|FOMC/i.test(text)) {
     return "美联储";
   }
   if (/CPI|非农|失业率|通胀|PMI|GDP|经济数据/i.test(text)) {
     return "经济数据";
   }
-  if (/稀土|铜|锂|镍|锌|铝|铁矿石|有色|矿产|矿业/i.test(text)) {
+  if (/稀土|铜价|铜矿|伦铜|沪铜|铜期货|锂|镍|锌|铝|铁矿石|有色|矿产|矿业/i.test(text)) {
     return "矿产资源";
   }
   if (/粮食|小麦|玉米|大豆|食品|农业|丰收/i.test(text)) {
@@ -842,6 +1103,14 @@ function classifyDomesticNews(title, summary = "") {
     return "全球市场";
   }
   return null;
+}
+
+function isNonMarketNewsText(value) {
+  return nonMarketNewsPatterns.some((pattern) => pattern.test(value));
+}
+
+function isNonMarketNewsItem(item) {
+  return isNonMarketNewsText(`${item.title ?? ""} ${item.summary ?? ""}`);
 }
 
 async function fetchSinaRollNews() {
@@ -967,7 +1236,10 @@ async function fetchNoaaEnsoNews() {
       id: `noaa-${hashText(title).slice(0, 12)}`,
       category: "气候风险",
       title,
+      titleEn: title,
       summary: "NOAA Climate.gov 最新 ENSO、厄尔尼诺或拉尼娜分析。",
+      summaryEn:
+        "Latest ENSO, El Nino, or La Nina analysis from NOAA Climate.gov.",
       source: "NOAA",
       url: new URL(match[1], "https://www.climate.gov").toString(),
       publishedAt: new Date().toISOString(),
@@ -1042,7 +1314,7 @@ function newsScore(item) {
   if (/rare earth/.test(text)) {
     score += 30;
   }
-  if (/copper|铜/.test(text)) {
+  if (/copper|铜价|铜矿|伦铜|沪铜|铜期货/.test(text)) {
     score += 8;
   }
   return score;
@@ -1052,6 +1324,7 @@ function rankNewsItems(results) {
   const seen = new Set();
   const rankedItems = results
     .flat()
+    .filter((item) => !isNonMarketNewsItem(item))
     .filter((item) => {
       const key = item.title.toLowerCase();
       if (seen.has(key)) {
@@ -1185,7 +1458,7 @@ async function fetchNewsItems({ includeData = true } = {}) {
 
   const items = rankNewsItems(results);
   if (items.length) {
-    return items;
+    return addBilingualNewsFields(items);
   }
   try {
     const previous = JSON.parse(await readFile(snapshotPath, "utf8"));
@@ -1719,7 +1992,7 @@ async function main() {
   );
 }
 
-export { fetchNewsItems, rankNewsItems };
+export { addBilingualNewsFields, fetchNewsItems, rankNewsItems };
 
 if (
   process.argv[1] &&
