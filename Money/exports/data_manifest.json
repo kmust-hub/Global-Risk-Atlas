@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-10-21 00:37:18 +0800",
+  "dividend_count": 5291,
+  "chinext_count": 3977,
+  "merged_count": 3977,
+  "overlap": {
+    "dividend": {
+      "overlap_days": 2556,
+      "max_abs_close_diff": 11.348999999999705,
+      "mean_abs_close_diff": 0.014384194053199273
+    },
+    "chinext": {
+      "overlap_days": 3976,
+      "max_abs_close_diff": 4.835000000000036,
+      "mean_abs_close_diff": 0.0050387323943669095
+    }
+  },
+  "ohlc_adjustments": {
+    "dividend": [],
+    "chinext": []
+  }
+}
