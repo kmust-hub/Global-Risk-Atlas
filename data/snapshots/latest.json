@@ -1,10 +1,10 @@
 {
   "meta": {
-    "generatedAt": "2026-09-26T13:36:22.305Z",
-    "newsUpdatedAt": "2026-09-26T13:47:04.817Z",
+    "generatedAt": "2026-10-20T14:50:53.699Z",
+    "newsUpdatedAt": "2026-10-20T14:50:53.699Z",
     "newsRefreshMinutes": 15,
-    "through": "2026-09-25",
-    "requestedThrough": "2026-09-26",
+    "through": "2026-10-20",
+    "requestedThrough": "2026-10-20",
     "start": "1982-01-04",
     "sources": {
       "sp500": "Tencent Finance primary, FRED fallback",
@@ -17,13 +17,13 @@
     },
     "validation": {
       "sp500VsFred": {
-        "points": 2514,
+        "points": 2512,
         "meanAbsPercent": 0,
         "maxAbsPercent": 0.0229
       },
       "nasdaq100VsFred": {
-        "points": 6712,
-        "meanAbsPercent": 0.0329,
+        "points": 6728,
+        "meanAbsPercent": 0.0328,
         "maxAbsPercent": 2.4426
       }
     },
@@ -90228,6 +90228,134 @@
         7752.07,
         7693.08,
         1
+      ],
+      [
+        "2026-09-28",
+        7683.69,
+        7721.7,
+        7724.15,
+        7666.6,
+        1
+      ],
+      [
+        "2026-09-29",
+        7670.84,
+        7699.6,
+        7699.6,
+        7653.55,
+        1
+      ],
+      [
+        "2026-09-30",
+        7651.54,
+        7688.99,
+        7722.88,
+        7651.54,
+        1
+      ],
+      [
+        "2026-10-01",
+        7666.45,
+        7666.47,
+        7684.75,
+        7616.78,
+        1
+      ],
+      [
+        "2026-10-02",
+        7722.72,
+        7726.24,
+        7754.67,
+        7700.51,
+        1
+      ],
+      [
+        "2026-10-05",
+        7773.95,
+        7730.86,
+        7794.35,
+        7727.59,
+        1
+      ],
+      [
+        "2026-10-06",
+        7818.93,
+        7805.96,
+        7844.52,
+        7805.96,
+        1
+      ],
+      [
+        "2026-10-07",
+        7801.77,
+        7792.98,
+        7807.02,
+        7763.34,
+        1
+      ],
+      [
+        "2026-10-08",
+        7765.36,
+        7778.45,
+        7797.79,
+        7731.26,
+        1
+      ],
+      [
+        "2026-10-09",
+        7811.54,
+        7786.36,
+        7820.57,
+        7779.34,
+        1
+      ],
+      [
+        "2026-10-12",
+        7807.24,
+        7813.04,
+        7821.67,
+        7796.94,
+        1
+      ],
+      [
+        "2026-10-13",
+        7805.45,
+        7795.27,
+        7814.15,
+        7786.11,
+        1
+      ],
+      [
+        "2026-10-14",
+        7718.94,
+        7774.18,
+        7789.15,
+        7693.31,
+        1
+      ],
+      [
+        "2026-10-15",
+        7744.06,
+        7687.31,
+        7754.15,
+        7669.66,
+        1
+      ],
+      [
+        "2026-10-16",
+        7659.44,
+        7745.32,
+        7756.84,
+        7631.77,
+        1
+      ],
+      [
+        "2026-10-19",
+        7690.73,
+        7702.77,
+        7731.18,
+        7684.79,
+        1
       ]
     ],
     "nasdaq100": [
@@ -158142,6 +158270,134 @@
         30667.56,
         30413.59,
         1
+      ],
+      [
+        "2026-09-28",
+        30276.81,
+        30426.63,
+        30480.4,
+        30081.06,
+        1
+      ],
+      [
+        "2026-09-29",
+        30339.33,
+        30412.29,
+        30429.97,
+        30235.67,
+        1
+      ],
+      [
+        "2026-09-30",
+        30408.5,
+        30421.68,
+        30630.45,
+        30408.5,
+        1
+      ],
+      [
+        "2026-10-01",
+        30501.56,
+        30533.6,
+        30616.24,
+        30274.65,
+        1
+      ],
+      [
+        "2026-10-02",
+        30807.93,
+        30869.14,
+        31017.52,
+        30737.07,
+        1
+      ],
+      [
+        "2026-10-05",
+        31076.44,
+        30812.76,
+        31117.36,
+        30798.42,
+        1
+      ],
+      [
+        "2026-10-06",
+        31224.69,
+        31255.4,
+        31361.37,
+        31208.2,
+        1
+      ],
+      [
+        "2026-10-07",
+        31160.08,
+        30976.25,
+        31170.12,
+        30904.46,
+        1
+      ],
+      [
+        "2026-10-08",
+        30725.81,
+        30985.23,
+        31125.13,
+        30556.4,
+        1
+      ],
+      [
+        "2026-10-09",
+        30883.15,
+        30900.06,
+        30946.74,
+        30770.06,
+        1
+      ],
+      [
+        "2026-10-12",
+        30664.7,
+        30796.04,
+        30813.96,
+        30618.65,
+        1
+      ],
+      [
+        "2026-10-13",
+        30569.48,
+        30404.2,
+        30595.8,
+        30372.3,
+        1
+      ],
+      [
+        "2026-10-14",
+        29950.82,
+        30316.02,
+        30436.6,
+        29861.06,
+        1
+      ],
+      [
+        "2026-10-15",
+        29935.59,
+        29526.71,
+        29985.62,
+        29408.41,
+        1
+      ],
+      [
+        "2026-10-16",
+        29187.55,
+        29797.1,
+        29822.91,
+        29073.29,
+        1
+      ],
+      [
+        "2026-10-19",
+        29529.34,
+        29539.31,
+        29788.76,
+        29461.32,
+        1
       ]
     ],
     "brent": [
@@ -184379,147 +184635,75 @@
       ],
       [
         "2016-09-26",
-        47.54,
-        46.62,
-        48.24,
-        46.3,
-        1
+        46.61
       ],
       [
         "2016-09-27",
-        46.75,
-        47.71,
-        48.24,
-        46.17,
-        1
+        44.95
       ],
       [
         "2016-09-28",
-        49.43,
-        46.75,
-        49.5,
-        46.17,
-        1
+        45.49
       ],
       [
         "2016-09-29",
-        49.62,
-        49.46,
-        50.39,
-        46.26,
-        1
+        48.43
       ],
       [
         "2016-09-30",
-        49.99,
-        49.76,
-        50.39,
-        48.55,
-        1
+        48.24
       ],
       [
         "2016-10-03",
-        49.95,
-        50.02,
-        50.05,
-        49.74,
-        1
+        48.61
       ],
       [
         "2016-10-04",
-        51.31,
-        50.93,
-        51.55,
-        49.95,
-        1
+        48.81
       ],
       [
         "2016-10-05",
-        51.61,
-        51.22,
-        52.09,
-        50.87,
-        1
+        49.57
       ],
       [
         "2016-10-06",
-        52.59,
-        51.76,
-        52.75,
-        51.22,
-        1
+        50.14
       ],
       [
         "2016-10-07",
-        51.69,
-        52.72,
-        52.84,
-        51.32,
-        1
+        50.49
       ],
       [
         "2016-10-10",
-        52.92,
-        51.63,
-        53.73,
-        51.3,
-        1
+        51.54
       ],
       [
         "2016-10-11",
-        52.32,
-        53.11,
-        53.73,
-        51.3,
-        1
+        50.48
       ],
       [
         "2016-10-12",
-        51.66,
-        52.48,
-        53.32,
-        51.61,
-        1
+        49.53
       ],
       [
         "2016-10-13",
-        51.96,
-        51.6,
-        52.87,
-        50.92,
-        1
+        49.29
       ],
       [
         "2016-10-14",
-        52,
-        52.06,
-        52.55,
-        50.92,
-        1
+        48.87
       ],
       [
         "2016-10-17",
-        51.68,
-        51.93,
-        52.29,
-        51.16,
-        1
+        49.31
       ],
       [
         "2016-10-18",
-        52.14,
-        51.72,
-        52.29,
-        51.16,
-        1
+        49.81
       ],
       [
         "2016-10-19",
-        52.54,
-        52.13,
-        53.14,
-        51.25,
-        1
+        51.85
       ],
       [
         "2016-10-20",
@@ -205076,153 +205260,145 @@
         99.76,
         96.38,
         1
+      ],
+      [
+        "2026-09-28",
+        98.63,
+        98.62,
+        101.24,
+        96.2,
+        1
+      ],
+      [
+        "2026-09-29",
+        95.69,
+        98.63,
+        100.28,
+        95.54,
+        1
+      ],
+      [
+        "2026-09-30",
+        97.86,
+        95.73,
+        99.3,
+        95.12,
+        1
+      ],
+      [
+        "2026-10-01",
+        103.05,
+        97.86,
+        103.96,
+        96.55,
+        1
+      ],
+      [
+        "2026-10-02",
+        102.61,
+        97.66,
+        103.04,
+        98.4,
+        1
+      ],
+      [
+        "2026-10-05",
+        100.23,
+        103.15,
+        103.4,
+        99.76,
+        1
+      ],
+      [
+        "2026-10-06",
+        101.03,
+        100.23,
+        101.32,
+        97.06,
+        1
+      ],
+      [
+        "2026-10-07",
+        101.1,
+        101.03,
+        102.59,
+        99.61,
+        1
+      ],
+      [
+        "2026-10-08",
+        104.04,
+        101.1,
+        105.92,
+        100.76,
+        1
+      ],
+      [
+        "2026-10-09",
+        104.42,
+        103.87,
+        105.09,
+        102.33,
+        1
+      ],
+      [
+        "2026-10-12",
+        106.13,
+        104.95,
+        107.33,
+        102.33,
+        1
+      ],
+      [
+        "2026-10-13",
+        106.2,
+        106.13,
+        106.75,
+        104.35,
+        1
+      ],
+      [
+        "2026-10-14",
+        106.1,
+        106.25,
+        107.15,
+        105.21,
+        1
+      ],
+      [
+        "2026-10-15",
+        105.64,
+        105.76,
+        106.4,
+        103.37,
+        1
+      ],
+      [
+        "2026-10-16",
+        109.64,
+        105.65,
+        110,
+        104.91,
+        1
+      ],
+      [
+        "2026-10-19",
+        109.15,
+        109.65,
+        110.7,
+        106.82,
+        1
+      ],
+      [
+        "2026-10-20",
+        106.73,
+        109.15,
+        111.99,
+        105.95,
+        1
       ]
     ],
     "gold": [
-      [
-        "2006-09-26",
-        592,
-        590,
-        594.1,
-        586.43,
-        1
-      ],
-      [
-        "2006-09-27",
-        603.1,
-        591.9,
-        603.6,
-        590,
-        1
-      ],
-      [
-        "2006-09-28",
-        601.3,
-        603.5,
-        607.3,
-        600.7,
-        1
-      ],
-      [
-        "2006-09-29",
-        598.3,
-        601.5,
-        603.9,
-        594.81,
-        1
-      ],
-      [
-        "2006-10-02",
-        596.7,
-        598.75,
-        604.17,
-        594.8,
-        1
-      ],
-      [
-        "2006-10-03",
-        574.5,
-        596.1,
-        598.38,
-        573.7,
-        1
-      ],
-      [
-        "2006-10-04",
-        567,
-        574.7,
-        581.1,
-        559.4,
-        1
-      ],
-      [
-        "2006-10-05",
-        574.3,
-        566.7,
-        574.5,
-        562.6,
-        1
-      ],
-      [
-        "2006-10-06",
-        574.1,
-        574.2,
-        574.2,
-        560.81,
-        1
-      ],
-      [
-        "2006-10-09",
-        577.1,
-        574.4,
-        581.2,
-        571.85,
-        1
-      ],
-      [
-        "2006-10-10",
-        573,
-        576.6,
-        581.2,
-        569.35,
-        1
-      ],
-      [
-        "2006-10-11",
-        573,
-        573,
-        579.13,
-        570.4,
-        1
-      ],
-      [
-        "2006-10-12",
-        579.3,
-        573.15,
-        579.5,
-        571.3,
-        1
-      ],
-      [
-        "2006-10-13",
-        590.4,
-        579.2,
-        590.6,
-        577.3,
-        1
-      ],
-      [
-        "2006-10-16",
-        596,
-        592,
-        596.3,
-        590.13,
-        1
-      ],
-      [
-        "2006-10-17",
-        590.1,
-        596.15,
-        598,
-        585.93,
-        1
-      ],
-      [
-        "2006-10-18",
-        590.2,
-        590.4,
-        595.4,
-        587.4,
-        1
-      ],
-      [
-        "2006-10-19",
-        599.4,
-        590.1,
-        600.7,
-        587,
-        1
-      ],
       [
         "2006-10-20",
         591.5,
@@ -246557,6 +246733,142 @@
         4273.12,
         4315.6,
         4254.41,
+        1
+      ],
+      [
+        "2026-09-28",
+        4114.93,
+        4278.05,
+        4278.37,
+        4110.8,
+        1
+      ],
+      [
+        "2026-09-29",
+        4181.87,
+        4117.01,
+        4185.1,
+        4113.3,
+        1
+      ],
+      [
+        "2026-09-30",
+        4156.85,
+        4183.69,
+        4219.1,
+        4147.39,
+        1
+      ],
+      [
+        "2026-10-01",
+        4177.27,
+        4160.89,
+        4192.73,
+        4139.17,
+        1
+      ],
+      [
+        "2026-10-02",
+        4139.28,
+        4176.78,
+        4226.51,
+        4125.14,
+        1
+      ],
+      [
+        "2026-10-05",
+        4140.28,
+        4139.9,
+        4170.2,
+        4123.19,
+        1
+      ],
+      [
+        "2026-10-06",
+        4163.78,
+        4141.69,
+        4184.24,
+        4105.17,
+        1
+      ],
+      [
+        "2026-10-07",
+        4110.68,
+        4166.99,
+        4169.79,
+        4066.36,
+        1
+      ],
+      [
+        "2026-10-08",
+        4133.46,
+        4115.25,
+        4145.82,
+        4103.25,
+        1
+      ],
+      [
+        "2026-10-09",
+        4194.39,
+        4134.26,
+        4207.46,
+        4130.9,
+        1
+      ],
+      [
+        "2026-10-12",
+        4171.48,
+        4194.28,
+        4217.06,
+        4154.6,
+        1
+      ],
+      [
+        "2026-10-13",
+        4161,
+        4172.45,
+        4200.4,
+        4146.85,
+        1
+      ],
+      [
+        "2026-10-14",
+        4105.2,
+        4161.97,
+        4170.25,
+        4073.3,
+        1
+      ],
+      [
+        "2026-10-15",
+        4170.58,
+        4105.91,
+        4177.26,
+        4099.92,
+        1
+      ],
+      [
+        "2026-10-16",
+        4164.05,
+        4172.02,
+        4198.54,
+        4147.23,
+        1
+      ],
+      [
+        "2026-10-19",
+        4140.45,
+        4160.14,
+        4190.26,
+        4136.48,
+        1
+      ],
+      [
+        "2026-10-20",
+        4146.8,
+        4143.42,
+        4155.32,
+        4111.58,
         1
       ]
     ],
@@ -315040,6 +315352,102 @@
         3930.5,
         3888.37,
         1
+      ],
+      [
+        "2026-09-28",
+        3823.62,
+        3878.41,
+        3878.41,
+        3806.67,
+        1
+      ],
+      [
+        "2026-09-29",
+        3830.45,
+        3816.15,
+        3843.84,
+        3810.81,
+        1
+      ],
+      [
+        "2026-09-30",
+        3842.19,
+        3839.25,
+        3851.22,
+        3833.09,
+        1
+      ],
+      [
+        "2026-10-08",
+        3811.9,
+        3838.98,
+        3864.12,
+        3795.37,
+        1
+      ],
+      [
+        "2026-10-09",
+        3813.79,
+        3804.09,
+        3824.71,
+        3754.14,
+        1
+      ],
+      [
+        "2026-10-12",
+        3797.24,
+        3806.98,
+        3828.22,
+        3791,
+        1
+      ],
+      [
+        "2026-10-13",
+        3800.86,
+        3760.8,
+        3822.11,
+        3741.53,
+        1
+      ],
+      [
+        "2026-10-14",
+        3767.23,
+        3790.63,
+        3811.81,
+        3761.96,
+        1
+      ],
+      [
+        "2026-10-15",
+        3707.48,
+        3710.7,
+        3724.56,
+        3674.82,
+        1
+      ],
+      [
+        "2026-10-16",
+        3716.28,
+        3723.8,
+        3750.77,
+        3681.28,
+        1
+      ],
+      [
+        "2026-10-19",
+        3730.92,
+        3694.12,
+        3743.8,
+        3692.29,
+        1
+      ],
+      [
+        "2026-10-20",
+        3735.37,
+        3718.44,
+        3740.07,
+        3702.44,
+        1
       ]
     ],
     "chinext": [
@@ -346753,6 +347161,102 @@
         3366.89,
         3371.61,
         3288.95,
+        1
+      ],
+      [
+        "2026-09-28",
+        3139.82,
+        3267.6,
+        3270.81,
+        3125.2,
+        1
+      ],
+      [
+        "2026-09-29",
+        3142.56,
+        3136.53,
+        3158.91,
+        3128.48,
+        1
+      ],
+      [
+        "2026-09-30",
+        3135.28,
+        3164.7,
+        3173.36,
+        3125.49,
+        1
+      ],
+      [
+        "2026-10-08",
+        3036.66,
+        3140.46,
+        3168.4,
+        3012.03,
+        1
+      ],
+      [
+        "2026-10-09",
+        3043.33,
+        3021.33,
+        3053.38,
+        2932.8,
+        1
+      ],
+      [
+        "2026-10-12",
+        2963.82,
+        3023.51,
+        3049.34,
+        2962.24,
+        1
+      ],
+      [
+        "2026-10-13",
+        2958.34,
+        2899.15,
+        2999.76,
+        2860.8,
+        1
+      ],
+      [
+        "2026-10-14",
+        2866.76,
+        2943.01,
+        2962.73,
+        2863.71,
+        1
+      ],
+      [
+        "2026-10-15",
+        2783.17,
+        2776.92,
+        2819.38,
+        2751.2,
+        1
+      ],
+      [
+        "2026-10-16",
+        2772.38,
+        2831.89,
+        2832.13,
+        2743.87,
+        1
+      ],
+      [
+        "2026-10-19",
+        2746.29,
+        2760.35,
+        2770.08,
+        2708.92,
+        1
+      ],
+      [
+        "2026-10-20",
+        2739.2,
+        2732.68,
+        2790.12,
+        2706.41,
         1
       ]
     ],
@@ -388500,6 +389004,102 @@
         4500.2,
         4439.14,
         1
+      ],
+      [
+        "2026-09-28",
+        4340.76,
+        4423.82,
+        4423.82,
+        4323.57,
+        1
+      ],
+      [
+        "2026-09-29",
+        4345.21,
+        4335.81,
+        4359.3,
+        4324.53,
+        1
+      ],
+      [
+        "2026-09-30",
+        4357.62,
+        4356.8,
+        4368.61,
+        4341.88,
+        1
+      ],
+      [
+        "2026-10-08",
+        4310.28,
+        4354.93,
+        4383.57,
+        4289.79,
+        1
+      ],
+      [
+        "2026-10-09",
+        4317.25,
+        4297.25,
+        4330.74,
+        4239.74,
+        1
+      ],
+      [
+        "2026-10-12",
+        4287.98,
+        4305.91,
+        4334.29,
+        4279.71,
+        1
+      ],
+      [
+        "2026-10-13",
+        4275.68,
+        4236.95,
+        4310.33,
+        4216.86,
+        1
+      ],
+      [
+        "2026-10-14",
+        4217.68,
+        4259.33,
+        4281.46,
+        4214.01,
+        1
+      ],
+      [
+        "2026-10-15",
+        4166.01,
+        4145.95,
+        4176.09,
+        4115.07,
+        1
+      ],
+      [
+        "2026-10-16",
+        4170.61,
+        4189.26,
+        4206.89,
+        4127.94,
+        1
+      ],
+      [
+        "2026-10-19",
+        4174.53,
+        4148.35,
+        4192.02,
+        4143.66,
+        1
+      ],
+      [
+        "2026-10-20",
+        4152.11,
+        4157.93,
+        4175.21,
+        4113.14,
+        1
       ]
     ]
   },
@@ -394407,7 +395007,7 @@
         "pre20": -0.91,
         "d1": 1.14,
         "d5": 0.87,
-        "d20": 1.38
+        "d20": 1.39
       },
       "windows": {
         "sp500": {
@@ -394416,7 +395016,7 @@
           "pre20": -0.91,
           "d1": 1.14,
           "d5": 0.87,
-          "d20": 1.38
+          "d20": 1.39
         },
         "nasdaq100": {
           "pre5": 1.18,
@@ -394424,7 +395024,7 @@
           "pre20": 0.07,
           "d1": 1.73,
           "d5": 3.5,
-          "d20": 3.94
+          "d20": 1.66
         },
         "brent": {
           "pre5": -8.98,
@@ -394432,7 +395032,7 @@
           "pre20": 6.72,
           "d1": -5.65,
           "d5": 0.75,
-          "d20": -2.04
+          "d20": 6.21
         },
         "gold": {
           "pre5": 0.58,
@@ -394440,7 +395040,7 @@
           "pre20": -3.93,
           "d1": 1.82,
           "d5": -1.56,
-          "d20": -1.3
+          "d20": -3.94
         }
       }
     }
@@ -394498,8 +395098,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -394555,8 +395155,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -394612,8 +395212,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -394669,8 +395269,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -394726,8 +395326,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -394783,8 +395383,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -394840,8 +395440,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -394897,8 +395497,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -394954,8 +395554,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -395011,8 +395611,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -395867,8 +396467,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -396317,8 +396917,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -396373,8 +396973,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -396429,8 +397029,8 @@
           "pre10": null,
           "pre20": null,
           "d1": null,
-          "d5": -2.96,
-          "d20": -0.94
+          "d5": 1.43,
+          "d20": 5.31
         }
       }
     },
@@ -396773,55 +397373,51 @@
   ],
   "news": [
     {
-      "id": "mining-1215067",
+      "id": "mining-1216590",
       "category": "矿产资源",
-      "title": "Rainbow Rare Earths deal with Neo clears path for Phalaborwa study",
-      "summary": "The partnership advances processing plans as Rainbow moves the South African rare earths project towards financing.",
+      "title": "Study nearly doubles value, lifts resource for Aclara’s Penco rare earths project",
+      "summary": "Aclara attributes the higher NPV partly to a 55% increase in material processed to 30.8 million tonnes.",
       "source": "MINING.COM",
-      "url": "https://www.mining.com/rainbow-rare-earths-deal-with-neo-clears-path-for-phalaborwa-study/",
-      "publishedAt": "2026-09-23T22:05:00.000Z",
-      "score": 48,
-      "titleZh": "Rainbow稀土与Neo达成协议，为Phalaborwa研究扫清道路",
-      "titleEn": "Rainbow Rare Earths deal with Neo clears path for Phalaborwa study",
+      "url": "https://www.mining.com/study-nearly-doubles-value-lifts-resource-for-aclaras-penco-rare-earths-project/",
+      "publishedAt": "2026-10-19T06:45:00.000Z",
+      "titleZh": "研究价值几乎翻倍，为Aclara的Penco稀土项目提供资源",
+      "titleEn": "Study nearly doubles value, lifts resource for Aclara’s Penco rare earths project",
       "categoryEn": "Mining & Metals"
     },
     {
-      "id": "mining-1215144",
+      "id": "mining-1216509",
       "category": "矿产资源",
-      "title": "North America is building rare earth plants faster than it is building rare earth engineers",
-      "summary": "Engineering degrees output is less than half the roughly 600 a year implied by DOE’s estimate of need, and about a 15th of China’s.",
+      "title": "Volta doubles Springer rare earths resource, eyes 2027 study",
+      "summary": "Ontario project ranks fifth in North America by resource tonnage, with its first gallium estimate adding potential value.",
       "source": "MINING.COM",
-      "url": "https://www.mining.com/north-america-is-building-rare-earth-plants-faster-than-it-is-building-rare-earth-engineers/",
-      "publishedAt": "2026-09-25T06:40:59.000Z",
-      "score": 44,
-      "titleZh": "北美建造稀土工厂的速度快于培养稀土工程师的速度",
-      "titleEn": "North America is building rare earth plants faster than it is building rare earth engineers",
+      "url": "https://www.mining.com/volta-doubles-springer-rare-earths-eyes-2027-study/",
+      "publishedAt": "2026-10-18T19:49:00.000Z",
+      "titleZh": "Volta将施普林格稀土资源翻倍， EYES 2027研究",
+      "titleEn": "Volta doubles Springer rare earths resource, eyes 2027 study",
       "categoryEn": "Mining & Metals"
     },
     {
-      "id": "mining-1215030",
+      "id": "mining-1216297",
       "category": "矿产资源",
-      "title": "High TREO concentrations boost Rare Earths Americas’ Homer project",
-      "summary": "More than 6,500 meters of drilling have been completed at the Homer project, with multiple drill intercepts grading more than 2,000 ppm total rare earth oxides.",
+      "title": "Rinehart-backed Arafura expands US rare earths deal by 70%",
+      "summary": "The Australian government and US buyers have secured supply from the Nolans project targeting first output in 2029.",
       "source": "MINING.COM",
-      "url": "https://www.mining.com/high-treo-concentrations-boost-rare-earths-americas-homer-project/",
-      "publishedAt": "2026-09-23T06:10:04.000Z",
-      "score": 44,
-      "titleZh": "高TREO浓度提振了Rare Earths Americas的Homer项目",
-      "titleEn": "High TREO concentrations boost Rare Earths Americas’ Homer project",
+      "url": "https://www.mining.com/rinehart-backed-arafura-expands-us-rare-earths-deal-by-70/",
+      "publishedAt": "2026-10-13T19:44:00.000Z",
+      "titleZh": "莱因哈特支持的阿拉弗拉将美国稀土交易扩大70%",
+      "titleEn": "Rinehart-backed Arafura expands US rare earths deal by 70%",
       "categoryEn": "Mining & Metals"
     },
     {
-      "id": "mining-1214671",
+      "id": "mining-1216041",
       "category": "矿产资源",
-      "title": "China Rare Earth eyes indirect stake in MP Materials",
-      "summary": "Beijing’s consolidation drive could put a Chinese state company alongside the Pentagon on MP’s shareholder register.",
+      "title": "Lynas plans Brazil rare earths plant with state support",
+      "summary": "Brazilian officials see the proposed separation facility as a regional processing hub, with BNDES considering financing.",
       "source": "MINING.COM",
-      "url": "https://www.mining.com/china-rare-earth-eyes-indirect-stake-in-mp-materials/",
-      "publishedAt": "2026-09-17T21:23:00.000Z",
-      "score": 44,
-      "titleZh": "中国稀土公司计划间接入股MP Materials",
-      "titleEn": "China Rare Earth eyes indirect stake in MP Materials",
+      "url": "https://www.mining.com/lynas-plans-brazil-rare-earths-plant-with-state-support/",
+      "publishedAt": "2026-10-11T21:45:00.000Z",
+      "titleZh": "莱纳斯计划在国家支持下建设巴西稀土工厂",
+      "titleEn": "Lynas plans Brazil rare earths plant with state support",
       "categoryEn": "Mining & Metals"
     },
     {
@@ -396833,142 +397429,36 @@
       "summaryEn": "Monthly global copper price data, updated via FRED.",
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PCOPPUSDM",
-      "publishedAt": "2026-09-26T13:36:18.085Z",
+      "publishedAt": "2026-10-20T14:50:50.878Z",
       "dataDate": "2026-07-01",
-      "categoryEn": "Mining & Metals",
-      "score": 22,
-      "titleZh": "全球铜价最新值 13542.8 美元/吨（2026-07），环比 -0.1%"
-    },
-    {
-      "id": "sina-comos:nitaxpm4068313",
-      "category": "矿产资源",
-      "title": "大宗商品综述：原油下跌 伦铜基本持平 金价微升",
-      "summary": "原油下跌，因有初步迹象显示，美伊围绕重开全球最重要能源运输通道的谈判正在取得进展。铜价连续第二周上涨，交易员关注需求前景。",
-      "source": "新浪财经",
-      "url": "https://finance.sina.com.cn/world/2026-09-26/doc-initaxpm4068313.shtml",
-      "publishedAt": "2026-09-25T22:36:33.000Z",
-      "score": 22,
-      "titleZh": "大宗商品综述：原油下跌 伦铜基本持平 金价微升",
-      "titleEn": "Commodity roundup: crude oil declined, copper basically flat, gold prices rose slightly",
+      "titleZh": "全球铜价最新值 13542.8 美元/吨（2026-07），环比 -0.1%",
       "categoryEn": "Mining & Metals"
     },
     {
-      "id": "sina-comos:nitaxpm4073998",
-      "category": "矿产资源",
-      "title": "9月26日隔夜要闻：美股三大指数收涨 原油下跌 金价微升 美官员称美伊正就重新开放霍尔木兹海峡进行讨论",
-      "summary": "市场 9月26日收盘：美股三大指数收涨且周线齐涨 市场无视债券抛售 苹果再创新高 9月26日热门中概股多数下跌，阿里巴巴跌0.8% 大宗商品综述：原油下跌 伦铜基本持平...",
-      "source": "新浪财经",
-      "url": "https://finance.sina.com.cn/world/2026-09-26/doc-initaxpm4073998.shtml",
-      "publishedAt": "2026-09-25T22:52:54.000Z",
-      "score": 18,
-      "titleZh": "9月26日隔夜要闻：美股三大指数收涨 原油下跌 金价微升 美官员称美伊正就重新开放霍尔木兹海峡进行讨论",
-      "titleEn": "Overnight news on September 26th: The three major indexes of US stocks closed higher, crude oil fell slightly, and gold prices rose slightly. US officials said that the US and Iran were discussing the reopening of the Strait of Hormuz.",
-      "categoryEn": "Mining & Metals"
-    },
-    {
-      "id": "macro-cpi-2026-08-01",
+      "id": "macro-cpi-2026-09-01",
       "category": "经济数据",
-      "title": "美国CPI最新数据：同比 +3.7%（2026-08）",
-      "titleEn": "US CPI (YoY): +3.7% (2026-08)",
+      "title": "美国CPI最新数据：同比 +4.0%（2026-09）",
+      "titleEn": "US CPI (YoY): +4.0% (2026-09)",
       "summary": "美国劳工统计局消费者价格指数，经 FRED 更新。",
       "summaryEn": "US consumer price index from the Bureau of Labor Statistics, updated via FRED.",
       "source": "FRED",
       "url": "https://fred.stlouisfed.org/series/CPIAUCSL",
-      "publishedAt": "2026-09-26T13:36:17.494Z",
-      "dataDate": "2026-08-01",
-      "categoryEn": "Economic Data",
-      "score": 16,
-      "titleZh": "美国CPI最新数据：同比 +3.7%（2026-08）"
+      "publishedAt": "2026-10-20T14:50:53.586Z",
+      "dataDate": "2026-09-01",
+      "titleZh": "美国CPI最新数据：同比 +4.0%（2026-09）",
+      "categoryEn": "Economic Data"
     },
     {
-      "id": "resource-PIORECRUSDM-2026-07-01",
-      "category": "矿产资源",
-      "title": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%",
-      "titleEn": "Global iron ore price: 101.6 USD/t (2026-07), MoM -2.1%",
-      "summary": "全球铁矿石价格月度国际价格，经 FRED 更新。",
-      "summaryEn": "Monthly global iron ore price data, updated via FRED.",
-      "source": "FRED Commodities",
-      "url": "https://fred.stlouisfed.org/series/PIORECRUSDM",
-      "publishedAt": "2026-09-26T13:36:21.170Z",
-      "dataDate": "2026-07-01",
-      "categoryEn": "Mining & Metals",
-      "score": 14,
-      "titleZh": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%"
-    },
-    {
-      "id": "food-PFOODINDEXM-2026-07-01",
-      "category": "粮食农业",
-      "title": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%",
-      "titleEn": "Global food price index: 131.8 index (2026-07), MoM +1.1%",
-      "summary": "全球食品价格指数月度数据，经 FRED 更新。",
-      "summaryEn": "Monthly global food price index data, updated via FRED.",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PFOODINDEXM",
-      "publishedAt": "2026-09-26T13:36:20.488Z",
-      "dataDate": "2026-07-01",
-      "categoryEn": "Food & Agriculture",
-      "score": 14,
-      "titleZh": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%"
-    },
-    {
-      "id": "resource-PZINCUSDM-2026-07-01",
-      "category": "矿产资源",
-      "title": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%",
-      "titleEn": "Global zinc price: 3593.8 USD/t (2026-07), MoM +1.6%",
-      "summary": "全球锌价月度国际价格，经 FRED 更新。",
-      "summaryEn": "Monthly global zinc price data, updated via FRED.",
-      "source": "FRED Commodities",
-      "url": "https://fred.stlouisfed.org/series/PZINCUSDM",
-      "publishedAt": "2026-09-26T13:36:17.613Z",
-      "dataDate": "2026-07-01",
-      "categoryEn": "Mining & Metals",
-      "score": 14,
-      "titleZh": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%"
-    },
-    {
-      "id": "food-PWHEAMTUSDM-2026-07-01",
-      "category": "粮食农业",
-      "title": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%",
-      "titleEn": "Global wheat price: 228.7 USD/t (2026-07), MoM +14.6%",
-      "summary": "全球小麦价格月度数据，经 FRED 更新。",
-      "summaryEn": "Monthly global wheat price data, updated via FRED.",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
-      "publishedAt": "2026-09-26T13:36:17.303Z",
-      "dataDate": "2026-07-01",
-      "categoryEn": "Food & Agriculture",
-      "score": 14,
-      "titleZh": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%"
-    },
-    {
-      "id": "food-PSOYBUSDQ-2026-04-01",
-      "category": "粮食农业",
-      "title": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%",
-      "titleEn": "Global soybean price: 426.3 USD/t (2026-04), MoM +4.9%",
-      "summary": "全球大豆价格月度数据，经 FRED 更新。",
-      "summaryEn": "Monthly global soybean price data, updated via FRED.",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PSOYBUSDQ",
-      "publishedAt": "2026-09-26T13:36:17.261Z",
-      "dataDate": "2026-04-01",
-      "categoryEn": "Food & Agriculture",
-      "score": 14,
-      "titleZh": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%"
-    },
-    {
-      "id": "food-PMAIZMTUSDM-2026-07-01",
-      "category": "粮食农业",
-      "title": "全球玉米价格最新值 213.2 美元/吨（2026-07），环比 +8.9%",
-      "titleEn": "Global maize price: 213.2 USD/t (2026-07), MoM +8.9%",
-      "summary": "全球玉米价格月度数据，经 FRED 更新。",
-      "summaryEn": "Monthly global maize price data, updated via FRED.",
-      "source": "FAO / FRED",
-      "url": "https://fred.stlouisfed.org/series/PMAIZMTUSDM",
-      "publishedAt": "2026-09-26T13:36:16.862Z",
-      "dataDate": "2026-07-01",
-      "categoryEn": "Food & Agriculture",
-      "score": 14,
-      "titleZh": "全球玉米价格最新值 213.2 美元/吨（2026-07），环比 +8.9%"
+      "id": "MarketWatch-116146194b25",
+      "category": "全球市场",
+      "title": "My wife says we can’t afford to retire. I vetoed her $8,000 trip to Italy. We’re in our 60s and have $4 million. Do I keep working?",
+      "summary": "“I worry about healthcare, long-term care, inflation, a long bear market and living to 95.”",
+      "source": "MarketWatch",
+      "url": "https://www.marketwatch.com/story/my-wife-says-we-cant-afford-to-retire-we-have-4-million-do-i-just-keep-working-f1b6b085?mod=mw_rss_topstories",
+      "publishedAt": "2026-10-20T13:15:00.000Z",
+      "titleZh": "我妻子说我们不能退休。我否决了她8000 $的意大利之行。我们已经60多岁了，有400万$。我继续工作吗？",
+      "titleEn": "My wife says we can’t afford to retire. I vetoed her $8,000 trip to Italy. We’re in our 60s and have $4 million. Do I keep working?",
+      "categoryEn": "Global Markets"
     },
     {
       "id": "resource-PNICKUSDM-2026-07-01",
@@ -396979,11 +397469,106 @@
       "summaryEn": "Monthly global nickel price data, updated via FRED.",
       "source": "FRED Commodities",
       "url": "https://fred.stlouisfed.org/series/PNICKUSDM",
-      "publishedAt": "2026-09-26T13:36:16.068Z",
+      "publishedAt": "2026-10-20T14:50:53.131Z",
       "dataDate": "2026-07-01",
-      "categoryEn": "Mining & Metals",
-      "score": 14,
-      "titleZh": "全球镍价最新值 16632.4 美元/吨（2026-07），环比 -5.4%"
+      "titleZh": "全球镍价最新值 16632.4 美元/吨（2026-07），环比 -5.4%",
+      "categoryEn": "Mining & Metals"
+    },
+    {
+      "id": "resource-PIORECRUSDM-2026-07-01",
+      "category": "矿产资源",
+      "title": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%",
+      "titleEn": "Global iron ore price: 101.6 USD/t (2026-07), MoM -2.1%",
+      "summary": "全球铁矿石价格月度国际价格，经 FRED 更新。",
+      "summaryEn": "Monthly global iron ore price data, updated via FRED.",
+      "source": "FRED Commodities",
+      "url": "https://fred.stlouisfed.org/series/PIORECRUSDM",
+      "publishedAt": "2026-10-20T14:50:52.614Z",
+      "dataDate": "2026-07-01",
+      "titleZh": "全球铁矿石价格最新值 101.6 美元/吨（2026-07），环比 -2.1%",
+      "categoryEn": "Mining & Metals"
+    },
+    {
+      "id": "food-PWHEAMTUSDM-2026-07-01",
+      "category": "粮食农业",
+      "title": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%",
+      "titleEn": "Global wheat price: 228.7 USD/t (2026-07), MoM +14.6%",
+      "summary": "全球小麦价格月度数据，经 FRED 更新。",
+      "summaryEn": "Monthly global wheat price data, updated via FRED.",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PWHEAMTUSDM",
+      "publishedAt": "2026-10-20T14:50:51.011Z",
+      "dataDate": "2026-07-01",
+      "titleZh": "全球小麦价格最新值 228.7 美元/吨（2026-07），环比 +14.6%",
+      "categoryEn": "Food & Agriculture"
+    },
+    {
+      "id": "food-PFOODINDEXM-2026-07-01",
+      "category": "粮食农业",
+      "title": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%",
+      "titleEn": "Global food price index: 131.8 index (2026-07), MoM +1.1%",
+      "summary": "全球食品价格指数月度数据，经 FRED 更新。",
+      "summaryEn": "Monthly global food price index data, updated via FRED.",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PFOODINDEXM",
+      "publishedAt": "2026-10-20T14:50:49.811Z",
+      "dataDate": "2026-07-01",
+      "titleZh": "全球食品价格指数最新值 131.8 指数（2026-07），环比 +1.1%",
+      "categoryEn": "Food & Agriculture"
+    },
+    {
+      "id": "resource-PZINCUSDM-2026-07-01",
+      "category": "矿产资源",
+      "title": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%",
+      "titleEn": "Global zinc price: 3593.8 USD/t (2026-07), MoM +1.6%",
+      "summary": "全球锌价月度国际价格，经 FRED 更新。",
+      "summaryEn": "Monthly global zinc price data, updated via FRED.",
+      "source": "FRED Commodities",
+      "url": "https://fred.stlouisfed.org/series/PZINCUSDM",
+      "publishedAt": "2026-10-20T14:50:48.903Z",
+      "dataDate": "2026-07-01",
+      "titleZh": "全球锌价最新值 3593.8 美元/吨（2026-07），环比 +1.6%",
+      "categoryEn": "Mining & Metals"
+    },
+    {
+      "id": "food-PSOYBUSDQ-2026-04-01",
+      "category": "粮食农业",
+      "title": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%",
+      "titleEn": "Global soybean price: 426.3 USD/t (2026-04), MoM +4.9%",
+      "summary": "全球大豆价格月度数据，经 FRED 更新。",
+      "summaryEn": "Monthly global soybean price data, updated via FRED.",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PSOYBUSDQ",
+      "publishedAt": "2026-10-20T14:50:48.679Z",
+      "dataDate": "2026-04-01",
+      "titleZh": "全球大豆价格最新值 426.3 美元/吨（2026-04），环比 +4.9%",
+      "categoryEn": "Food & Agriculture"
+    },
+    {
+      "id": "food-PMAIZMTUSDM-2026-07-01",
+      "category": "粮食农业",
+      "title": "全球玉米价格最新值 213.2 美元/吨（2026-07），环比 +8.9%",
+      "titleEn": "Global maize price: 213.2 USD/t (2026-07), MoM +8.9%",
+      "summary": "全球玉米价格月度数据，经 FRED 更新。",
+      "summaryEn": "Monthly global maize price data, updated via FRED.",
+      "source": "FAO / FRED",
+      "url": "https://fred.stlouisfed.org/series/PMAIZMTUSDM",
+      "publishedAt": "2026-10-20T14:50:48.275Z",
+      "dataDate": "2026-07-01",
+      "titleZh": "全球玉米价格最新值 213.2 美元/吨（2026-07），环比 +8.9%",
+      "categoryEn": "Food & Agriculture"
+    },
+    {
+      "id": "FAO-3b911eab291c",
+      "category": "粮食农业",
+      "title": "FAO Food Price Index rises in September amid weather concerns and transport disruptions",
+      "summary": "",
+      "source": "FAO",
+      "url": "https://www.fao.org/newsroom/detail/fao-food-price-index-rises-in-september-amid-weather-concerns-and-transport-disruptions/en",
+      "publishedAt": "2026-10-02T12:00:00.000Z",
+      "titleZh": "粮农组织粮食价格指数在9月份因天气问题和运输中断而上涨",
+      "titleEn": "FAO Food Price Index rises in September amid weather concerns and transport disruptions",
+      "categoryEn": "Food & Agriculture"
     },
     {
       "id": "FAO-54bfdf5b391b",
@@ -396993,7 +397578,6 @@
       "source": "FAO",
       "url": "https://www.fao.org/newsroom/detail/sudan--fao-launches-nationwide-livestock-vaccination-campaign-to-protect-food-security-and-livelihoods-amid-conflict/en",
       "publishedAt": "2026-09-25T12:00:00.000Z",
-      "score": 14,
       "titleZh": "苏丹：粮农组织在全国范围内开展牲畜疫苗接种运动，以保护冲突中的粮食安全和生计",
       "titleEn": "Sudan: FAO launches nationwide livestock vaccination campaign to protect food security and livelihoods amid conflict",
       "categoryEn": "Food & Agriculture"
