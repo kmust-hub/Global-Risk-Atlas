@@ -13,7 +13,7 @@ const state = {
   error: false
 };
 
-const rangeDays = { '1m': 31, '3m': 92, '6m': 183, '1y': 366, '3y': 1096, '5y': 1826, all: null };
+const rangeDays = { '1m': 31, '3m': 92, '6m': 183, '1y': 366, '3y': 1096, '5y': 1826, '10y': 3653, all: null };
 const seriesMeta = {
   zzhl: { label: '中证红利', color: '--zzhl', raw: value => `${Number(value).toFixed(2)} 点` },
   cyb: { label: '创业板指', color: '--cyb', raw: value => `${Number(value).toFixed(2)} 点` },
@@ -212,7 +212,7 @@ function renderChart() {
   const rawRows = state.data.series.filter(row => !start || parseDate(row.date) >= start);
   if (rawRows.length < 2) return;
 
-  const mode = state.range === 'all' ? 'month'
+  const mode = (state.range === 'all' || state.range === '10y') ? 'month'
     : (state.range === '3y' || state.range === '5y') ? 'week'
     : (width < 560 && state.range === '1y') ? 'week'
     : 'day';
