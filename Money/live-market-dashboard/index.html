@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>红利 / 创业板 / R 实时图</title>
+  <link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span id="marketDot" class="status-dot" aria-hidden="true"></span>
+          <span id="marketStatus" aria-live="polite">正在连接</span>
+          <span class="eyebrow-sep">·</span>
+          <span id="lastUpdated">等待数据</span>
+        </div>
+        <h1>红利 / 创业板 / R</h1>
+        <p>真实指数点位与 R 同图展示，90 月线和 40 月线按每日最新价格动态重算；盘中自动更新，收盘后使用最后交易日数据。</p>
+      </div>
+      <button id="refreshButton" class="refresh-button" type="button">
+        <span class="refresh-icon" aria-hidden="true">↻</span>
+        立即刷新
+      </button>
+    </header>
+
+    <section class="metric-grid" aria-label="最新行情">
+      <article class="metric metric-zzhl">
+        <div class="metric-head"><span class="series-mark line-solid"></span><span>中证红利</span><code>000922</code></div>
+        <div id="zzhlPrice" class="metric-value tabular">—</div>
+        <div id="zzhlDelta" class="metric-delta tabular">—</div>
+      </article>
+      <article class="metric metric-cyb">
+        <div class="metric-head"><span class="series-mark line-solid"></span><span>创业板指</span><code>399006</code></div>
+        <div id="cybPrice" class="metric-value tabular">—</div>
+        <div id="cybDelta" class="metric-delta tabular">—</div>
+      </article>
+      <article class="metric metric-r">
+        <div class="metric-head"><span class="series-mark line-dotted"></span><span>R = 创业板 ÷ 红利</span></div>
+        <div id="rValue" class="metric-value tabular">—</div>
+        <div id="rZone" class="metric-delta metric-zone">—</div>
+      </article>
+
+    </section>
+
+    <section class="chart-panel" aria-labelledby="chartTitle">
+      <div class="chart-toolbar">
+        <div class="chart-heading">
+          <h2 id="chartTitle">指数、长期均线与 R</h2>
+          <span class="chart-note">左轴：指数点位与长期均线 · 右轴：R · <span id="historyCoverage">完整历史载入中</span></span>
+        </div>
+        <div id="rangeControls" class="range-controls" role="group" aria-label="时间范围">
+          <button type="button" data-range="1m">1月</button>
+          <button type="button" data-range="3m">3月</button>
+          <button type="button" data-range="6m">6月</button>
+          <button type="button" data-range="1y" aria-pressed="true">1年</button>
+          <button type="button" data-range="3y">3年</button>
+          <button type="button" data-range="5y">5年</button>
+          <button type="button" data-range="all">全历史</button>
+        </div>
+      </div>
+
+      <div id="legend" class="legend" role="group" aria-label="显示系列">
+        <button type="button" data-series="zzhl" aria-pressed="true"><span class="legend-swatch swatch-zzhl"></span>中证红利</button>
+        <button type="button" data-series="cyb" aria-pressed="true"><span class="legend-swatch swatch-cyb"></span>创业板指</button>
+        <button type="button" data-series="r" aria-pressed="true"><span class="legend-swatch swatch-r"></span>R</button>
+        <span class="legend-divider" aria-hidden="true"></span>
+        <span class="legend-section-label">红利策略均线</span>
+        <button type="button" data-series="ma90" aria-pressed="true"><span class="legend-swatch swatch-ma90"></span>90 月线<span class="legend-hint">长期成本</span></button>
+        <button type="button" data-series="ma40" aria-pressed="true"><span class="legend-swatch swatch-ma40"></span>40 月线<span class="legend-hint">估值中枢</span></button>
+      </div>
+
+      <div id="chartWrap" class="chart-wrap">
+        <svg id="chart" role="img" aria-labelledby="chartTitle chartDesc"></svg>
+        <div id="chartTooltip" class="chart-tooltip" role="tooltip" hidden></div>
+      </div>
+    </section>
+
+    <section class="strategy-panel" aria-label="策略参数">
+      <div class="strategy-title">
+        <span class="strategy-kicker">策略观察</span>
+        <strong id="signalText">等待计算</strong>
+      </div>
+      <div class="strategy-values">
+        <div>
+          <span>中证红利 90 月线</span>
+          <strong id="ma90Value" class="tabular">—</strong>
+          <small id="dist90Value">—</small>
+        </div>
+        <div>
+          <span>中证红利 40 月线</span>
+          <strong id="ma40Value" class="tabular">—</strong>
+          <small id="dist40Value">—</small>
+        </div>
+        <div>
+          <span>R 关键位</span>
+          <strong class="tabular">0.33 / 0.52 / 0.65</strong>
+          <small id="rPosition">—</small>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>报价：东方财富 · 指数历史：完整数据文件 + 腾讯行情</span>
+      <span id="sourceStatus">本地服务正在读取数据</span>
+    </footer>
+  </main>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="zzhlGlow" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="currentColor" stop-opacity="0.2"></stop>
+        <stop offset="100%" stop-color="currentColor" stop-opacity="0"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <script src="vendor/d3.min.js"></script>
+  <script src="app.js?v=7"></script>
+</body>
+</html>
