@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
   <title>红利 / 创业板 / R 实时图</title>
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
   <main class="page">
@@ -48,8 +48,8 @@
     <section class="chart-panel" aria-labelledby="chartTitle">
       <div class="chart-toolbar">
         <div class="chart-heading">
-          <h2 id="chartTitle">指数、长期均线与 R</h2>
-          <span class="chart-note">左轴：指数点位与长期均线 · 右轴：R · <span id="historyCoverage">完整历史载入中</span></span>
+          <h2 id="chartTitle">双指数 K 线与 R</h2>
+          <span class="chart-note">红涨绿跌 · <span id="candleMode">日 K</span> · <span id="historyCoverage">完整历史载入中</span></span>
         </div>
         <div id="rangeControls" class="range-controls" role="group" aria-label="时间范围">
           <button type="button" data-range="1m">1月</button>
@@ -63,8 +63,8 @@
       </div>
 
       <div id="legend" class="legend" role="group" aria-label="显示系列">
-        <button type="button" data-series="zzhl" aria-pressed="true"><span class="legend-swatch swatch-zzhl"></span>中证红利</button>
-        <button type="button" data-series="cyb" aria-pressed="true"><span class="legend-swatch swatch-cyb"></span>创业板指</button>
+        <span class="legend-item"><span class="legend-swatch swatch-zzhl"></span>中证红利 K 线</span>
+        <span class="legend-item"><span class="legend-swatch swatch-cyb"></span>创业板指 K 线</span>
         <button type="button" data-series="r" aria-pressed="true"><span class="legend-swatch swatch-r"></span>R</button>
         <span class="legend-divider" aria-hidden="true"></span>
         <span class="legend-section-label">红利策略均线</span>
@@ -118,6 +118,6 @@
   </svg>
 
   <script src="vendor/d3.min.js"></script>
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>

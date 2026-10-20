@@ -98,7 +98,12 @@ function parseTencentDaily(payload, symbol) {
   const node = obj?.data?.[symbol];
   const rows = node?.qfqday || node?.day;
   if (!Array.isArray(rows) || rows.length < 100) throw new Error(`Tencent daily missing: ${symbol}`);
-  return Object.fromEntries(rows.map(row => [row[0], Number(row[2])]));
+  return Object.fromEntries(rows.map(row => [row[0], {
+    open: Number(row[1]),
+    close: Number(row[2]),
+    high: Number(row[3]),
+    low: Number(row[4])
+  }]));
 }
 
 async function fetchTencentDaily(symbol) {
@@ -124,16 +129,23 @@ function alignSeries(zzhlMap, cybMap, monthlyRows) {
   return dates.map(date => {
     const month = date.slice(0, 7);
     const prior = monthlySorted.filter(row => row.date.slice(0, 7) < month);
-    const zzhl = Number(zzhlMap[date]);
-    const closes90 = prior.slice(-89).map(row => row.close).concat(zzhl);
-    const closes40 = prior.slice(-39).map(row => row.close).concat(zzhl);
+    const zz = zzhlMap[date];
+    const cy = cybMap[date];
+    const closes90 = prior.slice(-89).map(row => row.close).concat(zz.close);
+    const closes40 = prior.slice(-39).map(row => row.close).concat(zz.close);
     return {
       date,
-      zzhl,
-      cyb: Number(cybMap[date]),
+      zzhl: zz.close,
+      zzhlOpen: zz.open,
+      zzhlHigh: zz.high,
+      zzhlLow: zz.low,
+      cyb: cy.close,
+      cybOpen: cy.open,
+      cybHigh: cy.high,
+      cybLow: cy.low,
       ma90: closes90.length >= 90 ? mean(closes90) : null,
       ma40: closes40.length >= 40 ? mean(closes40) : null,
-      r: Number(cybMap[date]) / zzhl
+      r: cy.close / zz.close
     };
   });
 }
@@ -158,13 +170,19 @@ function mean(values) {
 function enrich(series, liveQuote = null) {
   const working = series.map(row => ({ ...row }));
   if (liveQuote?.isLive) {
+    const last = working.at(-1);
     const point = {
       date: liveQuote.date,
       zzhl: liveQuote.zzhl.price,
-      cyb: liveQuote.cyb.price
+      zzhlOpen: liveQuote.zzhl.open ?? (last?.date === liveQuote.date ? last.zzhlOpen : last?.zzhl),
+      zzhlHigh: liveQuote.zzhl.high ?? Math.max(liveQuote.zzhl.price, last?.zzhlHigh ?? liveQuote.zzhl.price),
+      zzhlLow: liveQuote.zzhl.low ?? Math.min(liveQuote.zzhl.price, last?.zzhlLow ?? liveQuote.zzhl.price),
+      cyb: liveQuote.cyb.price,
+      cybOpen: liveQuote.cyb.open ?? (last?.date === liveQuote.date ? last.cybOpen : last?.cyb),
+      cybHigh: liveQuote.cyb.high ?? Math.max(liveQuote.cyb.price, last?.cybHigh ?? liveQuote.cyb.price),
+      cybLow: liveQuote.cyb.low ?? Math.min(liveQuote.cyb.price, last?.cybLow ?? liveQuote.cyb.price)
     };
     point.r = point.cyb / point.zzhl;
-    const last = working.at(-1);
     if (last?.date === point.date) working[working.length - 1] = point;
     else if (point.date > last?.date) working.push(point);
   }
@@ -204,6 +222,23 @@ function enrich(series, liveQuote = null) {
 }
 
 const FULL_HISTORY_FILE = path.join(ROOT, '..', 'exports', 'combined_R_MA90_MA40_daily.csv');
+const FULL_ZZHL_FILE = path.join(ROOT, '..', 'exports', '000922_csi_dividend_daily.csv');
+const FULL_CYB_FILE = path.join(ROOT, '..', 'exports', '399006_chinext_daily.csv');
+
+function parseCsvRows(text) {
+  const lines = text.replace(/^\uFEFF/, '').trim().split(/\r?\n/);
+  const headers = lines.shift().split(',');
+  return lines.map(line => Object.fromEntries(headers.map((header, index) => [header, line.split(',')[index]])));
+}
+
+function readOhlcMap(rows) {
+  return new Map(rows.map(row => [row.date, {
+    open: Number(row.open),
+    high: Number(row.high),
+    low: Number(row.low),
+    close: Number(row.close)
+  }]));
+}
 
 function numberOrNull(value) {
   if (value == null || value === '') return null;
@@ -212,21 +247,32 @@ function numberOrNull(value) {
 }
 
 async function readFullHistory() {
-  const text = (await fs.readFile(FULL_HISTORY_FILE, 'utf8')).replace(/^\uFEFF/, '').trim();
-  const lines = text.split(/\r?\n/);
-  const headers = lines.shift().split(',');
-  return lines.map(line => {
-    const values = line.split(',');
-    const row = Object.fromEntries(headers.map((header, index) => [header, values[index]]));
+  const [combinedText, zzhlText, cybText] = await Promise.all([
+    fs.readFile(FULL_HISTORY_FILE, 'utf8'),
+    fs.readFile(FULL_ZZHL_FILE, 'utf8'),
+    fs.readFile(FULL_CYB_FILE, 'utf8')
+  ]);
+  const zzhlMap = readOhlcMap(parseCsvRows(zzhlText));
+  const cybMap = readOhlcMap(parseCsvRows(cybText));
+  return parseCsvRows(combinedText).map(row => {
+    const zz = zzhlMap.get(row.date);
+    const cy = cybMap.get(row.date);
+    if (!zz || !cy) return null;
     return {
       date: row.date,
-      zzhl: Number(row.zzhl_close),
-      cyb: Number(row.cyb_close),
+      zzhl: zz.close,
+      zzhlOpen: zz.open,
+      zzhlHigh: zz.high,
+      zzhlLow: zz.low,
+      cyb: cy.close,
+      cybOpen: cy.open,
+      cybHigh: cy.high,
+      cybLow: cy.low,
       ma90: numberOrNull(row.zzhl_ma90),
       ma40: numberOrNull(row.zzhl_ma40),
       r: Number(row.R)
     };
-  }).filter(row => row.date && Number.isFinite(row.zzhl) && Number.isFinite(row.cyb));
+  }).filter(row => row && row.date && Number.isFinite(row.zzhl) && Number.isFinite(row.cyb));
 }
 
 async function getFallback() {
@@ -262,19 +308,38 @@ async function getHistory(force = false) {
   }
 }
 
+async function fetchTencentRealtimeBars() {
+  const text = await fetchText(`https://qt.gtimg.cn/q=sh000922,sz399006&_=${Date.now()}`, {
+    headers: { referer: 'https://gu.qq.com/' }
+  });
+  const result = {};
+  for (const match of text.matchAll(/v_(sh000922|sz399006)="([^"]*)";/g)) {
+    const fields = match[2].split('~');
+    result[match[1]] = {
+      price: Number(fields[3]),
+      previousClose: Number(fields[4]),
+      open: Number(fields[5]),
+      high: Number(fields[33]),
+      low: Number(fields[34])
+    };
+  }
+  return result;
+}
+
 async function getLiveQuote() {
   const now = chinaParts();
   const market = marketState(now);
   if (!market.isOpen && cache.quote && Date.now() - cache.quoteAt < 5 * 60 * 1000) return cache.quote;
   if (market.isOpen && cache.quote && Date.now() - cache.quoteAt < 10 * 1000) return cache.quote;
   try {
-    const [zzhl, cyb] = await Promise.all([
+    const [zzhl, cyb, bars] = await Promise.all([
       fetchEastmoneyQuote('1.000922'),
-      fetchEastmoneyQuote('0.399006')
+      fetchEastmoneyQuote('0.399006'),
+      fetchTencentRealtimeBars().catch(() => ({}))
     ]);
     cache.quote = {
-      zzhl,
-      cyb,
+      zzhl: { ...zzhl, ...(bars.sh000922 || {}) },
+      cyb: { ...cyb, ...(bars.sz399006 || {}) },
       isLive: market.isOpen,
       date: market.isOpen ? now.date : null,
       fetchedAt: new Date().toISOString(),

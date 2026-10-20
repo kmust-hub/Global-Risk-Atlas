@@ -107,35 +107,92 @@ function getRgbColors() {
   ]));
 }
 
-function buildLevel(rows, key) {
-  return rows.map(row => ({
-    date: parseDate(row.date),
-    y: Number.isFinite(row[key]) ? Number(row[key]) : null,
-    raw: row[key],
-    row
-  }));
+function aggregateCandles(rows, mode) {
+  const daily = rows.map(row => {
+    const zzClose = Number(row.zzhl);
+    const cyClose = Number(row.cyb);
+    const zzOpen = Number.isFinite(Number(row.zzhlOpen)) ? Number(row.zzhlOpen) : zzClose;
+    const cyOpen = Number.isFinite(Number(row.cybOpen)) ? Number(row.cybOpen) : cyClose;
+    const zzHigh = Number.isFinite(Number(row.zzhlHigh)) ? Number(row.zzhlHigh) : Math.max(zzOpen, zzClose);
+    const cyHigh = Number.isFinite(Number(row.cybHigh)) ? Number(row.cybHigh) : Math.max(cyOpen, cyClose);
+    const zzLow = Number.isFinite(Number(row.zzhlLow)) ? Number(row.zzhlLow) : Math.min(zzOpen, zzClose);
+    const cyLow = Number.isFinite(Number(row.cybLow)) ? Number(row.cybLow) : Math.min(cyOpen, cyClose);
+    return {
+      date: parseDate(row.date),
+      dateText: row.date,
+      zzhlOpen: zzOpen,
+      zzhlHigh: zzHigh,
+      zzhlLow: zzLow,
+      zzhl: zzClose,
+      cybOpen: cyOpen,
+      cybHigh: cyHigh,
+      cybLow: cyLow,
+      cyb: cyClose,
+      ma90: Number.isFinite(Number(row.ma90)) ? Number(row.ma90) : null,
+      ma40: Number.isFinite(Number(row.ma40)) ? Number(row.ma40) : null,
+      r: Number(row.r)
+    };
+  });
+  if (mode === 'day') return daily;
+
+  const floor = mode === 'week' ? d3.timeWeek.floor : d3.timeMonth.floor;
+  const groups = d3.group(daily, row => +floor(row.date));
+  return [...groups.values()]
+    .map(group => {
+      group.sort((a, b) => a.date - b.date);
+      const first = group[0];
+      const last = group[group.length - 1];
+      return {
+        date: last.date,
+        dateText: last.dateText,
+        zzhlOpen: first.zzhlOpen,
+        zzhlHigh: d3.max(group, row => row.zzhlHigh),
+        zzhlLow: d3.min(group, row => row.zzhlLow),
+        zzhl: last.zzhl,
+        cybOpen: first.cybOpen,
+        cybHigh: d3.max(group, row => row.cybHigh),
+        cybLow: d3.min(group, row => row.cybLow),
+        cyb: last.cyb,
+        ma90: last.ma90,
+        ma40: last.ma40,
+        r: last.r
+      };
+    })
+    .sort((a, b) => a.date - b.date);
 }
 
-function createTooltipRow(key, point) {
-  const meta = seriesMeta[key];
-  if (!point) return null;
+function createTooltipLine(label, value, colorVariable) {
   const row = document.createElement('div');
   row.className = 'tooltip-row';
   const dot = document.createElement('span');
   dot.className = 'tooltip-dot';
-  dot.style.setProperty('--tooltip-color', `var(${meta.color})`);
-  const label = document.createElement('span');
-  label.className = 'tooltip-label';
-  label.textContent = meta.label;
-  const value = document.createElement('span');
-  value.className = 'tooltip-value';
-  if (key === 'r') {
-    value.textContent = Number(point.raw).toFixed(4);
-  } else {
-    value.textContent = meta.raw(point.raw);
-  }
-  row.append(dot, label, value);
+  dot.style.setProperty('--tooltip-color', `var(${colorVariable})`);
+  const text = document.createElement('span');
+  text.className = 'tooltip-label';
+  text.textContent = label;
+  const number = document.createElement('span');
+  number.className = 'tooltip-value';
+  number.textContent = value;
+  row.append(dot, text, number);
   return row;
+}
+
+function createKlineTooltip(title, colorVariable, open, high, low, close) {
+  const block = document.createElement('div');
+  block.className = 'tooltip-kline';
+  const head = document.createElement('div');
+  head.className = 'tooltip-kline-head';
+  const dot = document.createElement('span');
+  dot.className = 'tooltip-dot';
+  dot.style.setProperty('--tooltip-color', `var(${colorVariable})`);
+  const label = document.createElement('span');
+  label.textContent = title;
+  head.append(dot, label);
+  const values = document.createElement('div');
+  values.className = 'tooltip-ohlc';
+  values.textContent = `开 ${formatValue(open)}  高 ${formatValue(high)}  低 ${formatValue(low)}  收 ${formatValue(close)}`;
+  block.append(head, values);
+  return block;
 }
 
 function renderChart() {
@@ -143,205 +200,233 @@ function renderChart() {
   const svg = d3.select('#chart');
   const node = el('chart');
   const width = Math.max(280, node.clientWidth || el('chartWrap').clientWidth);
-  const height = Math.max(360, node.clientHeight || 480);
+  const height = Math.max(560, node.clientHeight || 760);
   svg.attr('viewBox', `0 0 ${width} ${height}`).attr('width', width).attr('height', height);
   svg.selectAll('*').remove();
 
-  svg.append('title').text('中证红利、创业板指、长期均线与R的每日走势');
-  svg.append('desc').text('左轴显示中证红利、创业板指、红利90月线和40月线的真实点位，右轴显示创业板指除以中证红利的R值。');
+  svg.append('title').text('中证红利与创业板指 K 线及 R 比价');
+  svg.append('desc').text('上方为中证红利日K或聚合K线及90月线、40月线，中间为创业板指K线，下方为创业板指除以中证红利的R值。红涨绿跌。');
 
   const lastDate = parseDate(state.data.series.at(-1).date);
   const start = getRangeStart(lastDate);
   const rawRows = state.data.series.filter(row => !start || parseDate(row.date) >= start);
   if (rawRows.length < 2) return;
 
+  const mode = state.range === 'all' ? 'month'
+    : (state.range === '3y' || state.range === '5y') ? 'week'
+    : (width < 560 && state.range === '1y') ? 'week'
+    : 'day';
+  el('candleMode').textContent = mode === 'day' ? '日 K' : mode === 'week' ? '周 K' : '月 K';
+  const candles = aggregateCandles(rawRows, mode);
+  if (!candles.length) return;
+
   const margin = {
-    top: 28,
-    right: width < 560 ? 48 : 57,
+    top: 22,
+    right: width < 560 ? 54 : 66,
     bottom: 42,
-    left: width < 560 ? 48 : 59
+    left: width < 560 ? 54 : 66
   };
+  const gap = width < 560 ? 22 : 26;
   const innerW = width - margin.left - margin.right;
-  const innerH = height - margin.top - margin.bottom;
+  const totalH = height - margin.top - margin.bottom;
+  const zzH = Math.floor(totalH * 0.38);
+  const cyH = Math.floor(totalH * 0.33);
+  const rH = totalH - zzH - cyH - gap * 2;
+  const zzTop = margin.top;
+  const cyTop = zzTop + zzH + gap;
+  const rTop = cyTop + cyH + gap;
+  const bottomY = rTop + rH;
   const colors = getRgbColors();
+
   const x = d3.scaleTime()
-    .domain(d3.extent(rawRows, row => parseDate(row.date)))
+    .domain(d3.extent(candles, row => row.date))
     .range([margin.left, margin.left + innerW]);
+  const spacing = candles.length > 1 ? Math.abs(x(candles[1].date) - x(candles[0].date)) : 8;
+  const bodyWidth = Math.max(1, Math.min(9, spacing * 0.62));
 
-  const levels = {
-    zzhl: buildLevel(rawRows, 'zzhl'),
-    cyb: buildLevel(rawRows, 'cyb'),
-    ma90: buildLevel(rawRows, 'ma90'),
-    ma40: buildLevel(rawRows, 'ma40')
-  };
-  const rRows = rawRows.map(row => ({ date: parseDate(row.date), raw: row.r, row }));
+  const zzValues = candles.flatMap(row => [row.zzhlHigh, row.zzhlLow]);
+  if (state.visible.ma90) candles.forEach(row => { if (Number.isFinite(row.ma90)) zzValues.push(row.ma90); });
+  if (state.visible.ma40) candles.forEach(row => { if (Number.isFinite(row.ma40)) zzValues.push(row.ma40); });
+  let [zzMin, zzMax] = d3.extent(zzValues);
+  const zzPad = Math.max(1, (zzMax - zzMin) * 0.06);
+  const yZz = d3.scaleLinear().domain([zzMin - zzPad, zzMax + zzPad]).nice().range([zzTop + zzH, zzTop]);
 
-  const leftValues = [];
-  Object.keys(levels).forEach(key => {
-    if (state.visible[key]) levels[key].forEach(row => { if (Number.isFinite(row.y)) leftValues.push(row.y); });
-  });
-  if (!leftValues.length) leftValues.push(0, 100);
-  let [leftMin, leftMax] = d3.extent(leftValues);
-  const leftPad = Math.max(1.5, (leftMax - leftMin) * 0.08);
-  leftMin -= leftPad;
-  leftMax += leftPad;
-  const yLeft = d3.scaleLinear().domain([leftMin, leftMax]).nice().range([margin.top + innerH, margin.top]);
+  let [cyMin, cyMax] = d3.extent(candles.flatMap(row => [row.cybHigh, row.cybLow]));
+  const cyPad = Math.max(1, (cyMax - cyMin) * 0.06);
+  const yCy = d3.scaleLinear().domain([cyMin - cyPad, cyMax + cyPad]).nice().range([cyTop + cyH, cyTop]);
 
-  const rValues = rRows.map(row => row.raw);
-  const rMin = Math.min(0.30, d3.min(rValues) - 0.02);
-  const rMax = Math.max(0.70, d3.max(rValues) + 0.02);
-  const yRight = d3.scaleLinear().domain([rMin, rMax]).nice().range([margin.top + innerH, margin.top]);
+  const rValues = candles.map(row => row.r).filter(Number.isFinite);
+  const yR = d3.scaleLinear()
+    .domain([Math.min(0.30, d3.min(rValues) - 0.02), Math.max(0.70, d3.max(rValues) + 0.02)])
+    .nice()
+    .range([rTop + rH, rTop]);
 
-  const clipId = 'chart-clip';
+  const clipId = 'candlestick-clip';
   svg.append('defs').append('clipPath').attr('id', clipId)
     .append('rect')
     .attr('x', margin.left)
     .attr('y', margin.top)
     .attr('width', innerW)
-    .attr('height', innerH);
+    .attr('height', bottomY - margin.top);
 
-  const plot = svg.append('g').attr('class', 'chart');
-  const xTicks = width < 480 ? 4 : width < 720 ? 6 : 8;
-  const xAxis = d3.axisBottom(x).ticks(xTicks).tickSize(0).tickPadding(10)
-    .tickFormat(state.range === '1m' || state.range === '3m' ? d3.timeFormat('%m-%d') : d3.timeFormat('%y-%m'));
-  const yAxisLeft = d3.axisLeft(yLeft).ticks(5).tickSize(0).tickPadding(9).tickFormat(d3.format('.0f'));
-  const yAxisRight = d3.axisRight(yRight).ticks(5).tickSize(0).tickPadding(9).tickFormat(d3.format('.2f'));
+  const root = svg.append('g').attr('class', 'chart');
+  const plot = root.append('g').attr('clip-path', `url(#${clipId})`);
 
-  plot.append('g')
-    .attr('class', 'axis axis-y')
-    .attr('transform', `translate(${margin.left},0)`)
-    .call(yAxisLeft);
+  const drawPanelAxes = (top, panelHeight, yScale, format) => {
+    const axisG = root.append('g')
+      .attr('class', 'axis axis-y')
+      .attr('transform', `translate(${margin.left},0)`)
+      .call(d3.axisLeft(yScale).ticks(4).tickSize(0).tickPadding(8).tickFormat(format));
+    axisG.selectAll('.tick text').attr('x', -2);
+    const grid = root.append('g').attr('class', 'grid');
+    yScale.ticks(4).forEach(tick => {
+      grid.append('line')
+        .attr('class', 'grid-line')
+        .attr('x1', margin.left)
+        .attr('x2', margin.left + innerW)
+        .attr('y1', yScale(tick))
+        .attr('y2', yScale(tick));
+    });
+    return axisG;
+  };
 
-  plot.append('g')
+  drawPanelAxes(zzTop, zzH, yZz, d3.format('.0f'));
+  drawPanelAxes(cyTop, cyH, yCy, d3.format('.0f'));
+
+  const rAxis = root.append('g')
     .attr('class', 'axis axis-y-right')
     .attr('transform', `translate(${margin.left + innerW},0)`)
-    .call(yAxisRight);
-
-  plot.append('g')
-    .attr('class', 'axis axis-x')
-    .attr('transform', `translate(0,${margin.top + innerH})`)
-    .call(xAxis);
-
-  plot.selectAll('.axis-y .tick').select('text').attr('x', -2);
-  plot.selectAll('.axis-y-right .tick').select('text').attr('x', 2);
-
-  const gridGroup = plot.append('g').attr('class', 'grid');
-  yLeft.ticks(5).forEach(tick => {
-    gridGroup.append('line')
+    .call(d3.axisRight(yR).ticks(4).tickSize(0).tickPadding(8).tickFormat(d3.format('.2f')));
+  rAxis.selectAll('.tick text').attr('x', 2);
+  const rGrid = root.append('g');
+  yR.ticks(4).forEach(tick => {
+    rGrid.append('line')
       .attr('class', 'grid-line')
       .attr('x1', margin.left)
       .attr('x2', margin.left + innerW)
-      .attr('y1', yLeft(tick))
-      .attr('y2', yLeft(tick));
+      .attr('y1', yR(tick))
+      .attr('y2', yR(tick));
   });
 
-  plot.append('text')
-    .attr('class', 'axis-title')
-    .attr('data-axis', 'y')
-    .attr('x', margin.left)
-    .attr('y', margin.top - 10)
-    .text('指数点位');
-  plot.append('text')
-    .attr('class', 'axis-title')
-    .attr('data-axis', 'y')
-    .attr('x', margin.left + innerW)
-    .attr('y', margin.top - 10)
-    .attr('text-anchor', 'end')
-    .text('R');
+  const xTicks = width < 480 ? 4 : width < 720 ? 6 : 8;
+  const xAxis = d3.axisBottom(x).ticks(xTicks).tickSize(0).tickPadding(10)
+    .tickFormat(state.range === '1m' || state.range === '3m' ? d3.timeFormat('%m-%d') : d3.timeFormat('%y-%m'));
+  root.append('g')
+    .attr('class', 'axis axis-x')
+    .attr('transform', `translate(0,${bottomY})`)
+    .call(xAxis);
+
+  const panelTitle = (top, title, note) => {
+    root.append('text').attr('class', 'panel-title').attr('x', margin.left + 5).attr('y', top + 14).text(title);
+    if (note) root.append('text').attr('class', 'panel-note').attr('x', margin.left + 5).attr('y', top + 28).text(note);
+  };
+  panelTitle(zzTop, '中证红利 K 线', '90 / 40 月线');
+  panelTitle(cyTop, '创业板指 K 线', mode === 'day' ? '日 K' : mode === 'week' ? '周 K' : '月 K');
+  panelTitle(rTop, 'R = 创业板 ÷ 红利', '0.33 买入 · 0.52 减仓 · 0.65 清仓');
+
+  const drawCandles = (group, yScale, prefix) => {
+    group.selectAll(`.candle-wick-${prefix}`)
+      .data(candles)
+      .enter()
+      .append('line')
+      .attr('class', `candle-wick-${prefix}`)
+      .attr('x1', row => x(row.date))
+      .attr('x2', row => x(row.date))
+      .attr('y1', row => yScale(row[`${prefix}High`]))
+      .attr('y2', row => yScale(row[`${prefix}Low`]))
+      .attr('stroke', row => row[prefix] >= row[`${prefix}Open`] ? 'var(--up)' : 'var(--down)')
+      .attr('stroke-width', Math.max(1, Math.min(2, bodyWidth * 0.35)));
+    group.selectAll(`.candle-body-${prefix}`)
+      .data(candles)
+      .enter()
+      .append('rect')
+      .attr('class', row => `candle-body-${prefix} ${row[prefix] >= row[`${prefix}Open`] ? 'candle-up' : 'candle-down'}`)
+      .attr('x', row => x(row.date) - bodyWidth / 2)
+      .attr('y', row => Math.min(yScale(row[prefix]), yScale(row[`${prefix}Open`])))
+      .attr('width', bodyWidth)
+      .attr('height', row => Math.max(1, Math.abs(yScale(row[prefix]) - yScale(row[`${prefix}Open`]))))
+      .attr('stroke-width', bodyWidth < 2 ? 0.8 : 1.1);
+  };
+
+  const zzGroup = plot.append('g');
+  const cyGroup = plot.append('g');
+  if (state.visible.zzhl) drawCandles(zzGroup, yZz, 'zzhl');
+  if (state.visible.cyb) drawCandles(cyGroup, yCy, 'cyb');
+
+  const line = (yScale, accessor) => d3.line()
+    .defined(row => Number.isFinite(accessor(row)))
+    .x(row => x(row.date))
+    .y(row => yScale(accessor(row)));
+
+  if (state.visible.ma90) {
+    plot.append('path')
+      .datum(candles)
+      .attr('class', 'series-line ma90')
+      .attr('d', line(yZz, row => row.ma90));
+  }
+  if (state.visible.ma40) {
+    plot.append('path')
+      .datum(candles)
+      .attr('class', 'series-line ma40')
+      .attr('d', line(yZz, row => row.ma40));
+  }
+  if (state.visible.r) {
+    plot.append('path')
+      .datum(candles)
+      .attr('class', 'series-line r')
+      .attr('d', line(yR, row => row.r));
+  }
 
   if (state.visible.r) {
     [0.33, 0.52, 0.65].forEach((threshold, index) => {
-      const yy = yRight(threshold);
+      const yy = yR(threshold);
       plot.append('line')
         .attr('class', 'threshold-line')
         .attr('x1', margin.left)
         .attr('x2', margin.left + innerW)
         .attr('y1', yy)
         .attr('y2', yy);
-      const labels = ['R 0.33 买入', 'R 0.52 减仓', 'R 0.65 清仓'];
       plot.append('text')
         .attr('class', 'threshold-label')
         .attr('x', margin.left + 6)
         .attr('y', yy - 4)
-        .text(labels[index]);
+        .text(['R 0.33 买入', 'R 0.52 减仓', 'R 0.65 清仓'][index]);
     });
   }
 
-  const line = d3.line()
-    .defined(row => Number.isFinite(row.y))
-    .x(row => x(row.date))
-    .y(row => yLeft(row.y));
+  const last = candles[candles.length - 1];
+  const valueLabel = (y, value, color, label) => root.append('text')
+    .attr('class', 'last-value')
+    .attr('x', margin.left + innerW - 5)
+    .attr('y', y - 5)
+    .attr('text-anchor', 'end')
+    .attr('fill', color)
+    .text(`${label} ${formatValue(value)}`);
+  if (state.visible.zzhl) valueLabel(yZz(last.zzhl), last.zzhl, colors.zzhl, '红利');
+  if (state.visible.cyb) valueLabel(yCy(last.cyb), last.cyb, colors.cyb, '创业');
+  if (state.visible.ma90) valueLabel(yZz(last.ma90), last.ma90, colors.ma90, '90月');
+  if (state.visible.ma40) valueLabel(yZz(last.ma40), last.ma40, colors.ma40, '40月');
+  if (state.visible.r) valueLabel(yR(last.r), last.r, colors.r, 'R');
 
-  const rLine = d3.line()
-    .defined(row => Number.isFinite(row.raw))
-    .x(row => x(row.date))
-    .y(row => yRight(row.raw));
-
-  const clip = plot.append('g').attr('clip-path', `url(#${clipId})`);
-
-  const lineInfo = [
-    ['zzhl', levels.zzhl, line],
-    ['cyb', levels.cyb, line],
-    ['ma90', levels.ma90, line],
-    ['ma40', levels.ma40, line]
-  ];
-  lineInfo.forEach(([key, rows, generator]) => {
-    if (!state.visible[key] || !rows.length) return;
-    clip.append('path')
-      .datum(rows)
-      .attr('class', `series-line ${key}`)
-      .attr('d', generator);
-  });
-
-  if (state.visible.r) {
-    clip.append('path')
-      .datum(rRows)
-      .attr('class', 'series-line r')
-      .attr('d', rLine);
-  }
-
-  const lastMarkers = [];
-  lineInfo.forEach(([key, rows]) => {
-    if (!state.visible[key]) return;
-    const last = [...rows].reverse().find(row => Number.isFinite(row.y));
-    if (last) lastMarkers.push({ key, ...last, yPos: yLeft(last.y) });
-  });
-  if (state.visible.r) {
-    const last = [...rRows].reverse().find(row => Number.isFinite(row.raw));
-    if (last) lastMarkers.push({ key: 'r', ...last, yPos: yRight(last.raw) });
-  }
-  lastMarkers.forEach(mark => {
-    plot.append('circle')
-      .attr('class', 'last-dot')
-      .attr('cx', x(mark.date))
-      .attr('cy', mark.yPos)
-      .attr('r', 4)
-      .attr('fill', colors[mark.key]);
-    if (mark.key === 'ma90' || mark.key === 'ma40') {
-      plot.append('text')
-        .attr('class', 'series-end-label')
-        .attr('x', x(mark.date) - 7)
-        .attr('y', mark.yPos - 7)
-        .attr('text-anchor', 'end')
-        .attr('fill', colors[mark.key])
-        .text(`${mark.key === 'ma90' ? '90月线' : '40月线'} ${Number(mark.y).toFixed(0)}`);
-    }
-  });
-
-  const crossGroup = plot.append('g').attr('class', 'hover-layer');
-  const guide = crossGroup.append('line').attr('class', 'hover-guide').attr('y1', margin.top).attr('y2', margin.top + innerH).style('visibility', 'hidden');
-  const hoverDots = Object.fromEntries(Object.keys(seriesMeta).map(key => [
-    key,
-    crossGroup.append('circle').attr('class', 'hover-dot').attr('r', 4).attr('fill', colors[key]).style('visibility', 'hidden')
-  ]));
+  const crossGroup = root.append('g').attr('class', 'hover-layer');
+  const guide = crossGroup.append('line')
+    .attr('class', 'hover-guide')
+    .attr('y1', margin.top)
+    .attr('y2', bottomY)
+    .style('visibility', 'hidden');
+  const hoverDots = {
+    zzhl: crossGroup.append('circle').attr('class', 'hover-dot').attr('r', 4).attr('fill', colors.zzhl).style('visibility', 'hidden'),
+    cyb: crossGroup.append('circle').attr('class', 'hover-dot').attr('r', 4).attr('fill', colors.cyb).style('visibility', 'hidden'),
+    r: crossGroup.append('circle').attr('class', 'hover-dot').attr('r', 4).attr('fill', colors.r).style('visibility', 'hidden')
+  };
 
   const bisect = d3.bisector(row => row.date).center;
-  const overlay = plot.append('rect')
+  const overlay = root.append('rect')
     .attr('class', 'overlay')
     .attr('x', margin.left)
     .attr('y', margin.top)
     .attr('width', innerW)
-    .attr('height', innerH);
+    .attr('height', bottomY - margin.top);
 
   const hideTooltip = () => {
     el('chartTooltip').hidden = true;
@@ -352,46 +437,32 @@ function renderChart() {
   const showTooltip = event => {
     const [px] = d3.pointer(event, overlay.node());
     const targetDate = x.invert(px);
-    const index = bisect(rRows, targetDate);
-    const row = rRows[Math.max(0, Math.min(index, rRows.length - 1))];
+    const index = bisect(candles, targetDate);
+    const row = candles[Math.max(0, Math.min(index, candles.length - 1))];
     if (!row) return;
 
     guide.attr('x1', x(row.date)).attr('x2', x(row.date)).style('visibility', 'visible');
+    hoverDots.zzhl.attr('cx', x(row.date)).attr('cy', yZz(row.zzhl)).style('visibility', state.visible.zzhl ? 'visible' : 'hidden');
+    hoverDots.cyb.attr('cx', x(row.date)).attr('cy', yCy(row.cyb)).style('visibility', state.visible.cyb ? 'visible' : 'hidden');
+    hoverDots.r.attr('cx', x(row.date)).attr('cy', yR(row.r)).style('visibility', state.visible.r ? 'visible' : 'hidden');
+
     const tooltip = el('chartTooltip');
     tooltip.replaceChildren();
     const dateNode = document.createElement('div');
     dateNode.className = 'tooltip-date';
-    dateNode.textContent = row.row.date;
+    dateNode.textContent = `${row.dateText} · ${mode === 'day' ? '日 K' : mode === 'week' ? '周 K' : '月 K'}`;
     tooltip.appendChild(dateNode);
-
-    const points = {
-      zzhl: levels.zzhl.find(item => item.date.getTime() === row.date.getTime()),
-      cyb: levels.cyb.find(item => item.date.getTime() === row.date.getTime()),
-      ma90: levels.ma90.find(item => item.date.getTime() === row.date.getTime()),
-      ma40: levels.ma40.find(item => item.date.getTime() === row.date.getTime()),
-      r: row
-    };
-    Object.keys(seriesMeta).forEach(key => {
-      const point = points[key];
-      if (!state.visible[key] || !point) {
-        hoverDots[key].style('visibility', 'hidden');
-        return;
-      }
-      const tooltipRow = createTooltipRow(key, point);
-      if (tooltipRow) tooltip.appendChild(tooltipRow);
-      const yScale = key === 'r' ? yRight : yLeft;
-      const value = key === 'r' ? point.raw : point.y;
-      hoverDots[key]
-        .attr('cx', x(row.date))
-        .attr('cy', yScale(value))
-        .style('visibility', 'visible');
-    });
+    tooltip.appendChild(createKlineTooltip('中证红利', '--zzhl', row.zzhlOpen, row.zzhlHigh, row.zzhlLow, row.zzhl));
+    tooltip.appendChild(createKlineTooltip('创业板指', '--cyb', row.cybOpen, row.cybHigh, row.cybLow, row.cyb));
+    if (state.visible.r) tooltip.appendChild(createTooltipLine('R', Number(row.r).toFixed(4), '--r'));
+    if (state.visible.ma90 && Number.isFinite(row.ma90)) tooltip.appendChild(createTooltipLine('红利 90 月线', `${formatValue(row.ma90)} 点`, '--ma90'));
+    if (state.visible.ma40 && Number.isFinite(row.ma40)) tooltip.appendChild(createTooltipLine('红利 40 月线', `${formatValue(row.ma40)} 点`, '--ma40'));
 
     tooltip.hidden = false;
     const wrapRect = el('chartWrap').getBoundingClientRect();
     const pointerX = event.clientX - wrapRect.left;
     const pointerY = event.clientY - wrapRect.top;
-    const tooltipWidth = tooltip.offsetWidth || 220;
+    const tooltipWidth = tooltip.offsetWidth || 240;
     const left = pointerX + 14 + tooltipWidth > wrapRect.width ? pointerX - tooltipWidth - 14 : pointerX + 14;
     const top = Math.max(8, Math.min(pointerY - 20, wrapRect.height - tooltip.offsetHeight - 8));
     tooltip.style.left = `${Math.max(8, left)}px`;
